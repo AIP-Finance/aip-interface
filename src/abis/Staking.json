@@ -1,0 +1,180 @@
+[
+  {
+    "inputs": [{ "internalType": "address", "name": "tokenAddress", "type": "address" }],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": false, "internalType": "uint256", "name": "id", "type": "uint256" },
+      { "indexed": false, "internalType": "address", "name": "staker", "type": "address" },
+      { "indexed": false, "internalType": "uint256", "name": "amount", "type": "uint256" }
+    ],
+    "name": "ClaimBet",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "internalType": "address", "name": "previousOwner", "type": "address" },
+      { "indexed": true, "internalType": "address", "name": "newOwner", "type": "address" }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": false, "internalType": "uint256", "name": "id", "type": "uint256" },
+      { "indexed": false, "internalType": "uint256", "name": "stakingPackageId", "type": "uint256" },
+      { "indexed": false, "internalType": "address", "name": "staker", "type": "address" },
+      { "indexed": false, "internalType": "uint256", "name": "aprRate", "type": "uint256" },
+      { "indexed": false, "internalType": "uint256", "name": "rewardAmount", "type": "uint256" },
+      { "indexed": false, "internalType": "uint256", "name": "stakingAmount", "type": "uint256" },
+      { "indexed": false, "internalType": "uint256", "name": "status", "type": "uint256" },
+      { "indexed": false, "internalType": "uint256", "name": "startDate", "type": "uint256" },
+      { "indexed": false, "internalType": "uint256", "name": "endDate", "type": "uint256" }
+    ],
+    "name": "StakingCreated",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "_isRunning",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "_stakingCount",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "_stakingDetails",
+    "outputs": [
+      { "internalType": "uint256", "name": "id", "type": "uint256" },
+      { "internalType": "uint256", "name": "stakingPackageId", "type": "uint256" },
+      { "internalType": "address", "name": "staker", "type": "address" },
+      { "internalType": "uint256", "name": "aprRate", "type": "uint256" },
+      { "internalType": "uint256", "name": "rewardAmount", "type": "uint256" },
+      { "internalType": "uint256", "name": "stakingAmount", "type": "uint256" },
+      { "internalType": "uint256", "name": "status", "type": "uint256" },
+      { "internalType": "uint256", "name": "startDate", "type": "uint256" },
+      { "internalType": "uint256", "name": "endDate", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "_stakingPackages",
+    "outputs": [
+      { "internalType": "uint256", "name": "id", "type": "uint256" },
+      { "internalType": "bool", "name": "enable", "type": "bool" },
+      { "internalType": "uint256", "name": "aprRate", "type": "uint256" },
+      { "internalType": "uint256", "name": "minStakingAmount", "type": "uint256" },
+      { "internalType": "uint256", "name": "durationInSeconds", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "_token",
+    "outputs": [{ "internalType": "contract IERC20", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "_totalProfits",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "_totalStakingTimes",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "_totalVesting",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "stakingId", "type": "uint256" }],
+    "name": "claim",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "denominator",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "id", "type": "uint256" },
+      { "internalType": "bool", "name": "enable", "type": "bool" },
+      { "internalType": "uint256", "name": "aprRate", "type": "uint256" },
+      { "internalType": "uint256", "name": "minStakingAmount", "type": "uint256" },
+      { "internalType": "uint256", "name": "durationInSeconds", "type": "uint256" }
+    ],
+    "name": "setStakingPackage",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "address", "name": "newAddress", "type": "address" }],
+    "name": "setTokenAddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "newVestingAmount", "type": "uint256" }],
+    "name": "setTotalVesting",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "amount", "type": "uint256" },
+      { "internalType": "uint256", "name": "package", "type": "uint256" }
+    ],
+    "name": "staking",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  { "inputs": [], "name": "toggleRunning", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
+  {
+    "inputs": [{ "internalType": "address", "name": "recepient", "type": "address" }],
+    "name": "withdrawToken",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
