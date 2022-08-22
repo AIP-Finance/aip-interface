@@ -14,20 +14,20 @@ function colors(darkMode: boolean): Colors {
 
     neutral8: darkMode ? '#212529' : '#f6f9fc',
     neutral7: darkMode ? '#353945' : '#e9ecef',
-    neutral6: darkMode ? '#525f7f' : '#ced4da',
-    neutral5: darkMode ? '#8898aa' : '#adb5bd',
-    neutral4: darkMode ? '#adb5bd' : '#8898aa',
-    neutral3: darkMode ? '#ced4da' : '#525f7f',
-    neutral2: darkMode ? '#e9ecef' : '#353945',
-    neutral1: darkMode ? '#f6f9fc' : '#212529',
+    neutral6: darkMode ? '#525f7f' : '#E6E8EC',
+    neutral5: darkMode ? '#8898aa' : '#B1B5C3',
+    neutral4: darkMode ? '#adb5bd' : '#777E90',
+    neutral3: darkMode ? '#ced4da' : '#3D424E',
+    neutral2: darkMode ? '#e9ecef' : '#23262F',
+    neutral1: darkMode ? '#f6f9fc' : '#141416',
 
     //primary colors
-    primary1: '#5e72e4',
-    primary2: '#3d55df',
+    primary1: '#B1E846',
+    primary2: '#rgba(177, 232, 70, 0.1)',
 
     // secondary colors
-    secondary1: '#f4f5f7',
-    secondary2: '#dee1e7',
+    secondary1: '#465DDD',
+    secondary2: '#AFBBFD',
 
     // other
     info1: '#11cdef',

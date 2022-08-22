@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import AddressAvatar from 'components/AddressAvatar'
 import Container from 'components/Container'
+import Logo from 'components/Logo'
 import { useAuthContext } from 'hooks/web3/useAuth'
 import { Button } from 'theme/Buttons'
 import Dropdown, { DropdownItem } from 'theme/Dropdown'
@@ -61,7 +62,7 @@ const Navbar = () => {
       <Container>
         <Flex alignItems="center">
           <Link to="/">
-            <Box />
+            <Logo />
           </Link>
 
           <Box flex="1"></Box>
