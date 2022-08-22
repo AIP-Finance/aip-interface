@@ -6,7 +6,8 @@ const Divider = (props: any) => {
   return (
     <Box
       sx={{
-        borderTop: '1px solid #3D424E',
+        borderTop: 'small',
+        borderTopColor: 'neutral3',
       }}
       {...props}
     />

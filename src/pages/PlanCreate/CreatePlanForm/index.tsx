@@ -62,7 +62,8 @@ const CreatePlanForm = () => {
           p={24}
           pb={64}
           sx={{
-            borderRight: '1px solid #3D424E',
+            borderRight: 'small',
+            borderRightColor: 'neutral3',
           }}
           flex={1}
         >

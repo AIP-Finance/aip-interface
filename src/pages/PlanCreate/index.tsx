@@ -10,7 +10,7 @@ import CreatePlanForm from './CreatePlanForm'
 const PlanCreate = () => {
   return (
     <DefaultLayout>
-      <Container sx={{ background: '#23262F' }}>
+      <Container sx={{ background: 'neutral2' }}>
         <Breadcrumb items={[{ title: 'Home', path: ROUTES.HOME.path }, { title: 'Plan Create' }]} />
         <CreatePlanForm />
       </Container>
