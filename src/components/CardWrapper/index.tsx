@@ -2,7 +2,15 @@ import React, { ReactNode } from 'react'
 
 import { Box, Image, Type } from 'theme/base'
 
-const CardWrapper = ({ children, title, sx, ...props }: { children: ReactNode; title: string } & any) => {
+import { CornerIcon } from '../Icon'
+
+const CardWrapper = ({
+  children,
+  title,
+  sx,
+  hasImage = true,
+  ...props
+}: { children: ReactNode; title: string; hasImage?: boolean } & any) => {
   return (
     <Box
       maxWidth={{ lg: 1200 }}
@@ -18,19 +26,30 @@ const CardWrapper = ({ children, title, sx, ...props }: { children: ReactNode; t
         border: '1px solid rgba(112, 156, 107, 0.2)',
       }}
     >
+      {hasImage && (
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+          }}
+          textAlign="center"
+          pt={'4px'}
+        >
+          <Image src={`/images/arrow_down.svg`} height="100%" />
+        </Box>
+      )}
       <Box
         sx={{
           position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
+          top: '4px',
+          right: '4px',
         }}
-        textAlign="center"
-        pt={'4px'}
       >
-        <Image src={`/images/arrow_down.svg`} height="100%" />
+        <CornerIcon />
       </Box>
-      <Box>
+      <Box mb={18}>
         <Type.H5>{title}</Type.H5>
       </Box>
       {children}
