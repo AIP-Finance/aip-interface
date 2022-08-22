@@ -53,7 +53,7 @@ const CopyButton = ({
         }, 1500)
       })
       .catch((err: any) => {
-        toast.error(<Type.Small color="warning2">{err}</Type.Small>)
+        toast.error(<Type.Small color="red1">{err}</Type.Small>)
       })
   }
 

@@ -9,5 +9,5 @@ export default function ThemeProvider({ children }: { children: JSX.Element | JS
 
   // const themeObject = useMemo(() => theme(darkMode), [darkMode])
 
-  return <StyledComponentsThemeProvider theme={theme(true)}>{children}</StyledComponentsThemeProvider>
+  return <StyledComponentsThemeProvider theme={theme(false)}>{children}</StyledComponentsThemeProvider>
 }
