@@ -160,7 +160,7 @@ const ThemedGlobalStyle = createGlobalStyle`
     transition: all 240ms ease;
   }
   a {
-    color: ${({ theme }) => theme.colors.primary2};
+    color: ${({ theme }) => theme.colors.primary1};
   }
   .bold,
   bold {
