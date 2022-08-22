@@ -17,6 +17,11 @@ export const LINKS = {
   privacy: '',
 }
 
+export const PLAN_STATUS = {
+  live: 'live',
+  end: 'end',
+}
+
 export const DATE_FORMAT = 'MMM D, YYYY - HH:mm'
 export const DEFAULT_LIMIT = 12
 export const MIN_PARSE_ETHER = 0.00000001
