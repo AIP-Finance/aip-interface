@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Box } from 'theme/base'
 
-const bg = '#FCFCFD'
+const bg = 'neutral8'
 
 const Progress = ({ max, value }: { max: number; value: number }) => {
   return (
