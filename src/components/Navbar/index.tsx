@@ -36,7 +36,7 @@ const Navbar = () => {
             disconnect()
           }}
         >
-          <Flex alignItems="center" color="red1">
+          <Flex alignItems="center" color="warning2">
             <LogoutCurve size={24} />
             <Type.Body ml={2}>Logout</Type.Body>
           </Flex>
@@ -48,9 +48,6 @@ const Navbar = () => {
   return (
     <Box
       sx={{
-        borderBottom: 'small',
-        borderColor: 'neutral7',
-        bg: 'white',
         position: 'fixed',
         top: 0,
         left: 0,

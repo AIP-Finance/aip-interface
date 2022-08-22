@@ -17,10 +17,12 @@ const NumberInputField = ({
   InputProps) => {
   return (
     <Box width={block ? '100%' : 'auto'} sx={sx}>
-      {label && (
-        <Type.CaptionBold color={props.hasError ? 'red1' : 'neutral4'} mb="8px">
+      {typeof label !== 'string' ? (
+        label
+      ) : (
+        <Type.Body color={'neutral8'} mb="8px">
           {label}
-        </Type.CaptionBold>
+        </Type.Body>
       )}
       <NumberInput {...props} block={block} />
     </Box>

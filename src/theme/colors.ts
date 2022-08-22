@@ -12,14 +12,14 @@ function colors(darkMode: boolean): Colors {
 
     // backgrounds / greys
 
-    neutral8: darkMode ? '#212529' : '#f6f9fc',
-    neutral7: darkMode ? '#353945' : '#e9ecef',
-    neutral6: darkMode ? '#525f7f' : '#E6E8EC',
-    neutral5: darkMode ? '#8898aa' : '#B1B5C3',
-    neutral4: darkMode ? '#adb5bd' : '#777E90',
-    neutral3: darkMode ? '#ced4da' : '#3D424E',
-    neutral2: darkMode ? '#e9ecef' : '#23262F',
-    neutral1: darkMode ? '#f6f9fc' : '#141416',
+    neutral8: darkMode ? '#f6f9fc' : '#212529',
+    neutral7: darkMode ? '#e9ecef' : '#353945',
+    neutral6: darkMode ? '#E6E8EC' : '#525f7f',
+    neutral5: darkMode ? '#B1B5C3' : '#8898aa',
+    neutral4: darkMode ? '#777E90' : '#adb5bd',
+    neutral3: darkMode ? '#3D424E' : '#ced4da',
+    neutral2: darkMode ? '#23262F' : '#e9ecef',
+    neutral1: darkMode ? '#141416' : '#f6f9fc',
 
     //primary colors
     primary1: '#B1E846',

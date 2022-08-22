@@ -14,9 +14,7 @@ const renderBreadcrumbItem = (item: BreadcrumbItem) =>
       <Type.Small color="neutral6">{item.title}</Type.Small>
     </Link>
   ) : (
-    <Type.Small color="primary1">
-      <b>{item.title}</b>
-    </Type.Small>
+    <Type.Small color="primary1">{item.title}</Type.Small>
   )
 
 const Breadcrumb = ({ items }: { items?: BreadcrumbItem[] }) => {
@@ -35,7 +33,9 @@ const Breadcrumb = ({ items }: { items?: BreadcrumbItem[] }) => {
                 return (
                   <Flex key={index} color="neutral3">
                     {renderBreadcrumbItem(item)}
-                    <Type.Small color="neutral6">{' / '}</Type.Small>
+                    <Type.Small mx={2} color="neutral6">
+                      {'/'}
+                    </Type.Small>
                   </Flex>
                 )
               })}
