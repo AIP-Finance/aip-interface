@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import AddressAvatar from 'components/AddressAvatar'
 import Container from 'components/Container'
+import Logo from 'components/Logo'
 import { useAuthContext } from 'hooks/web3/useAuth'
 import { Button } from 'theme/Buttons'
 import Dropdown, { DropdownItem } from 'theme/Dropdown'
@@ -35,7 +36,7 @@ const Navbar = () => {
             disconnect()
           }}
         >
-          <Flex alignItems="center" color="red1">
+          <Flex alignItems="center" color="warning2">
             <LogoutCurve size={24} />
             <Type.Body ml={2}>Logout</Type.Body>
           </Flex>
@@ -47,9 +48,6 @@ const Navbar = () => {
   return (
     <Box
       sx={{
-        borderBottom: 'small',
-        borderColor: 'neutral7',
-        bg: 'white',
         position: 'fixed',
         top: 0,
         left: 0,
@@ -61,7 +59,7 @@ const Navbar = () => {
       <Container>
         <Flex alignItems="center">
           <Link to="/">
-            <Box />
+            <Logo />
           </Link>
 
           <Box flex="1"></Box>

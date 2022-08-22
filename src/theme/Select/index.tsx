@@ -16,10 +16,10 @@ const StyledSelect = styled(ReactSelect)<SelectProps>(({ hasError }: { hasError?
       alignItems: 'center',
       position: 'relative',
       border: 'normal',
-      borderColor: hasError ? 'red1' : 'neutral6',
+      borderColor: hasError ? 'warning2' : 'neutral6',
       borderRadius: 'sm',
       '&:hover:not([disabled]), &--is-hovered': {
-        borderColor: hasError ? 'red1' : 'neutral5',
+        borderColor: hasError ? 'warning2' : 'neutral5',
         boxShadow: 'none',
       },
       '&:focus-within:not([disabled]), &--is-focused': {
