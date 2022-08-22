@@ -19,7 +19,7 @@ const renderBreadcrumbItem = (item: BreadcrumbItem) =>
 
 const Breadcrumb = ({ items }: { items?: BreadcrumbItem[] }) => {
   return (
-    <Box pt={40} pb={16}>
+    <Box pt={47} pb={20}>
       <Box>
         {items?.length === 1 ? (
           <Type.H4 textAlign="center">{items?.[0]?.title}</Type.H4>

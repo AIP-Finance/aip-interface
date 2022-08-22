@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
+import { CornerIcon } from 'components/Icon'
 import { Button } from 'theme/Buttons'
 import NumberInputField from 'theme/InputField/NumberInputField'
 import { Box, Flex, Type } from 'theme/base'
-
-import { periodCalculated } from '../../../utils/parsers'
+import { periodCalculated } from 'utils/parsers'
 
 const MIN_ENTER = 1
 const MAX_FREQUENCY = 30
@@ -41,22 +41,39 @@ const CreatePlanForm = () => {
         justifyContent="space-between"
         flexDirection={{ _: 'column', sm: 'row' }}
         sx={{
+          position: 'relative',
           border: '1px solid #B1E846',
+          maxWidth: '843px',
+          margin: 'auto',
+          borderRadius: '4px',
         }}
       >
         <Box
+          sx={{
+            position: 'absolute',
+            top: '4px',
+            right: '4px',
+          }}
+        >
+          <CornerIcon />
+        </Box>
+        <Box
           p={24}
+          pb={64}
           sx={{
             borderRight: '1px solid #3D424E',
           }}
           flex={1}
         >
           <Type.H5>Create an Auto-Invest Plan</Type.H5>
-          <Box mt="24px">
+          <Flex my={36} justifyContent="space-between" width={'100%'} alignItems="center">
+            <Type.BodyBold>Binance (BNB)</Type.BodyBold>
+          </Flex>
+          <Box>
             <NumberInputField
               rules={{ required: true, min: MIN_ENTER, max: MAX_AMOUNT }}
               label={
-                <Flex mt={2} justifyContent="space-between" width={'100%'} alignItems="center" mb="8px">
+                <Flex justifyContent="space-between" width={'100%'} alignItems="center" mb="8px">
                   <Type.Body color={'neutral8'}>Amount Per Period</Type.Body>
                   <Type.Small color={'primary1'}>Max</Type.Small>
                 </Flex>
@@ -101,7 +118,7 @@ const CreatePlanForm = () => {
         </Box>
         <Box p={24} flex={1}>
           <Type.H5>Summary</Type.H5>
-          <Box>
+          <Box mt={32}>
             <Type.Body>
               You will invest in <Type.Body color="primary1">ETH</Type.Body> with{' '}
               <Type.Body color="primary1">{amountValue} USDT</Type.Body> every{' '}
@@ -135,7 +152,7 @@ const CreatePlanForm = () => {
               borderTop: '1px solid #3D424E',
             }}
           />
-          <Button type="submit" variant="primary" size="lg" px={4} isLoading={submitting} block>
+          <Button type="submit" variant="outlinePrimary" size="lg" px={4} isLoading={submitting} block>
             {!submitting && 'Confirm'}
           </Button>
           <Type.Small color="neutral5" mt={3}>
