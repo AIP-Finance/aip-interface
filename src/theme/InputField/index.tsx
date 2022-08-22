@@ -21,7 +21,7 @@ const InputField = forwardRef(
     ref: ForwardedRef<HTMLInputElement>
   ) => (
     <Box width={block ? '100%' : 'auto'} sx={sx}>
-      <Type.CaptionBold color={hasError ? 'warning2' : 'neutral1'} mb="8px">
+      <Type.CaptionBold color={hasError ? 'red1' : 'neutral1'} mb="8px">
         {label}
       </Type.CaptionBold>
       <Input {...props} sx={sxInput} block={block} ref={ref} variant={hasError ? 'error' : ''} />
@@ -35,7 +35,7 @@ export const InputPasswordField = forwardRef(
     ref: ForwardedRef<HTMLInputElement>
   ) => (
     <Box width={block ? '100%' : 'auto'} sx={sx}>
-      <Type.CaptionBold color={hasError ? 'warning2' : 'neutral4'} mb="8px">
+      <Type.CaptionBold color={hasError ? 'red1' : 'neutral4'} mb="8px">
         {label}
       </Type.CaptionBold>
       <InputPassword {...props} block={block} ref={ref} variant={hasError ? 'error' : ''} />
@@ -49,7 +49,7 @@ export const TextareaField = forwardRef(
     ref: ForwardedRef<HTMLTextAreaElement>
   ) => (
     <Box width={block ? '100%' : 'auto'} sx={sx}>
-      <Type.CaptionBold color={hasError ? 'warning2' : 'neutral1'} mb="8px">
+      <Type.CaptionBold color={hasError ? 'red1' : 'neutral1'} mb="8px">
         {label}
       </Type.CaptionBold>
       <Textarea {...props} block={block} ref={ref} variant={hasError ? 'error' : ''} />

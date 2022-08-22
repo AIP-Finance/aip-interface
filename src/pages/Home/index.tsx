@@ -1,11 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
-import CardWrapper from 'components/CardWrapper'
 import DefaultLayout from 'components/Layouts/DefaultLayout'
 import { Button } from 'theme/Buttons'
 import { Box, Type } from 'theme/base'
-import ROUTES from 'utils/routes'
 
 const Home = () => {
   return (
@@ -36,16 +33,12 @@ const Home = () => {
       <Box py={2}>
         <Button variant="outline">Primary</Button>
       </Box>{' '}
-      <CardWrapper title={'How to join?'}>
-        <Box py={2}>
-          <Button variant="outlinePrimary">Primary</Button>
-        </Box>
-        <Box py={2}>
-          <Link to={ROUTES.PLAN_MANAGEMENT.path}>
-            <Button variant="outlineDanger">PLAN_MANAGEMENT</Button>
-          </Link>
-        </Box>
-      </CardWrapper>
+      <Box py={2}>
+        <Button variant="outlinePrimary">Primary</Button>
+      </Box>
+      <Box py={2}>
+        <Button variant="outlineDanger">Primary</Button>
+      </Box>
     </DefaultLayout>
   )
 }
