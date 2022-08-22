@@ -114,7 +114,7 @@ const CreatePlanForm = () => {
               block
             />
             {Boolean(errors?.period) && <Type.Small color="warning2">Enter your total period</Type.Small>}
-            {errors?.periods?.type?.toString() === 'max' && <Type.Small color="warning2">max {MAX_PERIODS}</Type.Small>}
+            {errors?.period?.type?.toString() === 'max' && <Type.Small color="warning2">max {MAX_PERIODS}</Type.Small>}
           </Box>
         </Box>
         <Box p={24} flex={1}>
@@ -150,7 +150,15 @@ const CreatePlanForm = () => {
 
           <Divider my={3} />
 
-          <Button type="submit" variant="outlinePrimary" size="lg" px={4} isLoading={submitting} block>
+          <Button
+            type="submit"
+            variant="outlinePrimary"
+            size="lg"
+            px={4}
+            isLoading={submitting}
+            block
+            disabled={submitting}
+          >
             {!submitting && 'Confirm'}
           </Button>
           <Type.Small color="neutral5" mt={3}>

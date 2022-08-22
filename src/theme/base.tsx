@@ -110,7 +110,7 @@ export const Type = {
     return <TextWrapper fontSize="18px" lineHeight="26px" fontWeight="normal" display="inline-block" {...props} />
   },
   LargeBold(props: TextProps) {
-    return <TextWrapper fontSize="18px" lineHeight="26px" display="inline-block" fontWeight="bold" {...props} />
+    return <TextWrapper fontSize="24px" lineHeight="34px" display="inline-block" fontWeight="600" {...props} />
   },
   Body(props: TextProps) {
     return <TextWrapper fontSize="16px" lineHeight="24px" fontWeight="normal" display="inline-block" {...props} />

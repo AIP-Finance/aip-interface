@@ -17,6 +17,9 @@ export const Button = styled.button<ButtonProps>(
     py: '12px',
     color: 'neutral1',
     bg: 'neutral6',
+    fontSize: '16px',
+    lineHeight: '16px',
+    fontWeight: '600',
     borderRadius: 'button',
   }),
 

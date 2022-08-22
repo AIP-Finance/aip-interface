@@ -44,9 +44,15 @@ export const styleVariants = {
     },
   },
   [variants.OUTLINE]: {
-    color: 'neutral1',
+    color: 'neutral8',
     bg: 'transparent',
-    border: 'normal',
+    border: 'small',
+    borderColor: 'neutral4',
+    '&:hover,&:focus,&:active': {
+      borderColor: 'neutral6',
+      bg: 'neutral8',
+      color: 'neutral1',
+    },
   },
 
   [variants.OUTLINE_DANGER]: {
@@ -61,12 +67,13 @@ export const styleVariants = {
   },
   [variants.OUTLINE_PRIMARY]: {
     color: 'primary1',
-    bg: 'transparent',
-    border: 'normal',
+    bg: 'primary2',
+    border: 'small',
     borderColor: 'primary1',
     '&:hover,&:focus,&:active': {
-      borderColor: 'primary2',
-      color: 'primary2',
+      borderColor: 'primary1',
+      bg: 'primary1',
+      color: 'neutral1',
     },
   },
   [variants.GHOST]: {

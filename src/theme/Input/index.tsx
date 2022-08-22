@@ -44,7 +44,7 @@ export const InputWrapper = styled(Flex)<InputWrapperProps>(
       bg: 'neutral1',
       position: 'relative',
       border: props.border ?? 'small',
-      borderColor: 'neutral1',
+      borderColor: 'neutral5',
       borderRadius: 'sm',
       fontSize: 14,
       lineHeight: '20px',
@@ -53,10 +53,10 @@ export const InputWrapper = styled(Flex)<InputWrapperProps>(
       color: 'inherit',
       cursor: 'pointer',
       '&:hover:not([disabled])': {
-        borderColor: 'neutral5',
+        borderColor: 'primary1',
       },
       '&:focus-within:not([disabled])': {
-        borderColor: 'neutral5',
+        borderColor: 'primary1',
       },
       '&[disabled]': {
         bg: 'neutral2',

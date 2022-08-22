@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { PlanData } from 'apis/plan'
 import Divider from 'components/Divider'
@@ -7,10 +7,17 @@ import { Box, Flex, Type } from 'theme/base'
 import { PLAN_STATUS } from 'utils/constants'
 import { periodCalculated } from 'utils/parsers'
 
+import CancelPlanModal from './CancelPlanModal'
+import ExtendPlanModal from './ExtendPlanModal'
 import MoreIcon from './MoreIcon'
 import Progress from './Progress'
+import WithdrawPlanModal from './WithdrawPlanModal'
 
 const PlanItem = ({ plan }: { plan: PlanData }) => {
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false)
+  const [isExtendModalOpen, setIsExtendModalOpen] = useState(false)
+  const [isWithdrawModalOpen, setIsWithdrawModalOpen] = useState(false)
+
   return (
     <Box
       sx={{
@@ -23,7 +30,7 @@ const PlanItem = ({ plan }: { plan: PlanData }) => {
     >
       <Flex justifyContent="space-between" width={'100%'} alignItems="center" mb="8px">
         <Type.Large color={'neutral8'}>{plan.tokenName}</Type.Large>
-        <MoreIcon onCancel={() => console.log('PlanItem onCancel')} />
+        <MoreIcon onCancel={() => setIsCancelModalOpen(true)} />
       </Flex>
       {plan.status == PLAN_STATUS.live ? (
         <Type.BodyBold color="primary1">
@@ -60,13 +67,27 @@ const PlanItem = ({ plan }: { plan: PlanData }) => {
       <Divider my={3} />
 
       <Flex justifyContent="space-between" width={'100%'} alignItems="center">
-        <Button type="submit" variant="outlinePrimary" size="lg" px={4} block mr={3}>
+        <Button
+          type="submit"
+          variant="outlinePrimary"
+          size="lg"
+          px={4}
+          block
+          mr={3}
+          onClick={() => setIsExtendModalOpen(true)}
+        >
           {'Extend'}
         </Button>
-        <Button type="submit" variant="outline" size="lg" px={4} block>
+        <Button type="submit" variant="outline" size="lg" px={4} block onClick={() => setIsWithdrawModalOpen(true)}>
           {'Withdraw'}
         </Button>
       </Flex>
+
+      {isCancelModalOpen && <CancelPlanModal isOpen={isCancelModalOpen} setIsOpen={setIsCancelModalOpen} plan={plan} />}
+      {isExtendModalOpen && <ExtendPlanModal isOpen={isExtendModalOpen} setIsOpen={setIsExtendModalOpen} plan={plan} />}
+      {isWithdrawModalOpen && (
+        <WithdrawPlanModal isOpen={isWithdrawModalOpen} setIsOpen={setIsWithdrawModalOpen} plan={plan} />
+      )}
     </Box>
   )
 }

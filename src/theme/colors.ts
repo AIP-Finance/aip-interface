@@ -23,7 +23,7 @@ function colors(darkMode: boolean): Colors {
 
     //primary colors
     primary1: '#B1E846',
-    primary2: '#rgba(177, 232, 70, 0.1)',
+    primary2: 'rgba(177, 232, 70, 0.1)',
 
     // secondary colors
     secondary1: '#465DDD',
@@ -39,7 +39,7 @@ function colors(darkMode: boolean): Colors {
     warning1: '#fb6340',
     warning2: '#fa441b',
 
-    modalBG: darkMode ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.6)',
+    modalBG: darkMode ? 'rgba(35, 38, 47, 0.7);' : 'rgba(35, 38, 47, 0.6);',
   }
 }
 
