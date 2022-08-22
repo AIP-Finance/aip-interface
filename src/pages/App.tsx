@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 
+import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 // import { useIsDarkMode } from 'hooks/store/state/useDarkMode'
 import useEagerConnect from 'hooks/web3/useEagerConnect'
@@ -38,7 +39,7 @@ function App() {
           <Route exact path={ROUTES.PLAN_MANAGEMENT.path} component={PlanManagement}></Route>
         </Switch>
       </Suspense>
-
+      <Footer />
       <ToastContainer theme="light" limit={3} />
     </div>
   )

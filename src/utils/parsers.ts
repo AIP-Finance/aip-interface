@@ -1,6 +1,6 @@
-import { SUPPORTED_LOCALES } from './constants'
+import dayjs from 'dayjs'
 
-// dayjs.extend(duration)
+import { SUPPORTED_LOCALES } from './constants'
 
 /**
  * Given a locale string (e.g. from user agent), return the best match for corresponding SupportedLocale
@@ -17,6 +17,12 @@ export function parseLocale(maybeSupportedLocale: string) {
 export function floorNumber(num: number, decimals: number) {
   const multipler = Number('1'.padEnd(1 + decimals, '0'))
   return Math.floor(num * multipler) / multipler
+}
+
+export function periodCalculated(period: number): string {
+  const now = dayjs().set('hour', 8).set('minute', 0)
+  const endPeriod = now.add(1 + period, 'day')
+  return endPeriod.format('YYYY-MM-DD hh:mm') + ' UTC'
 }
 
 export const pageToOffset = (page: number, limit: number) => (page - 1) * limit

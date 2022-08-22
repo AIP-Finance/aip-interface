@@ -5,8 +5,7 @@ import CardWrapper from 'components/CardWrapper'
 import DefaultLayout from 'components/Layouts/DefaultLayout'
 import { Button } from 'theme/Buttons'
 import { Box, Type } from 'theme/base'
-
-import ROUTES from '../../utils/routes'
+import ROUTES from 'utils/routes'
 
 const Home = () => {
   return (
