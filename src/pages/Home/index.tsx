@@ -2,56 +2,51 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import CardWrapper from 'components/CardWrapper'
+import FAQContainer from 'components/FAQContainer'
 import DefaultLayout from 'components/Layouts/DefaultLayout'
 import { Button } from 'theme/Buttons'
-import { Box, Type } from 'theme/base'
+import { Box } from 'theme/base'
 import ROUTES from 'utils/routes'
+
+import HeroCard from './HeroCard'
+import HowCard from './HowCard'
+import ProductList from './ProductList'
 
 const Home = () => {
   return (
-    <DefaultLayout>
-      <Type.H1>ABC</Type.H1>
-      <Type.H2>ABC</Type.H2>
-      <Type.H3>ABC</Type.H3>
-      <Type.H4>ABC</Type.H4>
-      <Type.H5>ABC</Type.H5>
-      <Box py={2}>
-        <Button variant="primary">Primary</Button>
-      </Box>{' '}
-      <Box py={2}>
-        <Button variant="secondary">Primary</Button>
-      </Box>{' '}
-      <Box py={2}>
-        <Button variant="success">Primary</Button>
-      </Box>{' '}
-      <Box py={2}>
-        <Button variant="warning">Primary</Button>
-      </Box>{' '}
-      <Box py={2}>
-        <Button variant="info">Primary</Button>
-      </Box>{' '}
-      <Box py={2}>
-        <Button variant="danger">Primary</Button>
-      </Box>{' '}
-      <Box py={2}>
-        <Button variant="outline">Primary</Button>
-      </Box>{' '}
-      <CardWrapper title={'How to join?'}>
-        <Box py={2}>
-          <Button variant="outlinePrimary">Primary</Button>
-        </Box>
-        <Box py={2}>
-          <Link to={ROUTES.PLAN_CREATE.path}>
-            <Button variant="outlineDanger">PLAN_CREATE</Button>
-          </Link>
-        </Box>
-        <Box py={2}>
-          <Link to={ROUTES.PLAN_MANAGEMENT.path}>
-            <Button variant="outlineDanger">PLAN_MANAGEMENT</Button>
-          </Link>
-        </Box>
-      </CardWrapper>
-    </DefaultLayout>
+    <Box
+      sx={{
+        background: 'url(images/bg.png)',
+        backgroundPosition: 'top',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'contain',
+      }}
+    >
+      <DefaultLayout>
+        <HeroCard />
+
+        <CardWrapper mt={98} title={'Create  your own Auto-Invest Plan'}>
+          <ProductList />
+        </CardWrapper>
+
+        <HowCard />
+
+        <FAQContainer />
+
+        <CardWrapper title={'How to join?'}>
+          <Box py={2}>
+            <Link to={ROUTES.PLAN_CREATE.path}>
+              <Button variant="outlineDanger">PLAN_CREATE</Button>
+            </Link>
+          </Box>
+          <Box py={2}>
+            <Link to={ROUTES.PLAN_MANAGEMENT.path}>
+              <Button variant="outlineDanger">PLAN_MANAGEMENT</Button>
+            </Link>
+          </Box>
+        </CardWrapper>
+      </DefaultLayout>
+    </Box>
   )
 }
 

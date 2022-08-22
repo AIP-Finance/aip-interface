@@ -3,7 +3,6 @@ import React from 'react'
 import Breadcrumb from 'components/Breadcrumb'
 import Container from 'components/Container'
 import FAQContainer from 'components/FAQContainer'
-import FAQItem from 'components/FAQItem'
 import DefaultLayout from 'components/Layouts/DefaultLayout'
 import ROUTES from 'utils/routes'
 
