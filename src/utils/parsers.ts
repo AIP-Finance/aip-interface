@@ -19,8 +19,8 @@ export function floorNumber(num: number, decimals: number) {
   return Math.floor(num * multipler) / multipler
 }
 
-export function periodCalculated(period: number): string {
-  const now = dayjs().set('hour', 8).set('minute', 0)
+export function periodCalculated({ start, period }: { start?: string; period: number }): string {
+  const now = dayjs(start).set('hour', 8).set('minute', 0)
   const endPeriod = now.add(1 + period, 'day')
   return endPeriod.format('YYYY-MM-DD hh:mm') + ' UTC'
 }

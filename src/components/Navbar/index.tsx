@@ -71,7 +71,7 @@ const Navbar = () => {
             </>
           ) : (
             <Button
-              variant="primary"
+              variant="outlinePrimary"
               onClick={() => openModal(true)}
               mr={[16, 16, 16, 16, 0]}
               ml={['auto', 'auto', 'auto', 0]}

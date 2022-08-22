@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
+import Divider from 'components/Divider'
 import { CornerIcon } from 'components/Icon'
 import { Button } from 'theme/Buttons'
 import NumberInputField from 'theme/InputField/NumberInputField'
@@ -61,7 +62,8 @@ const CreatePlanForm = () => {
           p={24}
           pb={64}
           sx={{
-            borderRight: '1px solid #3D424E',
+            borderRight: 'small',
+            borderRightColor: 'neutral3',
           }}
           flex={1}
         >
@@ -113,7 +115,7 @@ const CreatePlanForm = () => {
               block
             />
             {Boolean(errors?.period) && <Type.Small color="warning2">Enter your total period</Type.Small>}
-            {errors?.periods?.type?.toString() === 'max' && <Type.Small color="warning2">max {MAX_PERIODS}</Type.Small>}
+            {errors?.period?.type?.toString() === 'max' && <Type.Small color="warning2">max {MAX_PERIODS}</Type.Small>}
           </Box>
         </Box>
         <Box p={24} flex={1}>
@@ -132,11 +134,11 @@ const CreatePlanForm = () => {
           </Box>
           <Flex mt={3} justifyContent="space-between" width={'100%'} alignItems="center">
             <Type.Body>Start from:</Type.Body>
-            <Type.BodyBold color="primary1">{periodCalculated(0)}</Type.BodyBold>
+            <Type.BodyBold color="primary1">{periodCalculated({ period: 0 })}</Type.BodyBold>
           </Flex>
           <Flex mt={3} justifyContent="space-between" width={'100%'} alignItems="center">
             <Type.Body>To:</Type.Body>
-            <Type.BodyBold color="primary1">{periodCalculated(frequencyValue * periodValue)}</Type.BodyBold>
+            <Type.BodyBold color="primary1">{periodCalculated({ period: frequencyValue * periodValue })}</Type.BodyBold>
           </Flex>
           <Flex mt={3} justifyContent="space-between" width={'100%'} alignItems="center">
             <Type.Body>Total investment:</Type.Body>
@@ -146,13 +148,18 @@ const CreatePlanForm = () => {
             <Type.Body>Your balance:</Type.Body>
             <Type.BodyBold color="primary1">{1000} USDT</Type.BodyBold>
           </Flex>
-          <Box
-            my={3}
-            sx={{
-              borderTop: '1px solid #3D424E',
-            }}
-          />
-          <Button type="submit" variant="outlinePrimary" size="lg" px={4} isLoading={submitting} block>
+
+          <Divider my={3} />
+
+          <Button
+            type="submit"
+            variant="outlinePrimary"
+            size="lg"
+            px={4}
+            isLoading={submitting}
+            block
+            disabled={submitting}
+          >
             {!submitting && 'Confirm'}
           </Button>
           <Type.Small color="neutral5" mt={3}>

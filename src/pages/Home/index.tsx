@@ -41,6 +41,11 @@ const Home = () => {
           <Button variant="outlinePrimary">Primary</Button>
         </Box>
         <Box py={2}>
+          <Link to={ROUTES.PLAN_CREATE.path}>
+            <Button variant="outlineDanger">PLAN_CREATE</Button>
+          </Link>
+        </Box>
+        <Box py={2}>
           <Link to={ROUTES.PLAN_MANAGEMENT.path}>
             <Button variant="outlineDanger">PLAN_MANAGEMENT</Button>
           </Link>
