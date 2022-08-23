@@ -30,31 +30,32 @@ const usePlans = () => {
     // ]
     const load = async () => {
       const planIndexes = await planManagerContract.plansOf(account)
-      const calls = planIndexes.map((planIndex: BigNumber) => ({
-        address: planManagerContract.address,
-        name: 'getPlan',
-        params: [planIndex],
-      }))
-      const data: PlanData[] = await multicallv2(PlanManager_ABI, calls).then((results) => {
-        return results.map((result: any) => {
-          console.log('result', result)
-          return {
-            stableCoinAddress: result.plan.token0,
-            tokenAddress: result.plan.token1,
-            startedTime: result.statistics?.startedTime?.toNumber(),
-            endedTime: result.statistics?.endedTime?.toNumber(),
-            lastTriggerTime: result.statistics?.lastTriggerTime?.toNumber(),
-            tickAmount: formatEther(result.plan?.tickAmount),
-            frequency: result.plan?.frequencyD,
-            ticks: result.statistics?.ticks?.toNumber(),
-            remainingTicks: result.statistics?.remainingTicks?.toNumber(),
-            tokenAmount: formatEther(result.statistics?.swapAmount1),
-            claimedTokenAmount: formatEther(result.statistics?.claimedAmount1),
-          }
+      if (planIndexes?.length > 0) {
+        const calls = planIndexes.map((planIndex: BigNumber) => ({
+          address: planManagerContract.address,
+          name: 'getPlan',
+          params: [planIndex],
+        }))
+        const data: PlanData[] = await multicallv2(PlanManager_ABI, calls).then((results) => {
+          return results.map((result: any) => {
+            return {
+              stableCoinAddress: result.plan.token0,
+              tokenAddress: result.plan.token1,
+              startedTime: result.statistics?.startedTime?.toNumber(),
+              endedTime: result.statistics?.endedTime?.toNumber(),
+              lastTriggerTime: result.statistics?.lastTriggerTime?.toNumber(),
+              tickAmount: formatEther(result.plan?.tickAmount),
+              frequency: result.plan?.frequencyD,
+              ticks: result.statistics?.ticks?.toNumber(),
+              remainingTicks: result.statistics?.remainingTicks?.toNumber(),
+              tokenAmount: formatEther(result.statistics?.swapAmount1),
+              claimedTokenAmount: formatEther(result.statistics?.claimedAmount1),
+            }
+          })
         })
-      })
-      if (data?.length > 0) {
         setPlans(data)
+      } else {
+        setPlans([])
       }
     }
     load()
