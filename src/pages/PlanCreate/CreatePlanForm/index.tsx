@@ -69,7 +69,7 @@ const CreatePlanForm = ({ token }: { token: TokenData }) => {
         >
           <Type.H5>Create an Auto-Invest Plan</Type.H5>
           <Flex my={36} justifyContent="space-between" width={'100%'} alignItems="center">
-            <Type.BodyBold>Binance (BNB)</Type.BodyBold>
+            <Type.BodyBold>{`${token.name} (${token.symbol})`}</Type.BodyBold>
           </Flex>
           <Box>
             <NumberInputField
@@ -122,7 +122,7 @@ const CreatePlanForm = ({ token }: { token: TokenData }) => {
           <Type.H5>Summary</Type.H5>
           <Box mt={32}>
             <Type.Body>
-              You will invest in <Type.Body color="primary1">ETH</Type.Body> with{' '}
+              You will invest in <Type.Body color="primary1">{token.symbol}</Type.Body> with{' '}
               <Type.Body color="primary1">{amountValue} USDT</Type.Body> every{' '}
               <Type.Body color="primary1">{frequencyValue > 1 ? `${frequencyValue} days` : ` day`}</Type.Body>. With a
               total of{' '}

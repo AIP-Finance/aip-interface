@@ -22,7 +22,7 @@ const PlanCreate = () => {
     <DefaultLayout>
       <Container sx={{ background: 'neutral2' }}>
         <Breadcrumb items={[{ title: 'Home', path: ROUTES.HOME.path }, { title: `Plan Create (${slug})` }]} />
-        {<CreatePlanForm token={token} />}
+        <CreatePlanForm token={token} />
         <FAQContainer />
       </Container>
     </DefaultLayout>
