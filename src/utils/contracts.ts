@@ -6,7 +6,6 @@ import { Contract } from '@ethersproject/contracts'
 import { Provider, Web3Provider } from '@ethersproject/providers'
 
 import MULTICALL_ABI from 'abis/Multicall.json'
-import PAIR_ABI from 'abis/Pair.json'
 import { simpleRpcProvider } from 'utils/providers'
 
 export function isAddress(value: any): string | false {

@@ -1,0 +1,398 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_factory",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_WETH9",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "WETH9",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      }
+    ],
+    "name": "aipExtendCallback",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      }
+    ],
+    "name": "aipSubcribeCallback",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "claim",
+    "outputs": [
+      {
+        "internalType": "contract IAipPool",
+        "name": "pool",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "token0",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "token1",
+            "type": "address"
+          },
+          {
+            "internalType": "uint24",
+            "name": "frequencyD",
+            "type": "uint24"
+          }
+        ],
+        "internalType": "struct PoolAddress.PoolInfo",
+        "name": "poolInfo",
+        "type": "tuple"
+      }
+    ],
+    "name": "createPoolIfNecessary",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "pool",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "periods",
+        "type": "uint256"
+      }
+    ],
+    "name": "extend",
+    "outputs": [
+      {
+        "internalType": "contract IAipPool",
+        "name": "pool",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "factory",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "planIndex",
+        "type": "uint256"
+      }
+    ],
+    "name": "getPlan",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "investor",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "token0",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "token1",
+            "type": "address"
+          },
+          {
+            "internalType": "uint24",
+            "name": "frequencyD",
+            "type": "uint24"
+          },
+          {
+            "internalType": "uint256",
+            "name": "index",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tickAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "createdTime",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct AipPlanManager.Plan",
+        "name": "plan",
+        "type": "tuple"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "swapAmount0",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "swapAmount1",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "claimedAmount1",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "ticks",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "remainingTicks",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "startedTime",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "endedTime",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "lastTriggerTime",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct AipPlanManager.PlanStatistics",
+        "name": "statistics",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "investorPlans",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes[]",
+        "name": "data",
+        "type": "bytes[]"
+      }
+    ],
+    "name": "multicall",
+    "outputs": [
+      {
+        "internalType": "bytes[]",
+        "name": "results",
+        "type": "bytes[]"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "addr",
+        "type": "address"
+      }
+    ],
+    "name": "plansOf",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "token0",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "token1",
+            "type": "address"
+          },
+          {
+            "internalType": "uint24",
+            "name": "frequencyD",
+            "type": "uint24"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tickAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "periods",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct AipPlanManager.SubcribeParams",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "subcribe",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "contract IAipPool",
+        "name": "pool",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "unsubcribe",
+    "outputs": [
+      {
+        "internalType": "contract IAipPool",
+        "name": "pool",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "receive"
+  }
+]

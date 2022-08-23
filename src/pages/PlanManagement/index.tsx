@@ -1,28 +1,18 @@
 import React from 'react'
 
-import { PlanData } from 'apis/plan'
 import Breadcrumb from 'components/Breadcrumb'
 import Container from 'components/Container'
 import DefaultLayout from 'components/Layouts/DefaultLayout'
+import { PlanData } from 'entities/plan'
 import { Box } from 'theme/base'
 import ROUTES from 'utils/routes'
 
 import PlanItem from './PlanItem'
 import Tabs from './Tabs'
-
-const plan: PlanData = {
-  tokenName: 'Binance',
-  startTime: 'Mon Aug 22 2022 13:56:09 GMT+0700',
-  amount: 1,
-  frequency: 2,
-  period: 10,
-  tokenAmount: 4,
-  status: 'live',
-  periodRemaining: 4,
-  amountRemaining: 200,
-}
+import usePlans from './usePlans'
 
 const PlanCreate = () => {
+  const { plans } = usePlans()
   return (
     <DefaultLayout>
       <Container sx={{ background: 'neutral2' }}>
@@ -30,7 +20,10 @@ const PlanCreate = () => {
       </Container>
       <Box>
         <Tabs active={0} />
-        <PlanItem plan={plan} />
+        {plans?.map((plan, index) => (
+          <PlanItem plan={plan} key={index} />
+        ))}
+        {/* <PlanItem plan={plan} /> */}
       </Box>
     </DefaultLayout>
   )
