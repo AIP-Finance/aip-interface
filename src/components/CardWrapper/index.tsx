@@ -23,13 +23,30 @@ const CardWrapper = ({
         ml: 'auto',
         mr: 'auto',
         ...sx,
-        border: '1px solid rgba(112, 156, 107, 0.2)',
+        border: 'small',
+        borderColor: 'primary1',
+        borderRadius: '4px',
       }}
     >
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          opacity: 0.7,
+          bg: 'neutral2',
+          backdropFilter: 'blur(100px)',
+          zIndex: 1,
+          borderRadius: '4px',
+        }}
+      />
       {hasImage && (
         <Box
           sx={{
             position: 'absolute',
+            zIndex: 2,
             top: 0,
             left: 0,
             right: 0,
@@ -43,16 +60,19 @@ const CardWrapper = ({
       <Box
         sx={{
           position: 'absolute',
+          zIndex: 2,
           top: '4px',
           right: '4px',
         }}
       >
         <CornerIcon />
       </Box>
-      <Box mb={18}>
-        <Type.H5>{title}</Type.H5>
+      <Box sx={{ zIndex: 2, position: 'relative' }}>
+        <Box mb={18}>
+          <Type.H5>{title}</Type.H5>
+        </Box>
+        {children}
       </Box>
-      {children}
     </Box>
   )
 }

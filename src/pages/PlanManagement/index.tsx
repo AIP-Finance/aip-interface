@@ -22,7 +22,7 @@ const plan: PlanData = {
   amountRemaining: 200,
 }
 
-const PlanCreate = () => {
+const PlanManagement = () => {
   return (
     <DefaultLayout>
       <Container sx={{ background: 'neutral2' }}>
@@ -36,4 +36,4 @@ const PlanCreate = () => {
   )
 }
 
-export default PlanCreate
+export default PlanManagement

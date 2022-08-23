@@ -48,7 +48,7 @@ const Navbar = () => {
   return (
     <Box
       sx={{
-        position: 'fixed',
+        position: 'absolute',
         top: 0,
         left: 0,
         width: '100%',
