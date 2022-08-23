@@ -46,10 +46,10 @@ const HowCard = () => {
           <HowItem index={1} title={'Connect Wallet'} image={'images/home_icon_1.png'} />
         </Box>
         <Box mr={40} flex={1}>
-          <HowItem index={2} title={'Connect Wallet'} image={'images/home_icon_2.png'} />
+          <HowItem index={2} title={'Create your Auto-Invest Plan'} image={'images/home_icon_2.png'} />
         </Box>
         <Box flex={1}>
-          <HowItem index={3} title={'Connect Wallet'} image={'images/home_icon_3.png'} />
+          <HowItem index={3} title={'Enjoy the way your money works'} image={'images/home_icon_3.png'} />
         </Box>
       </Flex>
     </CardWrapper>

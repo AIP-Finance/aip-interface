@@ -49,11 +49,11 @@ export const FAQ = [
     ),
   },
   {
-    title: '5. How many Auto-Invest plans can I subscribe?',
-    content: <span>There is no maximum limit to the number of Auto-Invest plans you can subscribe.</span>,
+    title: '5. How many Auto-Invest plans can I subscribe to?',
+    content: <span>There is no maximum limit to the number of Auto-Invest plans you can subscribe to.</span>,
   },
   {
-    title: '6.  What is fee on AIP and how to calculator?',
+    title: '6.  What is the fee on AIP and how to calculator?',
     content: (
       <span>
         When you use AIP, You should consider the fees below:

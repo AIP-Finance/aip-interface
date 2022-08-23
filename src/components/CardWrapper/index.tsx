@@ -24,7 +24,7 @@ const CardWrapper = ({
         mr: 'auto',
         ...sx,
         border: 'small',
-        borderColor: 'primary1',
+        borderColor: 'primary3',
         borderRadius: '4px',
       }}
     >
