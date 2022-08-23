@@ -13,7 +13,7 @@ const MAX_FREQUENCY = 30
 const MAX_AMOUNT = 1000000
 const MAX_PERIODS = 10000
 
-const CreatePlanForm = () => {
+const CreatePlanForm = ({ token }: { token: TokenData }) => {
   const {
     handleSubmit,
     control,
