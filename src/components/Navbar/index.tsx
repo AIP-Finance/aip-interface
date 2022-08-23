@@ -58,27 +58,42 @@ const Navbar = () => {
     >
       <Container>
         <Flex alignItems="center">
-          <Link to="/">
-            <Logo />
-          </Link>
+          <Box sx={{ position: 'relative' }}>
+            <Link to="/">
+              <Logo />
+            </Link>
+            <Box
+              sx={{
+                position: 'absolute',
+                top: '-5px',
+                left: '100px',
+                backgroundColor: 'primary1',
+                borderRadius: '4px',
+                width: '130px',
+                textAlign: 'center',
+              }}
+            >
+              <Type.BodyBold color="neutral1">In Development</Type.BodyBold>
+            </Box>
+          </Box>
 
           <Box flex="1"></Box>
-          {account ? (
-            <>
-              <Dropdown menu={renderMenu()} buttonVariant="ghost" buttonSx={{ p: 0 }} direction="right">
-                <UserFrame address={account} />
-              </Dropdown>
-            </>
-          ) : (
-            <Button
-              variant="outlinePrimary"
-              onClick={() => openModal(true)}
-              mr={[16, 16, 16, 16, 0]}
-              ml={['auto', 'auto', 'auto', 0]}
-            >
-              Connect Wallet
-            </Button>
-          )}
+          {/*{account ? (*/}
+          {/*  <>*/}
+          {/*    <Dropdown menu={renderMenu()} buttonVariant="ghost" buttonSx={{ p: 0 }} direction="right">*/}
+          {/*      <UserFrame address={account} />*/}
+          {/*    </Dropdown>*/}
+          {/*  </>*/}
+          {/*) : (*/}
+          {/*  <Button*/}
+          {/*    variant="outlinePrimary"*/}
+          {/*    onClick={() => openModal(true)}*/}
+          {/*    mr={[16, 16, 16, 16, 0]}*/}
+          {/*    ml={['auto', 'auto', 'auto', 0]}*/}
+          {/*  >*/}
+          {/*    Connect Wallet*/}
+          {/*  </Button>*/}
+          {/*)}*/}
         </Flex>
       </Container>
     </Box>

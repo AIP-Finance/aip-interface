@@ -1,5 +1,6 @@
 import React from 'react'
 
+import CommunityCard from 'components/CommunityCard'
 import { Box, Type } from 'theme/base'
 
 const HeroCard = () => {
@@ -21,6 +22,10 @@ const HeroCard = () => {
         <Type.Large color="neutral8">{`</`}</Type.Large> The Protocol makes your money & blockchain work for you{' '}
         <Type.Large color="neutral8">{`>`}</Type.Large>
       </Type.Large>
+
+      <Box mt={12}>
+        <CommunityCard />
+      </Box>
     </Box>
   )
 }
