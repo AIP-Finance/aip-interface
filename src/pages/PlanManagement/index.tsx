@@ -3,7 +3,6 @@ import React from 'react'
 import Breadcrumb from 'components/Breadcrumb'
 import Container from 'components/Container'
 import DefaultLayout from 'components/Layouts/DefaultLayout'
-import { PlanData } from 'entities/plan'
 import { Box } from 'theme/base'
 import ROUTES from 'utils/routes'
 
@@ -11,7 +10,7 @@ import PlanItem from './PlanItem'
 import Tabs from './Tabs'
 import usePlans from './usePlans'
 
-const PlanCreate = () => {
+const PlanManagement = () => {
   const { plans } = usePlans()
   return (
     <DefaultLayout>
@@ -29,4 +28,4 @@ const PlanCreate = () => {
   )
 }
 
-export default PlanCreate
+export default PlanManagement

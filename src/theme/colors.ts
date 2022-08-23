@@ -24,6 +24,7 @@ function colors(darkMode: boolean): Colors {
     //primary colors
     primary1: '#B1E846',
     primary2: 'rgba(177, 232, 70, 0.1)',
+    primary3: 'rgba(177, 232, 70, 0.4)',
 
     // secondary colors
     secondary1: '#465DDD',

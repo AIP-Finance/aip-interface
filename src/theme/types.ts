@@ -24,6 +24,7 @@ export type Colors = {
   //primary colors
   primary1: Color
   primary2: Color
+  primary3: Color
 
   // secondary colors
   secondary1: Color
