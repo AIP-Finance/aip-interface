@@ -36,8 +36,8 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, maxWidth, mobile, is
   &[data-reach-dialog-content] {
     margin: 0 0 2rem 0;
     position: relative;
-    background: ${({ theme }: { theme: DefaultTheme }) => theme.colors.neutral8};
-    border: 1px solid ${({ theme }: { theme: DefaultTheme }) => theme.colors.neutral6};
+    background: ${({ theme }: { theme: DefaultTheme }) => theme.colors.neutral1};
+    border: 1px solid ${({ theme }: { theme: DefaultTheme }) => theme.colors.neutral2};
     box-shadow: ${({ theme }: { theme: DefaultTheme }) => theme.shadows[4]};
     width: ${({ width }) => width ?? '50vw'};
     padding: 0;
@@ -112,7 +112,7 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, maxWidth, mobile, is
 // `
 
 const StyledDialogBody = styled.div`
-  padding: 16px 24px;
+  padding: 24px;
   overflow-y: auto;
   overflow-x: hidden;
   flex: 1 1 auto;
@@ -219,7 +219,7 @@ export default function Modal({
                     <Flex alignItems="start" justifyContent={hasClose ? 'flex-end' : 'flex-start'} py={3} px={24}>
                       {Boolean(title) && (
                         <Flex flex="1 1 auto">
-                          <Type.H4>{title}</Type.H4>
+                          <Type.LargeBold>{title}</Type.LargeBold>
                         </Flex>
                       )}
                       {hasClose && (

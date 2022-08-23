@@ -2,11 +2,11 @@ import { createGlobalStyle } from 'styled-components/macro'
 
 const ThemedGlobalStyle = createGlobalStyle`
   html {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Red Hat Display', sans-serif;
     font-size: 16px;
     line-height: 24px;
-    color: ${({ theme }) => theme.colors.neutral1};
-    background-color: ${({ theme }) => theme.colors.neutral8}; !important;
+    color: ${({ theme }) => theme.colors.neutral8};
+    background-color: ${({ theme }) => theme.colors.neutral2}; !important;
     font-variant: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -115,7 +115,7 @@ const ThemedGlobalStyle = createGlobalStyle`
     font-size: 14px;
     line-height: 20px;
     color: inherit;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Red Hat Display', sans-serif;
   }
   input[type='range']::-ms-track {
     width: 100%;
@@ -150,7 +150,7 @@ const ThemedGlobalStyle = createGlobalStyle`
     width: 100%;
   }
   button {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Red Hat Display', sans-serif;
     font-weight: bold;
     border: none;
     outline: none;
@@ -160,7 +160,7 @@ const ThemedGlobalStyle = createGlobalStyle`
     transition: all 240ms ease;
   }
   a {
-    color: ${({ theme }) => theme.colors.primary2};
+    color: ${({ theme }) => theme.colors.primary1};
   }
   .bold,
   bold {

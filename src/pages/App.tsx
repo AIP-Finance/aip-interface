@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 
+import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
 // import { useIsDarkMode } from 'hooks/store/state/useDarkMode'
 import useEagerConnect from 'hooks/web3/useEagerConnect'
@@ -13,6 +14,8 @@ import QSReader from './QSReader'
 import ScrollToTop from './ScrollToTop'
 
 const Home = lazy(() => import('pages/Home/index'))
+const PlanCreate = lazy(() => import('pages/PlanCreate/index'))
+const PlanManagement = lazy(() => import('pages/PlanManagement/index'))
 
 console.log(process.env.REACT_APP_TOKEN_CONTRACT)
 
@@ -34,9 +37,11 @@ function App() {
         <QSReader />
         <Switch>
           <Route exact path={ROUTES.HOME.path} component={Home}></Route>
+          <Route exact path={ROUTES.PLAN_CREATE.path} component={PlanCreate}></Route>
+          <Route exact path={ROUTES.PLAN_MANAGEMENT.path} component={PlanManagement}></Route>
         </Switch>
       </Suspense>
-
+      <Footer />
       <ToastContainer theme="light" limit={3} />
     </div>
   )

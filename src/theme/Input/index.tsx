@@ -41,10 +41,10 @@ export const InputWrapper = styled(Flex)<InputWrapperProps>(
     css({
       width: props.block ? '100%' : 'fit-content',
       alignItems: 'center',
-      bg: 'neutral8',
+      bg: 'neutral1',
       position: 'relative',
-      border: props.border ?? 'normal',
-      borderColor: 'neutral6',
+      border: props.border ?? 'small',
+      borderColor: 'neutral5',
       borderRadius: 'sm',
       fontSize: 14,
       lineHeight: '20px',
@@ -53,14 +53,14 @@ export const InputWrapper = styled(Flex)<InputWrapperProps>(
       color: 'inherit',
       cursor: 'pointer',
       '&:hover:not([disabled])': {
-        borderColor: 'neutral5',
+        borderColor: 'primary1',
       },
       '&:focus-within:not([disabled])': {
-        borderColor: 'neutral1',
+        borderColor: 'primary1',
       },
       '&[disabled]': {
-        bg: 'neutral6',
-        borderColor: 'neutral6',
+        bg: 'neutral2',
+        borderColor: 'neutral2',
         color: 'neutral5',
         cursor: 'not-allowed',
       },
@@ -68,12 +68,12 @@ export const InputWrapper = styled(Flex)<InputWrapperProps>(
   variant({
     variants: {
       error: {
-        borderColor: 'red1',
+        borderColor: 'warning2',
         '&:hover:not([disabled])': {
-          borderColor: 'red1',
+          borderColor: 'warning2',
         },
         '&:focus-within:not([disabled])': {
-          borderColor: 'red1',
+          borderColor: 'warning2',
         },
       },
     },

@@ -89,7 +89,7 @@ export const Type = {
   },
   H5({ children, ...props }: TextProps) {
     return (
-      <Box as="h5" fontSize="24px" lineHeight="32px" letterSpacing="-1%" {...props}>
+      <Box as="h5" fontSize="24px" lineHeight="32px" letterSpacing="-0.01em" fontWeight="900" {...props}>
         {children}
       </Box>
     )
@@ -101,22 +101,22 @@ export const Type = {
     return <TextWrapper fontSize="14px" lineHeight="22px" fontWeight="bold" display="inline-block" {...props} />
   },
   Small(props: TextProps) {
-    return <TextWrapper fontSize="12px" lineHeight="20px" fontWeight="normal" display="inline-block" {...props} />
+    return <TextWrapper fontSize="14px" lineHeight="22px" fontWeight="normal" display="inline-block" {...props} />
   },
   SmallBold(props: TextProps) {
-    return <TextWrapper fontSize="12px" lineHeight="20px" display="inline-block" fontWeight="bold" {...props} />
+    return <TextWrapper fontSize="14px" lineHeight="22px" display="inline-block" fontWeight="bold" {...props} />
   },
   Large(props: TextProps) {
     return <TextWrapper fontSize="18px" lineHeight="26px" fontWeight="normal" display="inline-block" {...props} />
   },
   LargeBold(props: TextProps) {
-    return <TextWrapper fontSize="18px" lineHeight="26px" display="inline-block" fontWeight="bold" {...props} />
+    return <TextWrapper fontSize="24px" lineHeight="34px" display="inline-block" fontWeight="600" {...props} />
   },
   Body(props: TextProps) {
     return <TextWrapper fontSize="16px" lineHeight="24px" fontWeight="normal" display="inline-block" {...props} />
   },
   BodyBold(props: TextProps) {
-    return <TextWrapper fontSize="16px" lineHeight="24px" display="inline-block" fontWeight="bold" {...props} />
+    return <TextWrapper fontSize="16px" lineHeight="24px" display="inline-block" fontWeight="600" {...props} />
   },
   ButtonLarge(props: TextProps) {
     return <TextWrapper fontSize="16px" lineHeight="16px" fontWeight="bold" {...props} />
