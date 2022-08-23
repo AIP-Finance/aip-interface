@@ -77,7 +77,7 @@ export const styleVariants = {
     },
   },
   [variants.GHOST]: {
-    color: 'neutral1',
+    color: 'neutral8',
     bg: 'transparent',
     border: 'none',
   },

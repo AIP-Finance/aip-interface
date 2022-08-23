@@ -27,6 +27,13 @@ type Option = {
   value: string | number
 }
 
+export type RadioOptionType = {
+  label: ReactElement | ReactElement[] | string
+  value: string | number
+}
+
+type Direction = 'vertical' | 'horizontal'
+
 type RadioGroupProps = {
   value?: string | number
   defaultValue?: string | number
@@ -34,6 +41,8 @@ type RadioGroupProps = {
   onChange?: (value?: string | number) => void
   disabled?: boolean
   block?: boolean
+  direction?: Direction
+  optionType?: 'default' | 'button'
   sxChildren?: SystemStyleObject & GridProps
 } & BoxProps
 
@@ -94,6 +103,26 @@ const RadioWrapper = styled(Box)<RadioWrapperProps>`
   }
 `
 
+const ButtonWrapper = styled(Box)<RadioWrapperProps>`
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: ${(props) => (props.block ? '100%' : 'fit-content')};
+  cursor: pointer;
+  transition: border-color 240ms ease-in;
+  border: 1px solid;
+  padding: 4px 12px;
+  margin: auto 4px;
+  border-radius: 2px;
+  border-color: ${(props) => (props.active ? props.theme.colors.neutral8 : props.theme.colors.neutral4)};
+  background-color: ${(props) => (props.active ? props.theme.colors.neutral8 : 'transparent')};
+  color: ${(props) => (props.active ? props.theme.colors.neutral1 : props.theme.colors.neutral7)};
+
+  &[disabled] {
+    background: ${(props) => props.theme.colors.neutral4};
+  }
+`
+
 const Radio = ({ checked, onChange, disabled, children, block = false, sx }: RadioProps) => {
   return (
     <RadioWrapper
@@ -113,6 +142,24 @@ const Radio = ({ checked, onChange, disabled, children, block = false, sx }: Rad
   )
 }
 
+const Button = ({ checked, onChange, disabled, children, block = false, sx }: RadioProps) => {
+  return (
+    <ButtonWrapper
+      onClick={(e: any) => {
+        if (!!disabled || !onChange) return
+        onChange(e)
+      }}
+      active={checked}
+      disabled={disabled}
+      block={block}
+      className={checked ? 'active' : ''}
+      sx={sx}
+    >
+      {children}
+    </ButtonWrapper>
+  )
+}
+
 const RadioGroup = ({
   value,
   defaultValue,
@@ -121,6 +168,8 @@ const RadioGroup = ({
   disabled,
   sx,
   sxChildren,
+  direction = 'horizontal',
+  optionType = 'default',
   block = false,
 }: RadioGroupProps) => {
   const [currentValue, setCurrentValue] = useState(defaultValue)
@@ -135,19 +184,37 @@ const RadioGroup = ({
   }, [value, currentValue, setCurrentValue])
 
   return (
-    <Flex flexDirection="column" sx={sx}>
-      {options.map((option: Option) => (
-        <Radio
-          key={option.value}
-          checked={currentValue === option.value}
-          onChange={() => changeValue(option)}
-          disabled={disabled}
-          block={block}
-          sx={sxChildren}
-        >
-          {option.label}
-        </Radio>
-      ))}
+    <Flex
+      flexDirection={direction == 'horizontal' ? 'row' : 'column'}
+      justifyContent="center"
+      alignContent="center"
+      sx={sx}
+    >
+      {options.map((option: Option) =>
+        optionType == 'default' ? (
+          <Radio
+            key={option.value}
+            checked={currentValue === option.value}
+            onChange={() => changeValue(option)}
+            disabled={disabled}
+            block={block}
+            sx={sxChildren}
+          >
+            {option.label}
+          </Radio>
+        ) : (
+          <Button
+            key={option.value}
+            checked={currentValue === option.value}
+            onChange={() => changeValue(option)}
+            disabled={disabled}
+            block={block}
+            sx={sxChildren}
+          >
+            {option.label}
+          </Button>
+        )
+      )}
     </Flex>
   )
 }
