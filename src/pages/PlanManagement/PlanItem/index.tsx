@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
-import { PlanData } from 'apis/plan'
 import Divider from 'components/Divider'
+import { PlanData } from 'entities/plan'
 import { Button } from 'theme/Buttons'
 import { Box, Flex, Type } from 'theme/base'
-import { PLAN_STATUS } from 'utils/constants'
-import { periodCalculated } from 'utils/parsers'
+import { formatDate, formatNumber } from 'utils/formats'
+import { getStableCoinInfo, getTokenInfo } from 'utils/tokens'
 
 import CancelPlanModal from './CancelPlanModal'
 import ExtendPlanModal from './ExtendPlanModal'
@@ -18,6 +18,9 @@ const PlanItem = ({ plan }: { plan: PlanData }) => {
   const [isExtendModalOpen, setIsExtendModalOpen] = useState(false)
   const [isWithdrawModalOpen, setIsWithdrawModalOpen] = useState(false)
 
+  const stableCoin = useMemo(() => getStableCoinInfo(plan.stableCoinAddress), [plan])
+  const token = useMemo(() => getTokenInfo(plan.tokenAddress), [plan])
+
   return (
     <Box
       sx={{
@@ -28,40 +31,58 @@ const PlanItem = ({ plan }: { plan: PlanData }) => {
         maxWidth: '413px',
       }}
     >
-      <Flex justifyContent="space-between" width={'100%'} alignItems="center" mb="8px">
-        <Type.Large color={'neutral8'}>{plan.tokenName}</Type.Large>
+      <Flex justifyContent="space-between" width="100%" alignItems="center" mb="8px">
+        <Type.Large color={'neutral8'}>
+          {token?.name} ({token?.symbol})
+        </Type.Large>
         <MoreIcon onCancel={() => setIsCancelModalOpen(true)} />
       </Flex>
-      {plan.status == PLAN_STATUS.live ? (
-        <Type.BodyBold color="primary1">
-          Ongoing ({plan.period - plan.periodRemaining} / {plan.period})
-        </Type.BodyBold>
-      ) : (
-        <Type.BodyBold color="neutral6">
-          Ended ({plan.period - plan.periodRemaining} / {plan.period})
-        </Type.BodyBold>
-      )}
+      <Flex justifyContent="space-between" width="100%" alignItems="center">
+        {plan.lastTriggerTime < plan.endedTime ? (
+          <Type.SmallBold color="primary1">
+            Ongoing ({plan.ticks - plan.remainingTicks} / {plan.ticks})
+          </Type.SmallBold>
+        ) : (
+          <Type.SmallBold color="neutral6">
+            Ended ({plan.ticks - plan.remainingTicks} / {plan.ticks})
+          </Type.SmallBold>
+        )}
+        <Type.SmallBold color="neutral4">
+          APP: {formatNumber(plan.tickAmount, 2, 2)} {token?.symbol}
+        </Type.SmallBold>
+      </Flex>
 
-      <Progress max={plan.period} value={plan.period - plan.periodRemaining} />
+      <Progress max={plan.ticks} value={plan.ticks - plan.remainingTicks} />
 
       <Flex mt={3} justifyContent="space-between" alignItems="center">
         <Type.Body>Total Invested:</Type.Body>
-        <Type.BodyBold>{plan.tokenAmount}</Type.BodyBold>
+        <Type.BodyBold>
+          {formatNumber(plan.tokenAmount, 4, 4)} {token?.symbol}
+        </Type.BodyBold>
       </Flex>
 
       <Flex mt={3} justifyContent="space-between" alignItems="center">
-        <Type.Body>Remaining Amount:</Type.Body>
-        <Type.BodyBold>{plan.amountRemaining}</Type.BodyBold>
+        <Type.Body>Remaining Deposit:</Type.Body>
+        <Type.BodyBold>
+          {formatNumber(plan.tickAmount * plan.remainingTicks, 2, 2)} {stableCoin?.symbol}
+        </Type.BodyBold>
+      </Flex>
+
+      <Flex mt={3} justifyContent="space-between" alignItems="center">
+        <Type.Body>Remaining Withdrawal:</Type.Body>
+        <Type.BodyBold>
+          {formatNumber(plan.tokenAmount - plan.claimedTokenAmount, 4, 4)} {token?.symbol}
+        </Type.BodyBold>
       </Flex>
 
       <Flex mt={3} justifyContent="space-between" alignItems="center">
         <Type.Body>Start from:</Type.Body>
-        <Type.BodyBold>{periodCalculated({ start: plan.startTime, period: 0 })}</Type.BodyBold>
+        <Type.BodyBold>{plan.startedTime ? formatDate(plan.startedTime) : 'Not run yet'}</Type.BodyBold>
       </Flex>
 
       <Flex mt={3} justifyContent="space-between" alignItems="center">
         <Type.Body>To:</Type.Body>
-        <Type.BodyBold>{periodCalculated({ start: plan.startTime, period: plan.period })}</Type.BodyBold>
+        <Type.BodyBold>{plan.endedTime ? formatDate(plan.endedTime) : '-'}</Type.BodyBold>
       </Flex>
 
       <Divider my={3} />

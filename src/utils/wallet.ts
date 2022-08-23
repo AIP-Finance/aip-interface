@@ -51,7 +51,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
 export const setupNetwork = async (externalProvider?: ExternalProvider) => {
   const provider = externalProvider || window.ethereum
   if (provider && provider.request) {
-    const chainId = parseInt(process.env.REACT_APP_CHAIN_ID ?? DEFAULT_CHAIN_ID, 10)
+    const chainId = +(process.env.REACT_APP_CHAIN_ID ?? DEFAULT_CHAIN_ID)
     try {
       await provider.request({
         method: 'wallet_addEthereumChain',

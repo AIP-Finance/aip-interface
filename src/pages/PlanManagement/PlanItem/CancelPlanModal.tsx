@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { PlanData } from 'apis/plan'
 import Divider from 'components/Divider'
+import { PlanData } from 'entities/plan'
 import { Button } from 'theme/Buttons'
 import Modal from 'theme/Modal'
 import { Box, Flex, Type } from 'theme/base'

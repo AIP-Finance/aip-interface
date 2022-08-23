@@ -1,3 +1,7 @@
+import dayjs from 'dayjs'
+
+import { DATE_FORMAT } from './constants'
+
 export function formatNumber(num?: number | string, maxDigit = 2, minDigit?: number) {
   if (num == null) return ''
   if (typeof num === 'string') num = Number(num)
@@ -13,3 +17,5 @@ export const addressShorten = (address: string, num?: number) => {
   const suffix = address.slice(-num, address.length)
   return `${prefix}...${suffix}`
 }
+
+export const formatDate = (timestamp: number) => dayjs.unix(timestamp).format(DATE_FORMAT)
