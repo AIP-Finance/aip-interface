@@ -3,6 +3,7 @@ import { Contract } from '@ethersproject/contracts'
 import { useMemo } from 'react'
 
 import ERC20_ABI from 'abis/ERC20.json'
+import PlanManager_ABI from 'abis/PlanManager.json'
 import useActiveWeb3React from 'hooks/web3/useActiveWeb3React'
 import { getContract, getProviderOrSigner } from 'utils/contracts'
 
@@ -28,4 +29,8 @@ function useContract<T extends Contract = Contract>(
 
 export function useERC20Contract(erc20Address?: string, withSignerIfPossible?: boolean) {
   return useContract(erc20Address, ERC20_ABI, withSignerIfPossible)
+}
+
+export function usePlanManagerContract(withSignerIfPossible?: boolean) {
+  return useContract(process.env.REACT_APP_PLAN_MANAGER, PlanManager_ABI, withSignerIfPossible)
 }

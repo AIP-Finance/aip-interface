@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { PlanData } from 'apis/plan'
 import Divider from 'components/Divider'
+import { PlanData } from 'entities/plan'
 import { Button } from 'theme/Buttons'
 import NumberInputField from 'theme/InputField/NumberInputField'
 import Modal from 'theme/Modal'
