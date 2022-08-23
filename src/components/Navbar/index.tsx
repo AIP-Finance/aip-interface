@@ -78,22 +78,22 @@ const Navbar = () => {
           </Box>
 
           <Box flex="1"></Box>
-          {/*{account ? (*/}
-          {/*  <>*/}
-          {/*    <Dropdown menu={renderMenu()} buttonVariant="ghost" buttonSx={{ p: 0 }} direction="right">*/}
-          {/*      <UserFrame address={account} />*/}
-          {/*    </Dropdown>*/}
-          {/*  </>*/}
-          {/*) : (*/}
-          {/*  <Button*/}
-          {/*    variant="outlinePrimary"*/}
-          {/*    onClick={() => openModal(true)}*/}
-          {/*    mr={[16, 16, 16, 16, 0]}*/}
-          {/*    ml={['auto', 'auto', 'auto', 0]}*/}
-          {/*  >*/}
-          {/*    Connect Wallet*/}
-          {/*  </Button>*/}
-          {/*)}*/}
+          {account ? (
+            <>
+              <Dropdown menu={renderMenu()} buttonVariant="ghost" buttonSx={{ p: 0 }} direction="right">
+                <UserFrame address={account} />
+              </Dropdown>
+            </>
+          ) : (
+            <Button
+              variant="outlinePrimary"
+              onClick={() => openModal(true)}
+              mr={[16, 16, 16, 16, 0]}
+              ml={['auto', 'auto', 'auto', 0]}
+            >
+              Connect Wallet
+            </Button>
+          )}
         </Flex>
       </Container>
     </Box>

@@ -42,7 +42,7 @@ function App() {
         </Switch>
       </Suspense>
       <Footer />
-      <ToastContainer theme="light" limit={3} />
+      <ToastContainer theme="dark" limit={3} />
     </div>
   )
 }

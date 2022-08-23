@@ -1,19 +1,33 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
 import Divider from 'components/Divider'
 import { CornerIcon } from 'components/Icon'
+import usePlanManager from 'hooks/web3/usePlanManager'
+import useERC20Approval from 'hooks/web3/useTokenApproval'
 import { Button } from 'theme/Buttons'
 import NumberInputField from 'theme/InputField/NumberInputField'
 import { Box, Flex, Type } from 'theme/base'
 import { periodCalculated } from 'utils/parsers'
+import { getStableCoinAddress, getTokenInfo } from 'utils/tokens'
 
-const MIN_ENTER = 1
+const MIN_FREQUENCY = 1
 const MAX_FREQUENCY = 30
-const MAX_AMOUNT = 1000000
-const MAX_PERIODS = 10000
+const MIN_AMOUNT = 10
+const MAX_AMOUNT = 1000
+const MIN_PERIODS = 2
+const MAX_PERIODS = 100
 
-const CreatePlanForm = () => {
+enum SubmitStep {
+  INPUTING,
+  APPROVING,
+  SUBCRIBING,
+}
+
+const token = getTokenInfo('0xE06c2497422b6428350E2E7da24d3FE816166983')
+const usdtAddress = getStableCoinAddress('USDT') ?? ''
+
+const CreatePlanForm = ({ account }: { account: string }) => {
   const {
     handleSubmit,
     control,
@@ -21,18 +35,40 @@ const CreatePlanForm = () => {
   } = useForm({
     mode: 'onChange',
   })
-
+  const [submitStep, setSubmitStep] = useState<SubmitStep>(SubmitStep.INPUTING)
   const amountValue = useWatch({ control, name: 'amount' }) ?? 0
   const frequencyValue = useWatch({ control, name: 'frequency' }) ?? 0
   const periodValue = useWatch({ control, name: 'period' }) ?? 0
   const [submitting, setSubmitting] = useState(false)
+  const { approveToken, isTokenAllowanceEnough } = useERC20Approval(
+    account,
+    usdtAddress,
+    process.env.REACT_APP_PLAN_MANAGER
+  )
+  const { subcribe } = usePlanManager(usdtAddress, '0xE06c2497422b6428350E2E7da24d3FE816166983')
 
   const onSubmit = useCallback(
     async (values) => {
       if (submitting) return
-      console.log(values)
+      setSubmitting(true)
+      const totalAmount = values.amount * values.period
+      const isEnough = await isTokenAllowanceEnough(totalAmount)
+      if (isEnough) {
+        setSubmitStep(SubmitStep.SUBCRIBING)
+      } else {
+        setSubmitStep(SubmitStep.APPROVING)
+        const success = await approveToken(totalAmount)
+        if (!success) {
+          setSubmitStep(SubmitStep.INPUTING)
+          setSubmitting(false)
+          return
+        }
+        setSubmitStep(SubmitStep.SUBCRIBING)
+      }
+      await subcribe(values)
+      setSubmitting(false)
     },
-    [submitting]
+    [approveToken, isTokenAllowanceEnough, subcribe, submitting]
   )
 
   return (
@@ -69,11 +105,17 @@ const CreatePlanForm = () => {
         >
           <Type.H5>Create an Auto-Invest Plan</Type.H5>
           <Flex my={36} justifyContent="space-between" width={'100%'} alignItems="center">
-            <Type.BodyBold>Binance (BNB)</Type.BodyBold>
+            <Type.BodyBold>
+              {token?.name} ({token?.symbol})
+            </Type.BodyBold>
           </Flex>
           <Box>
             <NumberInputField
-              rules={{ required: true, min: MIN_ENTER, max: MAX_AMOUNT }}
+              rules={{
+                required: { value: true, message: 'Amount is required' },
+                min: { value: MIN_AMOUNT, message: `Minimum amount is ${MIN_AMOUNT}` },
+                max: { value: MAX_AMOUNT, message: `Maximum amount is ${MAX_AMOUNT}` },
+              }}
               label={
                 <Flex justifyContent="space-between" width={'100%'} alignItems="center" mb="8px">
                   <Type.Body color={'neutral8'}>Amount Per Period</Type.Body>
@@ -83,30 +125,37 @@ const CreatePlanForm = () => {
               required
               control={control}
               name="amount"
-              hasError={Boolean(errors?.amount)}
+              hasError={!!errors?.amount}
               block
               autoFocus
               suffix={<Type.Small color="neutral8">USDT</Type.Small>}
             />
-            {Boolean(errors?.amount) && <Type.Small color="warning2">Enter your amount</Type.Small>}
-            {errors?.amount?.type?.toString() === 'max' && <Type.Small color="warning2">max {MAX_AMOUNT}</Type.Small>}
+            {!!errors?.amount && <Type.Small color="warning2">{errors?.amount.message}</Type.Small>}
           </Box>
           <Box mt="24px">
             <NumberInputField
-              rules={{ required: true, min: MIN_ENTER, max: MAX_FREQUENCY }}
+              rules={{ required: true, min: MIN_FREQUENCY, max: MAX_FREQUENCY }}
               label={'Frequency Invest'}
               required
               control={control}
               name="frequency"
-              hasError={Boolean(errors?.frequency)}
+              hasError={!!errors?.frequency}
               block
               suffix={<Type.Small color="neutral8">Day</Type.Small>}
             />
-            {Boolean(errors?.frequency) && <Type.Small color="warning2">Min 1 day and max 30 days</Type.Small>}
+            {!!errors?.frequency && (
+              <Type.Small color="warning2">
+                From {MIN_FREQUENCY} day to {MAX_FREQUENCY} days
+              </Type.Small>
+            )}
           </Box>
           <Box mt="24px">
             <NumberInputField
-              rules={{ required: true, min: MIN_ENTER, max: MAX_PERIODS }}
+              rules={{
+                required: true,
+                min: { value: MIN_PERIODS, message: `Minimum periods is ${MIN_PERIODS}` },
+                max: { value: MAX_PERIODS, message: `Maximum periods is ${MAX_PERIODS}` },
+              }}
               label={'Total Periods'}
               required
               control={control}
@@ -114,8 +163,7 @@ const CreatePlanForm = () => {
               hasError={Boolean(errors?.period)}
               block
             />
-            {Boolean(errors?.period) && <Type.Small color="warning2">Enter your total period</Type.Small>}
-            {errors?.period?.type?.toString() === 'max' && <Type.Small color="warning2">max {MAX_PERIODS}</Type.Small>}
+            {!!errors?.period && <Type.Small color="warning2">{errors?.period.message}</Type.Small>}
           </Box>
         </Box>
         <Box p={24} flex={1}>
@@ -160,7 +208,9 @@ const CreatePlanForm = () => {
             block
             disabled={submitting}
           >
-            {!submitting && 'Confirm'}
+            {submitStep === SubmitStep.INPUTING && 'Submit'}
+            {submitStep === SubmitStep.APPROVING && 'Approving USDT...'}
+            {submitStep === SubmitStep.SUBCRIBING && 'Subcribing...'}
           </Button>
           <Type.Small color="neutral5" mt={3}>
             You can cancel and withdraw all USDT at any time without any fee

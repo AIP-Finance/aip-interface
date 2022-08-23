@@ -1,3 +1,4 @@
+import { formatUnits } from '@ethersproject/units'
 import React, { useMemo, useState } from 'react'
 
 import Divider from 'components/Divider'
@@ -20,6 +21,18 @@ const PlanItem = ({ plan }: { plan: PlanData }) => {
 
   const stableCoin = useMemo(() => getStableCoinInfo(plan.stableCoinAddress), [plan])
   const token = useMemo(() => getTokenInfo(plan.tokenAddress), [plan])
+  const tickAmount = useMemo(
+    () => Number(formatUnits(plan.tickAmount, stableCoin?.decimals)),
+    [plan.tickAmount, stableCoin?.decimals]
+  )
+  const tokenAmount = useMemo(
+    () => Number(formatUnits(plan.tokenAmount, token?.decimals)),
+    [plan.tokenAmount, token?.decimals]
+  )
+  const claimedTokenAmount = useMemo(
+    () => Number(formatUnits(plan.claimedTokenAmount, token?.decimals)),
+    [plan.claimedTokenAmount, token?.decimals]
+  )
 
   return (
     <Box
@@ -48,7 +61,7 @@ const PlanItem = ({ plan }: { plan: PlanData }) => {
           </Type.SmallBold>
         )}
         <Type.SmallBold color="neutral4">
-          APP: {formatNumber(plan.tickAmount, 2, 2)} {token?.symbol}
+          APP: {formatNumber(tickAmount, 2, 2)} {token?.symbol}
         </Type.SmallBold>
       </Flex>
 
@@ -57,21 +70,21 @@ const PlanItem = ({ plan }: { plan: PlanData }) => {
       <Flex mt={3} justifyContent="space-between" alignItems="center">
         <Type.Body>Total Invested:</Type.Body>
         <Type.BodyBold>
-          {formatNumber(plan.tokenAmount, 4, 4)} {token?.symbol}
+          {formatNumber(tokenAmount, 4, 4)} {token?.symbol}
         </Type.BodyBold>
       </Flex>
 
       <Flex mt={3} justifyContent="space-between" alignItems="center">
         <Type.Body>Remaining Deposit:</Type.Body>
         <Type.BodyBold>
-          {formatNumber(plan.tickAmount * plan.remainingTicks, 2, 2)} {stableCoin?.symbol}
+          {formatNumber(tickAmount * plan.remainingTicks, 2, 2)} {stableCoin?.symbol}
         </Type.BodyBold>
       </Flex>
 
       <Flex mt={3} justifyContent="space-between" alignItems="center">
         <Type.Body>Remaining Withdrawal:</Type.Body>
         <Type.BodyBold>
-          {formatNumber(plan.tokenAmount - plan.claimedTokenAmount, 4, 4)} {token?.symbol}
+          {formatNumber(tokenAmount - claimedTokenAmount, 4, 4)} {token?.symbol}
         </Type.BodyBold>
       </Flex>
 

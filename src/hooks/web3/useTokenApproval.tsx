@@ -1,5 +1,5 @@
 import { MaxUint256 } from '@ethersproject/constants'
-import { parseEther } from '@ethersproject/units'
+import { parseUnits } from '@ethersproject/units'
 import { BigNumber } from 'ethers'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { toast } from 'react-toastify'
@@ -11,39 +11,30 @@ import { getContractErrorData } from 'utils/errorHandler'
 import { useERC20Contract } from './useContract'
 import usePollCheckingConfirmations from './usePollCheckingConfirmations'
 
-const useERC20Approval = (account: string, contract?: string) => {
+const useERC20Approval = (account: string, contract?: string, spender?: string, decimals = 18) => {
   const accountRef = useRef<string>()
   const [approving, setApproving] = useState(false)
-  const [allowance, setAllowance] = useState(BigNumber.from(0))
   const pollCheckingConfirmations = usePollCheckingConfirmations()
-  const tokenContract = useERC20Contract(process.env.REACT_APP_TOKEN_CONTRACT, true)
+  const erc20Contract = useERC20Contract(contract, true)
 
-  const load = useCallback(() => {
-    if (!tokenContract || !account) return
-    const getAllowance = async () => {
-      try {
-        const amount = await tokenContract.allowance(account, contract)
-        setAllowance(amount)
-      } catch (err) {
-        //
-      }
+  const loadAllowance = useCallback(async () => {
+    if (!erc20Contract || !account) return
+    try {
+      const amount = await erc20Contract.allowance(account, spender)
+      return amount
+    } catch (err) {
+      //
     }
-    getAllowance()
-  }, [account, contract, tokenContract])
-
-  useEffect(() => {
-    if (account && accountRef.current !== account && tokenContract) {
-      accountRef.current = account
-      load()
-    }
-  }, [load, account, tokenContract])
+  }, [account, spender, erc20Contract])
 
   const isTokenAllowanceEnough = useCallback(
-    (amount?: number) => {
+    async (amount?: number) => {
       if (!amount || amount < MIN_PARSE_ETHER) return true
-      return allowance.gte(parseEther(amount.toString()))
+      const allowance = await loadAllowance()
+      if (!allowance) return false
+      return allowance.gte(parseUnits(amount.toString(), decimals))
     },
-    [allowance]
+    [decimals, loadAllowance]
   )
 
   const handleResult = useCallback(
@@ -54,10 +45,10 @@ const useERC20Approval = (account: string, contract?: string) => {
           await pollCheckingConfirmations(result.hash)
           toast.success(<ToastBody title="Success" message="The approval has been succeeded" />)
           setApproving(false)
-          load()
           return true
         }
         setApproving(false)
+        return false
       } catch (err) {
         setApproving(false)
         if (err.data || err.error) {
@@ -68,17 +59,19 @@ const useERC20Approval = (account: string, contract?: string) => {
         }
         return false
       }
-      return false
     },
-    [load, pollCheckingConfirmations]
+    [pollCheckingConfirmations]
   )
 
-  const approveToken = useCallback(async () => {
-    if (!tokenContract || !contract) return
-    setApproving(true)
-    return handleResult(() => tokenContract.approve(contract, MaxUint256))
-  }, [contract, handleResult, tokenContract])
-  return { approving, approveToken, allowance, isTokenAllowanceEnough, load }
+  const approveToken = useCallback(
+    async (amount: number) => {
+      if (!erc20Contract || !spender) return
+      setApproving(true)
+      return handleResult(() => erc20Contract.approve(spender, parseUnits(amount.toString(), decimals)))
+    },
+    [erc20Contract, handleResult, spender, decimals]
+  )
+  return { approving, approveToken, isTokenAllowanceEnough }
 }
 
 export default useERC20Approval

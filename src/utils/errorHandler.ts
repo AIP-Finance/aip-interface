@@ -9,8 +9,14 @@ export const getErrorMessage = (error: AxiosError): string => {
 
 export const getContractErrorData = (error: {
   code: number
-  message: number
+  message: number | string
   data: { code: number; message: string }
 }): { name: string; message: string } => {
-  return { name: 'Error', message: error.data.message.replace('execution reverted: ', '') }
+  return {
+    name: 'Error',
+    message:
+      typeof error.message === 'string'
+        ? error.message.replace('execution reverted: ', '')
+        : error.data.message.replace('execution reverted: ', ''),
+  }
 }

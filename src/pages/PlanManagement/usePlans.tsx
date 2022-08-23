@@ -44,12 +44,12 @@ const usePlans = () => {
               startedTime: result.statistics?.startedTime?.toNumber(),
               endedTime: result.statistics?.endedTime?.toNumber(),
               lastTriggerTime: result.statistics?.lastTriggerTime?.toNumber(),
-              tickAmount: formatEther(result.plan?.tickAmount),
+              tickAmount: result.plan?.tickAmount,
               frequency: result.plan?.frequencyD,
               ticks: result.statistics?.ticks?.toNumber(),
               remainingTicks: result.statistics?.remainingTicks?.toNumber(),
-              tokenAmount: formatEther(result.statistics?.swapAmount1),
-              claimedTokenAmount: formatEther(result.statistics?.claimedAmount1),
+              tokenAmount: result.statistics?.swapAmount1,
+              claimedTokenAmount: result.statistics?.claimedAmount1,
             }
           })
         })
