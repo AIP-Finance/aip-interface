@@ -59,7 +59,7 @@
         "type": "bytes"
       }
     ],
-    "name": "aipSubcribeCallback",
+    "name": "aipSubscribeCallback",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -351,12 +351,12 @@
             "type": "uint256"
           }
         ],
-        "internalType": "struct AipPlanManager.SubcribeParams",
+        "internalType": "struct AipPlanManager.SubscribeParams",
         "name": "params",
         "type": "tuple"
       }
     ],
-    "name": "subcribe",
+    "name": "subscribe",
     "outputs": [
       {
         "internalType": "uint256",
@@ -380,7 +380,7 @@
         "type": "uint256"
       }
     ],
-    "name": "unsubcribe",
+    "name": "unsubscribe",
     "outputs": [
       {
         "internalType": "contract IAipPool",
