@@ -25,6 +25,6 @@ export const LINKS = {
 
 export type StableCoin = 'USDT' | 'USDC' | 'DAI'
 
-export const DATE_FORMAT = 'MMM D, YYYY - HH:mm'
+export const DATE_FORMAT = 'YYYY-MM-DD hh:mm'
 export const DEFAULT_LIMIT = 12
 export const MIN_PARSE_ETHER = 0.00000001

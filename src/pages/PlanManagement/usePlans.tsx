@@ -1,4 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber'
+import { formatUnits } from '@ethersproject/units'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import PlanManager_ABI from 'abis/PlanManager.json'
@@ -6,6 +7,7 @@ import { PlanData } from 'entities/plan'
 import { useAuthContext } from 'hooks/web3/useAuth'
 import { usePlanManagerContract } from 'hooks/web3/useContract'
 import { multicallv2 } from 'utils/multicall'
+import { getStableCoinInfo, getTokenInfo } from 'utils/tokens'
 
 const LIMIT = 6
 
@@ -32,19 +34,25 @@ const usePlans = () => {
       }))
       const data: PlanData[] = await multicallv2(PlanManager_ABI, calls).then((results) => {
         return results.map((result: any, index: number) => {
+          const token: TokenData | undefined = getTokenInfo(result.plan.token1)
+          const stableCoin: TokenData | undefined = getStableCoinInfo(result.plan.token0)
+
           return {
             index: indexes[index],
             stableCoinAddress: result.plan.token0,
             tokenAddress: result.plan.token1,
+            token,
+            stableCoin,
+            createdTime: result.plan.createdTime.toNumber(),
             startedTime: result.statistics?.startedTime?.toNumber(),
             endedTime: result.statistics?.endedTime?.toNumber(),
             lastTriggerTime: result.statistics?.lastTriggerTime?.toNumber(),
-            tickAmount: result.plan?.tickAmount,
+            tickAmount: Number(formatUnits(result.plan?.tickAmount, stableCoin?.decimals)),
             frequency: result.plan?.frequencyD,
             ticks: result.statistics?.ticks?.toNumber(),
             remainingTicks: result.statistics?.remainingTicks?.toNumber(),
-            tokenAmount: result.statistics?.swapAmount1,
-            claimedTokenAmount: result.statistics?.claimedAmount1,
+            tokenAmount: Number(formatUnits(result.statistics?.swapAmount1, token?.decimals)),
+            claimedTokenAmount: Number(formatUnits(result.statistics?.claimedAmount1, token?.decimals)),
           }
         })
       })

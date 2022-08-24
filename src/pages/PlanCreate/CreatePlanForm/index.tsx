@@ -12,7 +12,7 @@ import NumberInputField from 'theme/InputField/NumberInputField'
 import RadioGroup, { RadioOptionType } from 'theme/RadioGroup'
 import { Box, Flex, Type } from 'theme/base'
 import { formatNumber } from 'utils/formats'
-import { periodCalculated } from 'utils/parsers'
+import { durationCalculated } from 'utils/parsers'
 import { getStableCoinAddress } from 'utils/tokens'
 
 const MIN_AMOUNT = 10
@@ -228,11 +228,13 @@ const CreatePlanForm = ({
           </Box>
           <Flex mt={3} justifyContent="space-between" width={'100%'} alignItems="center">
             <Type.Body>Start from:</Type.Body>
-            <Type.BodyBold color="primary1">{periodCalculated({ period: 0 })}</Type.BodyBold>
+            <Type.BodyBold color="primary1">{durationCalculated({ period: 0 })}</Type.BodyBold>
           </Flex>
           <Flex mt={3} justifyContent="space-between" width={'100%'} alignItems="center">
             <Type.Body>To:</Type.Body>
-            <Type.BodyBold color="primary1">{periodCalculated({ period: frequencyValue * periodValue })}</Type.BodyBold>
+            <Type.BodyBold color="primary1">
+              {durationCalculated({ period: frequencyValue * periodValue })}
+            </Type.BodyBold>
           </Flex>
           <Flex mt={3} justifyContent="space-between" width={'100%'} alignItems="center">
             <Type.Body>Total investment:</Type.Body>
