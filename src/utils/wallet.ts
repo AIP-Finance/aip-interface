@@ -5,7 +5,7 @@ import METAMASK_ICON_URL from 'assets/images/metamask.png'
 import WALLETCONNECT_ICON_URL from 'assets/images/walletconnect.png'
 
 import { injected, walletconnect } from './connectors'
-import { DEFAULT_CHAIN_ID } from './constants'
+import { CHAIN_ID, ChainId } from './constants'
 import { nodes } from './getRpcUrl'
 import { simpleRpcProvider } from './providers'
 
@@ -44,6 +44,11 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
   },
 }
 
+const NETWORK_NAME = {
+  [ChainId.TESTNET]: 'Ropsten Test Network',
+  [ChainId.MAINNET]: 'Ethereum Mainnet',
+}
+
 /**
  * Prompt the user to add BSC as a network on Metamask, or switch to BSC if the wallet is on a different network
  * @returns {boolean} true if the setup succeeded, false otherwise
@@ -51,28 +56,39 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
 export const setupNetwork = async (externalProvider?: ExternalProvider) => {
   const provider = externalProvider || window.ethereum
   if (provider && provider.request) {
-    const chainId = +(process.env.REACT_APP_CHAIN_ID ?? DEFAULT_CHAIN_ID)
     try {
       await provider.request({
-        method: 'wallet_addEthereumChain',
+        method: 'wallet_switchEthereumChain',
         params: [
           {
-            chainId: `0x${chainId.toString(16)}`,
-            chainName: `Binance Smart Chain ${chainId === 56 ? 'Mainnet' : 'Testnet'}`,
-            nativeCurrency: {
-              name: 'BNB',
-              symbol: 'bnb',
-              decimals: 18,
-            },
-            rpcUrls: nodes,
-            blockExplorerUrls: [`${process.env.REACT_APP_BSC_SCAN_URL}/`],
+            chainId: `0x${CHAIN_ID.toString(16)}`,
           },
         ],
       })
       return true
-    } catch (error) {
-      console.error('Failed to setup the network in Metamask:', error)
-      return false
+    } catch (err) {
+      try {
+        await provider.request({
+          method: 'wallet_addEthereumChain',
+          params: [
+            {
+              chainId: `0x${CHAIN_ID.toString(16)}`,
+              chainName: NETWORK_NAME[CHAIN_ID as ChainId],
+              nativeCurrency: {
+                name: 'ETH',
+                symbol: 'eth',
+                decimals: 18,
+              },
+              rpcUrls: nodes,
+              blockExplorerUrls: [`${process.env.REACT_APP_SCAN_URL}/`],
+            },
+          ],
+        })
+        return true
+      } catch (error) {
+        console.error('Failed to setup the network in Metamask:', error)
+        return false
+      }
     }
   } else {
     console.error("Can't setup the BSC network on metamask because window.ethereum is undefined")

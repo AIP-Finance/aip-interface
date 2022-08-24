@@ -13,7 +13,7 @@ const ProductList = () => {
           <Type.Caption color="neutral8">Product</Type.Caption>
         </Box>
         <Box width="30%" textAlign="left">
-          <Type.Caption color="neutral8">Spot Price</Type.Caption>
+          <Type.Caption color="neutral8">Pool Price</Type.Caption>
         </Box>
         <Box width="30%" />
       </Flex>

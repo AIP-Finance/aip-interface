@@ -1,6 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber'
-import { formatEther } from '@ethersproject/units'
-import React, { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import PlanManager_ABI from 'abis/PlanManager.json'
 import { PlanData } from 'entities/plan'
@@ -8,11 +7,67 @@ import { useAuthContext } from 'hooks/web3/useAuth'
 import { usePlanManagerContract } from 'hooks/web3/useContract'
 import { multicallv2 } from 'utils/multicall'
 
+const LIMIT = 6
+
 const usePlans = () => {
-  const [plans, setPlans] = useState<PlanData[]>()
+  const [planIndexes, setPlanIndexes] = useState<number[]>()
+  const [currentPage, setCurrentPage] = useState<number>(1)
+  const loadedPageRef = useRef<number[]>([])
+  const [plansInfo, setPlansInfo] = useState<{ [key: number]: PlanData }>({})
   const { account } = useAuthContext()
   const planManagerContract = usePlanManagerContract(true)
   const accountRef = useRef<string>()
+  const data: PlanData[] | undefined = useMemo(
+    () => planIndexes?.slice((currentPage - 1) * LIMIT, currentPage * LIMIT).map((planIndex) => plansInfo[planIndex]),
+    [currentPage, planIndexes, plansInfo]
+  )
+  const total = useMemo(() => (planIndexes ? Math.ceil(planIndexes.length / LIMIT) : null), [planIndexes])
+  const loadPlansInfo = useCallback(
+    async (indexes) => {
+      if (!planManagerContract) return
+      const calls = indexes.map((planIndex: BigNumber) => ({
+        address: planManagerContract.address,
+        name: 'getPlan',
+        params: [planIndex],
+      }))
+      const data: PlanData[] = await multicallv2(PlanManager_ABI, calls).then((results) => {
+        return results.map((result: any, index: number) => {
+          return {
+            index: indexes[index],
+            stableCoinAddress: result.plan.token0,
+            tokenAddress: result.plan.token1,
+            startedTime: result.statistics?.startedTime?.toNumber(),
+            endedTime: result.statistics?.endedTime?.toNumber(),
+            lastTriggerTime: result.statistics?.lastTriggerTime?.toNumber(),
+            tickAmount: result.plan?.tickAmount,
+            frequency: result.plan?.frequencyD,
+            ticks: result.statistics?.ticks?.toNumber(),
+            remainingTicks: result.statistics?.remainingTicks?.toNumber(),
+            tokenAmount: result.statistics?.swapAmount1,
+            claimedTokenAmount: result.statistics?.claimedAmount1,
+          }
+        })
+      })
+      setPlansInfo((info) => ({
+        ...info,
+        ...data.reduce((prev, cur) => {
+          prev[cur.index] = cur
+          return prev
+        }, {} as { [key: number]: PlanData }),
+      }))
+    },
+    [planManagerContract]
+  )
+  const loadPage = useCallback(
+    (page: number) => {
+      if (!planIndexes || planIndexes.length < (page - 1) * LIMIT) return
+      setCurrentPage(page)
+      if (!loadedPageRef.current.includes(page)) {
+        loadPlansInfo(planIndexes.slice((page - 1) * LIMIT, page * LIMIT))
+      }
+    },
+    [loadPlansInfo, planIndexes]
+  )
   useEffect(() => {
     if (!planManagerContract || !account || account == accountRef.current) return
 
@@ -28,39 +83,18 @@ const usePlans = () => {
     //     params: [],
     //   },
     // ]
-    const load = async () => {
-      const planIndexes = await planManagerContract.plansOf(account)
-      if (planIndexes?.length > 0) {
-        const calls = planIndexes.map((planIndex: BigNumber) => ({
-          address: planManagerContract.address,
-          name: 'getPlan',
-          params: [planIndex],
-        }))
-        const data: PlanData[] = await multicallv2(PlanManager_ABI, calls).then((results) => {
-          return results.map((result: any) => {
-            return {
-              stableCoinAddress: result.plan.token0,
-              tokenAddress: result.plan.token1,
-              startedTime: result.statistics?.startedTime?.toNumber(),
-              endedTime: result.statistics?.endedTime?.toNumber(),
-              lastTriggerTime: result.statistics?.lastTriggerTime?.toNumber(),
-              tickAmount: formatEther(result.plan?.tickAmount),
-              frequency: result.plan?.frequencyD,
-              ticks: result.statistics?.ticks?.toNumber(),
-              remainingTicks: result.statistics?.remainingTicks?.toNumber(),
-              tokenAmount: formatEther(result.statistics?.swapAmount1),
-              claimedTokenAmount: formatEther(result.statistics?.claimedAmount1),
-            }
-          })
-        })
-        setPlans(data)
-      } else {
-        setPlans([])
-      }
+    const init = async () => {
+      let indexes = await planManagerContract.plansOf(account)
+
+      if (indexes?.length > 0) indexes = indexes.map((i: BigNumber) => i.toNumber()).reverse()
+      console.log(indexes)
+      setPlanIndexes(indexes)
+      loadPlansInfo(indexes.slice(0, LIMIT))
+      loadedPageRef.current.push(1)
     }
-    load()
-  }, [account, planManagerContract])
-  return { plans }
+    init()
+  }, [account, loadPlansInfo, planManagerContract])
+  return { data, currentPage, total, loadPage }
 }
 
 export default usePlans

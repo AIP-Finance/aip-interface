@@ -1,5 +1,7 @@
 import * as yup from 'yup'
 
+import { StableCoin } from 'utils/constants'
+
 export type LocalState = {
   setting: {
     userDarkMode: boolean | null
@@ -9,11 +11,13 @@ export type LocalState = {
 }
 
 export type GlobalState = {
-  bnbInUsd?: number
   balances: {
-    BNB?: number
-    TOKEN?: number
+    ETH?: number
+    USDT?: number
+    DAI?: number
+    USDC?: number
   }
+  stableCoin: StableCoin
 }
 
 export const localStateSchema = yup.object({

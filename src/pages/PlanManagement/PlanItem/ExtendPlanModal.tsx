@@ -11,7 +11,7 @@ import { Box, Flex, Type } from 'theme/base'
 const MIN_ENTER = 1
 const MAX_PERIODS = 10000
 
-const ExtendPlanModal = ({ isOpen, setIsOpen, plan }: { plan: PlanData } & any) => {
+const ExtendPlanModal = ({ isOpen, setIsOpen }: { plan: PlanData } & any) => {
   const {
     handleSubmit,
     control,

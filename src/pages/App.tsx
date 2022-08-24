@@ -4,6 +4,8 @@ import { ToastContainer } from 'react-toastify'
 
 import Footer from 'components/Footer'
 import Navbar from 'components/Navbar'
+import { usePollingBalance } from 'hooks/store/state/useBalancesManager'
+import useStableCoinManager from 'hooks/store/state/useStableCoinManager'
 // import { useIsDarkMode } from 'hooks/store/state/useDarkMode'
 import useEagerConnect from 'hooks/web3/useEagerConnect'
 import Loading from 'theme/Loading'
@@ -22,8 +24,9 @@ console.log(process.env.REACT_APP_TOKEN_CONTRACT)
 
 function App() {
   // const isDarkMode = useIsDarkMode()
+  const { stableCoin } = useStableCoinManager()
   useEagerConnect()
-
+  usePollingBalance(stableCoin)
   return (
     <div>
       <Navbar />
@@ -45,7 +48,7 @@ function App() {
         </Switch>
       </Suspense>
       <Footer />
-      <ToastContainer theme="light" limit={3} />
+      <ToastContainer theme="dark" limit={3} />
     </div>
   )
 }

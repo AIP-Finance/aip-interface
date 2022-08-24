@@ -5,12 +5,12 @@ const cgkClient = axios.create({
   timeout: 5000,
 })
 
-export const getBnbPrice = (): Promise<number | null> =>
+export const getETHPrice = (): Promise<number | null> =>
   cgkClient
     .get(`price`, {
-      params: { ids: 'binancecoin', vs_currencies: 'usd' },
+      params: { ids: 'eth', vs_currencies: 'usd' },
     })
     .then((res) => {
       if (!res || !res.data) return null
-      return (res.data['binancecoin'] as { usd: number }).usd
+      return (res.data['eth'] as { usd: number }).usd
     })

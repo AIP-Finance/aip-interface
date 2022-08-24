@@ -32,10 +32,12 @@ const useIsomorphicLayoutEffect =
 
 export const GLOBAL_INITIAL_STATE: GlobalState = {
   balances: {
-    BNB: undefined,
-    TOKEN: undefined,
+    ETH: undefined,
+    USDT: undefined,
+    DAI: undefined,
+    USDC: undefined,
   },
-  bnbInUsd: undefined,
+  stableCoin: 'USDT',
 }
 
 export const GlobalStoreContext = React.createContext({} as any)

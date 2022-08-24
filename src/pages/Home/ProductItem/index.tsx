@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { Button } from 'theme/Buttons'
 import { Box, Flex, Type } from 'theme/base'
+import { CHAIN_ID } from 'utils/constants'
 import ROUTES from 'utils/routes'
 
 const ProductItem = ({ token }: { token: TokenData }) => {
@@ -16,7 +17,7 @@ const ProductItem = ({ token }: { token: TokenData }) => {
           <Type.BodyBold color="primary1">320</Type.BodyBold>
         </Box>
         <Box width="30%" textAlign="right">
-          <Link to={`${ROUTES.PLAN_CREATE.path_prefix}/${token.symbol}`}>
+          <Link to={`${ROUTES.PLAN_CREATE.path_prefix}/${token.addresses[CHAIN_ID]}`}>
             <Button variant="outlinePrimary" py={12} px={16}>
               <Type.Small>Create Plan</Type.Small>
             </Button>

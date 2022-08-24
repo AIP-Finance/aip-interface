@@ -22,7 +22,8 @@ export function floorNumber(num: number, decimals: number) {
 export function periodCalculated({ start, period }: { start?: string; period: number }): string {
   const now = dayjs(start).set('hour', 8).set('minute', 0)
   const endPeriod = now.add(1 + period, 'day')
-  return endPeriod.format('YYYY-MM-DD hh:mm') + ' UTC'
+  // return endPeriod.format('YYYY-MM-DD hh:mm') + ' UTC'
+  return endPeriod.format('YYYY-MM-DD')
 }
 
 export const pageToOffset = (page: number, limit: number) => (page - 1) * limit
