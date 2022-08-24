@@ -14,12 +14,14 @@ const usePlanManager = (token0: string, token1: string) => {
   const pollCheckingConfirmations = usePollCheckingConfirmations()
 
   const handleResult = useCallback(
-    async (func: () => Promise<{ hash: string }>, successMsg: string) => {
+    async (func: () => Promise<{ hash: string }>, successMsg?: string) => {
       try {
         const result = await func()
         if (result.hash) {
           await pollCheckingConfirmations(result.hash)
-          toast.success(<ToastBody title="Success" message={successMsg} />)
+          toast.success(
+            <ToastBody title="Success" message={successMsg ?? 'Transaction has been executed successfully'} />
+          )
           setSubmitting(false)
           return true
         }

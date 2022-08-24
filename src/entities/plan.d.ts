@@ -1,6 +1,7 @@
 import { BigNumber } from '@ethersproject/bignumber'
 
 export interface PlanData {
+  index: number
   tokenAddress: string
   stableCoinAddress: string
   startedTime: number

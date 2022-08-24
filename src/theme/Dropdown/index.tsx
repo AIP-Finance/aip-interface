@@ -169,7 +169,7 @@ export const DropdownItem = styled(Button)(
     color: 'neutral1',
     bg: 'transparent',
     '&:hover': {
-      bg: 'neutral7',
+      bg: 'neutral2',
     },
   })
 )

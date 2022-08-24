@@ -6,7 +6,8 @@ const ROUTES = {
     path: '/plan_management',
   },
   PLAN_CREATE: {
-    path: '/plan_create',
+    path: '/plan_create/:slug',
+    path_prefix: '/plan_create',
   },
 }
 

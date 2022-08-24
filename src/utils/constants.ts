@@ -23,10 +23,7 @@ export const LINKS = {
   privacy: '',
 }
 
-export const PLAN_STATUS = {
-  live: 'live',
-  end: 'end',
-}
+export type StableCoin = 'USDT' | 'USDC' | 'DAI'
 
 export const DATE_FORMAT = 'MMM D, YYYY - HH:mm'
 export const DEFAULT_LIMIT = 12

@@ -27,8 +27,8 @@ export const Button = styled.button<ButtonProps>(
     position: relative;
     top: 2px;
     content: '';
-    border: 2px solid ${theme.colors.neutral1}16;
-    border-top: 2px solid ${theme.colors.neutral2};
+    border: 2px solid ${theme.colors.neutral8}16;
+    border-top: 2px solid ${theme.colors.neutral8};
     border-radius: 50%;
     width: 16px;
     height: 16px;

@@ -1,7 +1,5 @@
-import { MaxUint256 } from '@ethersproject/constants'
 import { parseUnits } from '@ethersproject/units'
-import { BigNumber } from 'ethers'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { toast } from 'react-toastify'
 
 import ToastBody from 'components/ToastBody'
@@ -12,7 +10,6 @@ import { useERC20Contract } from './useContract'
 import usePollCheckingConfirmations from './usePollCheckingConfirmations'
 
 const useERC20Approval = (account: string, contract?: string, spender?: string, decimals = 18) => {
-  const accountRef = useRef<string>()
   const [approving, setApproving] = useState(false)
   const pollCheckingConfirmations = usePollCheckingConfirmations()
   const erc20Contract = useERC20Contract(contract, true)

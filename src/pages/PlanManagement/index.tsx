@@ -11,7 +11,7 @@ import Tabs from './Tabs'
 import usePlans from './usePlans'
 
 const PlanManagement = () => {
-  const { plans } = usePlans()
+  const { data } = usePlans()
   return (
     <DefaultLayout>
       <Container sx={{ background: 'neutral2' }}>
@@ -19,9 +19,7 @@ const PlanManagement = () => {
       </Container>
       <Box>
         <Tabs active={0} />
-        {plans?.map((plan, index) => (
-          <PlanItem plan={plan} key={index} />
-        ))}
+        {data?.map((plan, index) => (plan ? <PlanItem plan={plan} key={index} /> : <div key={index}></div>))}
         {/* <PlanItem plan={plan} /> */}
       </Box>
     </DefaultLayout>
