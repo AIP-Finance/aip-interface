@@ -13,7 +13,7 @@ import MoreIcon from './MoreIcon'
 import Progress from './Progress'
 import WithdrawPlanModal from './WithdrawPlanModal'
 
-const PlanItem = ({ plan }: { plan: PlanData }) => {
+const PlanItem = ({ account, plan }: { account: string; plan: PlanData }) => {
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false)
   const [isExtendModalOpen, setIsExtendModalOpen] = useState(false)
   const [isWithdrawModalOpen, setIsWithdrawModalOpen] = useState(false)
@@ -112,7 +112,9 @@ const PlanItem = ({ plan }: { plan: PlanData }) => {
         </Button>
       </Flex>
 
-      {isCancelModalOpen && <CancelPlanModal isOpen={isCancelModalOpen} setIsOpen={setIsCancelModalOpen} plan={plan} />}
+      {isCancelModalOpen && (
+        <CancelPlanModal isOpen={isCancelModalOpen} setIsOpen={setIsCancelModalOpen} plan={plan} account={account} />
+      )}
       {isExtendModalOpen && <ExtendPlanModal isOpen={isExtendModalOpen} setIsOpen={setIsExtendModalOpen} plan={plan} />}
       {isWithdrawModalOpen && (
         <WithdrawPlanModal isOpen={isWithdrawModalOpen} setIsOpen={setIsWithdrawModalOpen} plan={plan} />

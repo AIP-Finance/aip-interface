@@ -1,33 +1,27 @@
 import React, { useCallback, useState } from 'react'
-import { useForm } from 'react-hook-form'
 
 import Divider from 'components/Divider'
 import { PlanData } from 'entities/plan'
+import usePlanManager from 'hooks/web3/usePlanManager'
 import { Button } from 'theme/Buttons'
-import NumberInputField from 'theme/InputField/NumberInputField'
 import Modal from 'theme/Modal'
 import { Box, Flex, Type } from 'theme/base'
-
-const MIN_ENTER = 0
+import { CHAIN_ID } from 'utils/constants'
+import { formatNumber } from 'utils/formats'
 
 const WithdrawPlanModal = ({ isOpen, setIsOpen, plan }: { plan: PlanData } & any) => {
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm({
-    mode: 'onChange',
-  })
+  const { withdraw } = usePlanManager(plan.stableCoin?.addresses[CHAIN_ID], plan.token?.addresses[CHAIN_ID])
 
   const [submitting, setSubmitting] = useState(false)
 
-  const onSubmit = useCallback(
-    async (values) => {
-      if (submitting) return
-      console.log(values)
-    },
-    [submitting]
-  )
+  const onSubmit = useCallback(async () => {
+    if (submitting) return
+    setSubmitting(true)
+    const success = await withdraw(plan.index)
+    // TODO Handle success
+    console.log('success', success)
+    setSubmitting(false)
+  }, [plan, withdraw, submitting])
 
   return (
     <Modal
@@ -38,48 +32,35 @@ const WithdrawPlanModal = ({ isOpen, setIsOpen, plan }: { plan: PlanData } & any
       hasClose
       onDismiss={() => setIsOpen(false)}
     >
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Box>
-          <Box>
-            <NumberInputField
-              rules={{ required: true, min: MIN_ENTER, max: plan.tokenAmount }}
-              label={
-                <Flex justifyContent="space-between" width={'100%'} alignItems="center" mb="8px">
-                  <Type.Body color={'neutral8'}>Amount</Type.Body>
-                  <Type.Small color={'primary1'}>{plan.tokenAmount}</Type.Small>
-                </Flex>
-              }
-              required
-              control={control}
-              name="amount"
-              hasError={Boolean(errors?.amount)}
-              suffix={<Type.Small color="primary1">Max</Type.Small>}
-              block
-            />
-            {errors?.amount?.type?.toString() === 'required' && (
-              <Type.Small color="warning2">Enter your amount</Type.Small>
-            )}
-            {errors?.amount?.type?.toString() === 'min' && <Type.Small color="warning2">Min: {MIN_ENTER}</Type.Small>}
-            {errors?.amount?.type?.toString() === 'max' && (
-              <Type.Small color="warning2">Max: {plan.tokenAmount}</Type.Small>
-            )}
-          </Box>
+      <Box>
+        <Flex justifyContent="space-between" alignItems="center" mb={2}>
+          <Type.Body>Total invested:</Type.Body>
+          <Type.BodyBold>
+            {formatNumber(plan.tokenAmount, 4, 4)} {plan.token?.symbol}
+          </Type.BodyBold>
+        </Flex>
+        <Flex justifyContent="space-between" alignItems="center" mb={2}>
+          <Type.Body color={'neutral8'}>Remaining Withdrawal:</Type.Body>
+          <Type.BodyBold color={'primary1'}>
+            {formatNumber(plan.tokenAmount - plan.claimedTokenAmount, 4, 4)} {plan.token?.symbol}
+          </Type.BodyBold>
+        </Flex>
 
-          <Divider my={3} />
-          <Button
-            type="submit"
-            variant="outlinePrimary"
-            size="lg"
-            px={4}
-            block
-            mr={3}
-            isLoading={submitting}
-            disabled={submitting}
-          >
-            Confirm
-          </Button>
-        </Box>
-      </form>
+        <Divider my={3} />
+        <Button
+          type="submit"
+          variant="outlinePrimary"
+          size="lg"
+          px={4}
+          block
+          mr={3}
+          isLoading={submitting}
+          disabled={submitting}
+          onClick={onSubmit}
+        >
+          Confirm Withdraw
+        </Button>
+      </Box>
     </Modal>
   )
 }

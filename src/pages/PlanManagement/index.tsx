@@ -3,6 +3,7 @@ import React from 'react'
 import Breadcrumb from 'components/Breadcrumb'
 import Container from 'components/Container'
 import DefaultLayout from 'components/Layouts/DefaultLayout'
+import { useAuthContext } from 'hooks/web3/useAuth'
 import { Box, Grid } from 'theme/base'
 import ROUTES from 'utils/routes'
 
@@ -12,6 +13,8 @@ import usePlans from './usePlans'
 
 const PlanManagement = () => {
   const { data } = usePlans()
+  const { account } = useAuthContext()
+
   return (
     <DefaultLayout>
       <Container sx={{ background: 'neutral2' }}>
@@ -22,7 +25,9 @@ const PlanManagement = () => {
         <Grid
           sx={{ gridTemplateColumns: ['1fr', '1fr 1fr', '1fr 1fr', '1fr 1fr 1fr'], gridAutoRows: 'auto', gap: '16px' }}
         >
-          {data?.map((plan, index) => (plan ? <PlanItem plan={plan} key={index} /> : <div key={index}></div>))}
+          {data?.map((plan, index) =>
+            plan ? <PlanItem account={account} plan={plan} key={index} /> : <div key={index}></div>
+          )}
         </Grid>
         {/* <PlanItem plan={plan} /> */}
       </Box>

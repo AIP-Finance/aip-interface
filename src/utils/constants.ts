@@ -8,6 +8,13 @@ export enum ChainId {
   TESTNET = 3,
   MAINNET = 1,
 }
+
+export enum SubmitStep {
+  INPUTTING,
+  APPROVING,
+  SUBSCRIBING,
+}
+
 export const DEFAULT_CHAIN_ID = ChainId.MAINNET
 export const CHAIN_ID = +(process.env.REACT_APP_CHAIN_ID ?? DEFAULT_CHAIN_ID)
 

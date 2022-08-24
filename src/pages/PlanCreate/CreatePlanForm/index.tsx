@@ -11,6 +11,7 @@ import { Button } from 'theme/Buttons'
 import NumberInputField from 'theme/InputField/NumberInputField'
 import RadioGroup, { RadioOptionType } from 'theme/RadioGroup'
 import { Box, Flex, Type } from 'theme/base'
+import { SubmitStep } from 'utils/constants'
 import { formatNumber } from 'utils/formats'
 import { durationCalculated } from 'utils/parsers'
 import { getStableCoinAddress } from 'utils/tokens'
@@ -19,12 +20,6 @@ const MIN_AMOUNT = 10
 const MAX_AMOUNT = 1000
 const MIN_PERIODS = 2
 const MAX_PERIODS = 100
-
-enum SubmitStep {
-  INPUTING,
-  APPROVING,
-  SUBCRIBING,
-}
 
 const options: RadioOptionType[] = [
   {
@@ -69,7 +64,7 @@ const CreatePlanForm = ({
   })
   const { stableCoin } = useStableCoinManager()
   const { balances } = useBalancesManager()
-  const [submitStep, setSubmitStep] = useState<SubmitStep>(SubmitStep.INPUTING)
+  const [submitStep, setSubmitStep] = useState<SubmitStep>(SubmitStep.INPUTTING)
   const amountValue = useWatch({ control, name: 'amount' }) ?? 0
   const frequencyValue = useWatch({ control, name: 'frequency' }) ?? 0
   const periodValue = useWatch({ control, name: 'period' }) ?? 0
@@ -89,21 +84,21 @@ const CreatePlanForm = ({
       const totalAmount = values.amount * values.period
       const isEnough = await isTokenAllowanceEnough(totalAmount)
       if (isEnough) {
-        setSubmitStep(SubmitStep.SUBCRIBING)
+        setSubmitStep(SubmitStep.SUBSCRIBING)
       } else {
         setSubmitStep(SubmitStep.APPROVING)
         const success = await approveToken(totalAmount)
         if (!success) {
-          setSubmitStep(SubmitStep.INPUTING)
+          setSubmitStep(SubmitStep.INPUTTING)
           setSubmitting(false)
           return
         }
-        setSubmitStep(SubmitStep.SUBCRIBING)
+        setSubmitStep(SubmitStep.SUBSCRIBING)
       }
       const success = await subscribe(values)
       // TODO Handle success
       console.log('success', success)
-      setSubmitStep(SubmitStep.INPUTING)
+      setSubmitStep(SubmitStep.INPUTTING)
       setSubmitting(false)
     },
     [approveToken, isTokenAllowanceEnough, subscribe, submitting]
@@ -260,9 +255,9 @@ const CreatePlanForm = ({
             block
             disabled={submitting}
           >
-            {submitStep === SubmitStep.INPUTING && 'Submit'}
+            {submitStep === SubmitStep.INPUTTING && 'Submit'}
             {submitStep === SubmitStep.APPROVING && `Approving ${stableCoin}...`}
-            {submitStep === SubmitStep.SUBCRIBING && 'Subcribing...'}
+            {submitStep === SubmitStep.SUBSCRIBING && 'Subscribing...'}
           </Button>
           <Type.Small color="neutral5" mt={3}>
             You can cancel and withdraw all {stableCoin} at any time without any fee

@@ -10,19 +10,19 @@ import { CHAIN_ID } from 'utils/constants'
 import { formatNumber } from 'utils/formats'
 
 const CancelPlanModal = ({ isOpen, setIsOpen, plan }: { plan: PlanData } & any) => {
-  const { unsubcribe } = usePlanManager(plan.stableCoin?.addresses[CHAIN_ID], plan.token?.addresses[CHAIN_ID])
+  const { unsubscribe } = usePlanManager(plan.stableCoin?.addresses[CHAIN_ID], plan.token?.addresses[CHAIN_ID])
   const [submitting, setSubmitting] = useState(false)
 
   const onUnsubscribe = useCallback(async () => {
     if (submitting) return
     setSubmitting(true)
     console.log('plan.index', plan.index)
-    const success = await unsubcribe(plan.index)
+    const success = await unsubscribe(plan.index)
     // TODO Handle success
 
     console.log('success', success)
     setSubmitting(false)
-  }, [plan, unsubcribe, submitting])
+  }, [plan, unsubscribe, submitting])
 
   return (
     <Modal
@@ -48,7 +48,17 @@ const CancelPlanModal = ({ isOpen, setIsOpen, plan }: { plan: PlanData } & any) 
           </Type.BodyBold>
         </Flex>
         <Divider mt={3} />
-        <Button type="submit" variant="outlinePrimary" size="lg" px={4} block mr={3} onClick={onUnsubscribe}>
+        <Button
+          type="submit"
+          variant="outlinePrimary"
+          size="lg"
+          px={4}
+          block
+          mr={3}
+          onClick={onUnsubscribe}
+          disabled={submitting}
+          isLoading={submitting}
+        >
           Confirm Cancel
         </Button>
       </Box>
