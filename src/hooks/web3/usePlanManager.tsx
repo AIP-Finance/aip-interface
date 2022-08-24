@@ -9,7 +9,7 @@ import { usePlanManagerContract } from './useContract'
 import usePollCheckingConfirmations from './usePollCheckingConfirmations'
 
 const usePlanManager = (token0: string, token1: string) => {
-  const [submiting, setSubmitting] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
   const planManagerContract = usePlanManagerContract(true)
   const pollCheckingConfirmations = usePollCheckingConfirmations()
 
@@ -79,7 +79,7 @@ const usePlanManager = (token0: string, token1: string) => {
     },
     [handleResult, planManagerContract]
   )
-  return { submiting, subscribe, unsubscribe, extend, withdraw }
+  return { submitting, subscribe, unsubscribe, extend, withdraw }
 }
 
 export default usePlanManager

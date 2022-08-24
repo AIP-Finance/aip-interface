@@ -8,6 +8,13 @@ export enum ChainId {
   TESTNET = 3,
   MAINNET = 1,
 }
+
+export enum SubmitStep {
+  INPUTTING,
+  APPROVING,
+  SUBSCRIBING,
+}
+
 export const DEFAULT_CHAIN_ID = ChainId.MAINNET
 export const CHAIN_ID = +(process.env.REACT_APP_CHAIN_ID ?? DEFAULT_CHAIN_ID)
 
@@ -25,6 +32,6 @@ export const LINKS = {
 
 export type StableCoin = 'USDT' | 'USDC' | 'DAI'
 
-export const DATE_FORMAT = 'MMM D, YYYY - HH:mm'
+export const DATE_FORMAT = 'YYYY-MM-DD hh:mm'
 export const DEFAULT_LIMIT = 12
 export const MIN_PARSE_ETHER = 0.00000001

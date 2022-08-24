@@ -1,16 +1,17 @@
-import { BigNumber } from '@ethersproject/bignumber'
-
 export interface PlanData {
   index: number
   tokenAddress: string
+  token?: TokenData
+  stableCoin?: TokenData
   stableCoinAddress: string
+  createdTime: number
   startedTime: number
   endedTime: number
   lastTriggerTime: number
-  tickAmount: BigNumber
+  tickAmount: number
   frequency: number
   ticks: number
-  tokenAmount: BigNumber
-  claimedTokenAmount: BigNumber
+  tokenAmount: number
+  claimedTokenAmount: number
   remainingTicks: number
 }
