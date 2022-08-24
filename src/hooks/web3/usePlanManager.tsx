@@ -28,8 +28,6 @@ const usePlanManager = (token0: string, token1: string) => {
         setSubmitting(false)
         return false
       } catch (err) {
-        console.log('err', err.data)
-        console.log('err', err.error)
         setSubmitting(false)
         if (err.data || err.error) {
           const errorData = getContractErrorData(err.error ? err.error : err)
@@ -60,7 +58,28 @@ const usePlanManager = (token0: string, token1: string) => {
     },
     [handleResult, planManagerContract, token0, token1]
   )
-  return { submiting, subcribe }
+  const unsubcribe = useCallback(
+    (planIndex: number) => {
+      if (!planManagerContract) return
+      return handleResult(() => planManagerContract.unsubcribe(planIndex), 'Cancel plan successful')
+    },
+    [handleResult, planManagerContract]
+  )
+  const extend = useCallback(
+    (planIndex: number, periods: number) => {
+      if (!planManagerContract) return
+      return handleResult(() => planManagerContract.extend(planIndex, periods), 'Extend plan successful')
+    },
+    [handleResult, planManagerContract]
+  )
+  const withdraw = useCallback(
+    (planIndex: number) => {
+      if (!planManagerContract) return
+      return handleResult(() => planManagerContract.claim(planIndex), 'Withdraw token successful')
+    },
+    [handleResult, planManagerContract]
+  )
+  return { submiting, subcribe, unsubcribe, extend, withdraw }
 }
 
 export default usePlanManager
