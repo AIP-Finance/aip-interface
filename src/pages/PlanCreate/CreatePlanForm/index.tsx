@@ -80,7 +80,7 @@ const CreatePlanForm = ({
     stableCoinAddress,
     process.env.REACT_APP_PLAN_MANAGER
   )
-  const { subcribe } = usePlanManager(stableCoinAddress, tokenAddress)
+  const { subscribe } = usePlanManager(stableCoinAddress, tokenAddress)
 
   const onSubmit = useCallback(
     async (values) => {
@@ -100,13 +100,13 @@ const CreatePlanForm = ({
         }
         setSubmitStep(SubmitStep.SUBCRIBING)
       }
-      const success = await subcribe(values)
+      const success = await subscribe(values)
       // TODO Handle success
       console.log('success', success)
       setSubmitStep(SubmitStep.INPUTING)
       setSubmitting(false)
     },
-    [approveToken, isTokenAllowanceEnough, subcribe, submitting]
+    [approveToken, isTokenAllowanceEnough, subscribe, submitting]
   )
 
   const handleRadioChange = (value: string | number | undefined): void => {

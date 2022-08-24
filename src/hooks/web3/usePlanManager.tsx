@@ -41,12 +41,12 @@ const usePlanManager = (token0: string, token1: string) => {
     [pollCheckingConfirmations]
   )
 
-  const subcribe = useCallback(
+  const subscribe = useCallback(
     ({ amount, frequency, period }: { amount: number; frequency: number; period: number }) => {
       if (!planManagerContract) return
       return handleResult(
         () =>
-          planManagerContract.subcribe({
+          planManagerContract.subscribe({
             token0,
             token1,
             frequencyD: frequency,
@@ -58,10 +58,10 @@ const usePlanManager = (token0: string, token1: string) => {
     },
     [handleResult, planManagerContract, token0, token1]
   )
-  const unsubcribe = useCallback(
+  const unsubscribe = useCallback(
     (planIndex: number) => {
       if (!planManagerContract) return
-      return handleResult(() => planManagerContract.unsubcribe(planIndex), 'Cancel plan successful')
+      return handleResult(() => planManagerContract.unsubscribe(planIndex), 'Cancel plan successful')
     },
     [handleResult, planManagerContract]
   )
@@ -79,7 +79,7 @@ const usePlanManager = (token0: string, token1: string) => {
     },
     [handleResult, planManagerContract]
   )
-  return { submiting, subcribe, unsubcribe, extend, withdraw }
+  return { submiting, subscribe, unsubscribe, extend, withdraw }
 }
 
 export default usePlanManager
