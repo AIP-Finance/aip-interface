@@ -14,7 +14,6 @@ const History = ({ plan }: { plan: PlanData }) => {
   const { md } = useResponsive()
 
   console.log('data', data)
-  console.log('md', md)
 
   if (!md) {
     return (
