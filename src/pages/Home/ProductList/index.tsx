@@ -4,11 +4,13 @@ import { Box, Flex, Type } from 'theme/base'
 import { TOKENS } from 'utils/tokens'
 
 import ProductItem from '../ProductItem'
+import usePrices from './usePrices'
 
 const ProductList = () => {
+  const { prices, stableCoin } = usePrices()
   return (
     <Box textAlign="center">
-      <Flex mb={24}>
+      <Flex mb={24} alignItems="center">
         <Box width="40%" textAlign="left">
           <Type.Caption color="neutral8">Product</Type.Caption>
         </Box>
@@ -19,7 +21,7 @@ const ProductList = () => {
       </Flex>
 
       {TOKENS.map((token: TokenData) => (
-        <ProductItem key={token.symbol} token={token} />
+        <ProductItem key={token.symbol} token={token} price={prices[token.symbol]} stableCoin={stableCoin} />
       ))}
     </Box>
   )
