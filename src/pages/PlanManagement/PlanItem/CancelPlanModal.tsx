@@ -9,8 +9,11 @@ import { Box, Flex, Type } from 'theme/base'
 import { CHAIN_ID } from 'utils/constants'
 import { formatNumber } from 'utils/formats'
 
-const CancelPlanModal = ({ isOpen, setIsOpen, plan }: { plan: PlanData } & any) => {
-  const { unsubscribe } = usePlanManager(plan.stableCoin?.addresses[CHAIN_ID], plan.token?.addresses[CHAIN_ID])
+const CancelPlanModal = ({ isOpen, setIsOpen, plan }: { isOpen: boolean; setIsOpen: any; plan: PlanData }) => {
+  const { unsubscribe } = usePlanManager(
+    plan.stableCoin?.addresses[CHAIN_ID] ?? '',
+    plan.token?.addresses[CHAIN_ID] ?? ''
+  )
   const [submitting, setSubmitting] = useState(false)
 
   const onUnsubscribe = useCallback(async () => {

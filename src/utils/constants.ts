@@ -15,6 +15,12 @@ export enum SubmitStep {
   SUBSCRIBING,
 }
 
+export enum PlanStatus {
+  NOT_RUNNING,
+  ON_GOING,
+  ENDED,
+}
+
 export const DEFAULT_CHAIN_ID = ChainId.MAINNET
 export const CHAIN_ID = +(process.env.REACT_APP_CHAIN_ID ?? DEFAULT_CHAIN_ID)
 
