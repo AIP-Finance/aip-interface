@@ -18,7 +18,7 @@ const Progress = ({ max, value }: { max: number; value: number }) => {
         sx={{
           height: '12px',
           width: '12px',
-          bg: value > 1 ? 'primary1' : bg,
+          bg: value > 0 ? 'primary1' : bg,
           position: 'absolute',
           top: '-5px',
           left: '-3px',
@@ -41,7 +41,7 @@ const Progress = ({ max, value }: { max: number; value: number }) => {
         sx={{
           height: '12px',
           width: '12px',
-          bg: value == max ? 'primary1' : bg,
+          bg: value == max && value != 0 ? 'primary1' : bg,
           position: 'absolute',
           top: '-5px',
           right: '-3px',

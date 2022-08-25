@@ -22,10 +22,15 @@ const ExtendPlanModal = ({
   isOpen,
   setIsOpen,
   plan,
-}: { account: string; isOpen: boolean; plan: PlanData } & any) => {
+}: {
+  account: string
+  isOpen: boolean
+  setIsOpen: any
+  plan: PlanData
+}) => {
   const { stableCoin } = useStableCoinManager()
   const { balances } = useBalancesManager()
-  const { extend } = usePlanManager(plan.stableCoin?.addresses[CHAIN_ID], plan.token?.addresses[CHAIN_ID])
+  const { extend } = usePlanManager(plan.stableCoin?.addresses[CHAIN_ID] ?? '', plan.token?.addresses[CHAIN_ID] ?? '')
 
   const {
     handleSubmit,
@@ -99,6 +104,20 @@ const ExtendPlanModal = ({
           </Box>
 
           <Flex mt={3} justifyContent="space-between" width={'100%'} alignItems="center">
+            <Type.Body>Current amount per period:</Type.Body>
+            <Type.BodyBold>
+              {formatNumber(plan.tickAmount, 2, 2)} {plan.stableCoin?.symbol}{' '}
+            </Type.BodyBold>
+          </Flex>
+          <Flex mt={3} justifyContent="space-between" width={'100%'} alignItems="center">
+            <Type.Body>Current periods:</Type.Body>
+            <Type.BodyBold>
+              {plan.ticks} {periodValue > 0 && <Type.BodyBold color="primary1">{`+ ${periodValue}`}</Type.BodyBold>}
+            </Type.BodyBold>
+          </Flex>
+          <Divider my={3} />
+
+          <Flex justifyContent="space-between" width={'100%'} alignItems="center">
             <Type.Body>Deposit more:</Type.Body>
             <Type.BodyBold color="primary1">
               {formatNumber(periodValue * plan.tickAmount, 2, 2)} {stableCoin}
