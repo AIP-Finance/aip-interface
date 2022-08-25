@@ -4,6 +4,7 @@ import { useMemo } from 'react'
 
 import ERC20_ABI from 'abis/ERC20.json'
 import PlanManager_ABI from 'abis/PlanManager.json'
+import Pool_ABI from 'abis/Pool.json'
 import useActiveWeb3React from 'hooks/web3/useActiveWeb3React'
 import { getContract, getProviderOrSigner } from 'utils/contracts'
 
@@ -33,4 +34,8 @@ export function useERC20Contract(erc20Address?: string, withSignerIfPossible?: b
 
 export function usePlanManagerContract(withSignerIfPossible?: boolean) {
   return useContract(process.env.REACT_APP_PLAN_MANAGER, PlanManager_ABI, withSignerIfPossible)
+}
+
+export function usePoolContract(poolAddress: string, withSignerIfPossible?: boolean) {
+  return useContract(poolAddress, Pool_ABI, withSignerIfPossible)
 }

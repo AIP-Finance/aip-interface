@@ -1,5 +1,6 @@
 export interface PlanData {
   index: number
+  poolPlanIndex: number
   tokenAddress: string
   token?: TokenData
   stableCoin?: TokenData
