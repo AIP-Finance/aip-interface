@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Breadcrumb from 'components/Breadcrumb'
-import Container from 'components/Container'
+import DataLoading from 'components/DataLoading'
 import DefaultLayout from 'components/Layouts/DefaultLayout'
 import { useAuthContext } from 'hooks/web3/useAuth'
 import { Box, Grid } from 'theme/base'
@@ -17,11 +17,11 @@ const PlanManagement = () => {
 
   return (
     <DefaultLayout>
-      <Container sx={{ background: 'neutral2' }}>
-        <Breadcrumb items={[{ title: 'Home', path: ROUTES.HOME.path }, { title: 'Plan Management' }]} />
-      </Container>
+      <Breadcrumb items={[{ title: 'Home', path: ROUTES.HOME.path }, { title: 'My Plan' }]} />
+
       <Box>
         <Tabs active={0} />
+        {<DataLoading data={data} />}
         <Grid
           sx={{ gridTemplateColumns: ['1fr', '1fr 1fr', '1fr 1fr', '1fr 1fr 1fr'], gridAutoRows: 'auto', gap: '16px' }}
         >

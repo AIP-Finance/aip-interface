@@ -13,7 +13,6 @@ const MoreIcon = ({ onCancel }: { onCancel: any }) => {
           sx={{
             color: 'warning2',
             cursor: 'pointer',
-            width: '95px',
             textAlign: 'center',
           }}
           onClick={onCancel}

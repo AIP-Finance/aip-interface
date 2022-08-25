@@ -127,6 +127,7 @@ const CreatePlanForm = ({
             maxWidth: '843px',
             margin: 'auto',
             borderRadius: '4px',
+            bg: 'modalBG',
           }}
         >
           <Box

@@ -13,16 +13,16 @@ const Home = () => {
   return (
     <Box
       sx={{
-        background: 'url(images/bg.png)',
+        background: 'url(/images/bg.png)',
         backgroundPosition: 'top',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'contain',
       }}
     >
-      <DefaultLayout>
+      <DefaultLayout hbg={false}>
         <HeroCard />
 
-        <CardWrapper mt={98} title={'Create  your own Auto-Invest Plan'}>
+        <CardWrapper mt={98} title={'Create your own Auto-Invest Plan'}>
           <ProductList />
         </CardWrapper>
 

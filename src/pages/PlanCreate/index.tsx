@@ -2,7 +2,6 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 
 import Breadcrumb from 'components/Breadcrumb'
-import Container from 'components/Container'
 import FAQContainer from 'components/FAQContainer'
 import DefaultLayout from 'components/Layouts/DefaultLayout'
 import NotFound from 'components/NotFound'
@@ -24,11 +23,9 @@ const PlanCreate = () => {
 
   return (
     <DefaultLayout>
-      <Container sx={{ background: 'neutral2' }}>
-        <Breadcrumb items={[{ title: 'Home', path: ROUTES.HOME.path }, { title: `Plan Create (${slug})` }]} />
-        <CreatePlanForm token={token} account={account} tokenAddress={slug} />
-        <FAQContainer />
-      </Container>
+      <Breadcrumb items={[{ title: 'Home', path: ROUTES.HOME.path }, { title: `Plan Create (${token.symbol})` }]} />
+      <CreatePlanForm token={token} account={account} tokenAddress={slug} />
+      <FAQContainer />
     </DefaultLayout>
   )
 }
