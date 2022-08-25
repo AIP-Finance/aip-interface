@@ -1,3 +1,4 @@
+import { useResponsive } from 'ahooks'
 import React from 'react'
 
 import DataLoading from 'components/DataLoading'
@@ -5,16 +6,27 @@ import { PlanData } from 'entities/plan'
 import { Box, Flex, Type } from 'theme/base'
 
 import HistoryItem from './HistoryItem'
+import HistoryItemMobile from './HistoryItem/HistoryItemMobile'
 import usePlanHistory from './usePlanHistory'
 
 const History = ({ plan }: { plan: PlanData }) => {
   const data = usePlanHistory(plan)
+  const { md } = useResponsive()
+
   console.log('data', data)
+  console.log('md', md)
+
+  if (!md) {
+    return (
+      <>
+        {<DataLoading data={data} />}
+        {data && data.map((history) => <HistoryItemMobile key={history.time} history={history} plan={plan} />)}
+      </>
+    )
+  }
 
   return (
     <>
-      <Type.H5 mb={32}>History</Type.H5>
-
       <Box
         sx={{
           position: 'relative',
@@ -27,15 +39,18 @@ const History = ({ plan }: { plan: PlanData }) => {
         }}
       >
         <Box textAlign="center">
-          <Flex mb={24}>
-            <Box width="40%" textAlign="left">
+          <Flex>
+            <Box width="25%" textAlign="left">
               <Type.BodyBold color="neutral8">Time</Type.BodyBold>
             </Box>
-            <Box width="30%" textAlign="left">
+            <Box width="25%" textAlign="left">
               <Type.BodyBold color="neutral8">Amount</Type.BodyBold>
             </Box>
-            <Box width="30%" textAlign="left">
+            <Box width="25%" textAlign="left">
               <Type.BodyBold color="neutral8">Price</Type.BodyBold>
+            </Box>
+            <Box width="25%" textAlign="left">
+              <Type.BodyBold color="neutral8">Fee</Type.BodyBold>
             </Box>
           </Flex>
 

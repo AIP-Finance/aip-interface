@@ -5,7 +5,7 @@ import Breadcrumb from 'components/Breadcrumb'
 import DefaultLayout from 'components/Layouts/DefaultLayout'
 import { PlanData } from 'entities/plan'
 import { usePlanManagerContract } from 'hooks/web3/useContract'
-import { Box } from 'theme/base'
+import { Box, Type } from 'theme/base'
 import { getPlanData } from 'utils/plan'
 import ROUTES from 'utils/routes'
 
@@ -30,10 +30,12 @@ const PlanDetails = () => {
       <Breadcrumb
         items={[
           { title: 'Home', path: ROUTES.HOME.path },
-          { title: 'My Plan', path: ROUTES.PLAN_MANAGEMENT.path },
+          { title: 'My Plans', path: ROUTES.PLAN_MANAGEMENT.path },
           { title: `#${id}` },
         ]}
       />
+
+      <Type.H5 mb={32}>History</Type.H5>
 
       <Box>{!!plan && <History plan={plan} />}</Box>
     </DefaultLayout>

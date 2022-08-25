@@ -17,7 +17,7 @@ const PlanManagement = () => {
 
   return (
     <DefaultLayout>
-      <Breadcrumb items={[{ title: 'Home', path: ROUTES.HOME.path }, { title: 'My Plan' }]} />
+      <Breadcrumb items={[{ title: 'Home', path: ROUTES.HOME.path }, { title: 'My Plans' }]} />
 
       <Box>
         <Tabs active={0} />

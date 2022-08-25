@@ -7,20 +7,25 @@ import { formatNumber } from 'utils/formats'
 
 const HistoryItem = ({ history, plan }: { history: HistoryData; plan: PlanData }) => {
   return (
-    <Box mb={3}>
+    <Box mt={28}>
       <Flex>
-        <Box width="40%" textAlign="left">
-          <Type.BodyBold color="neutral8">{history.time}</Type.BodyBold>
+        <Box width="25%" textAlign="left">
+          <Type.Body color="neutral8">{history.time}</Type.Body>
         </Box>
-        <Box width="30%" textAlign="left">
-          <Type.BodyBold color="primary1">
+        <Box width="25%" textAlign="left">
+          <Type.Body color="primary1">
             {formatNumber(history.tokenAmount, 4, 4)} {plan.token?.symbol}
-          </Type.BodyBold>
+          </Type.Body>
         </Box>
-        <Box width="30%" textAlign="left">
-          <Type.BodyBold color="neutral8">
+        <Box width="25%" textAlign="left">
+          <Type.Body color="neutral8">
             {formatNumber(history.price, 4, 4)} {`${plan.stableCoin?.symbol}/${plan.token?.symbol}`}
-          </Type.BodyBold>
+          </Type.Body>
+        </Box>
+        <Box width="25%" textAlign="left">
+          <Type.Body color="neutral8">
+            {formatNumber(history.tokenAmount, 4, 4)} {plan.stableCoin?.symbol}
+          </Type.Body>
         </Box>
       </Flex>
     </Box>
