@@ -1,4 +1,6 @@
+import { Login } from 'iconsax-react'
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import Divider from 'components/Divider'
 import { PlanData } from 'entities/plan'
@@ -8,6 +10,7 @@ import { PlanStatus } from 'utils/constants'
 import { formatDate, formatNumber } from 'utils/formats'
 import { getPlanStatus } from 'utils/func'
 import { durationCalculated } from 'utils/parsers'
+import ROUTES from 'utils/routes'
 
 import CancelPlanModal from './CancelPlanModal'
 import ExtendPlanModal from './ExtendPlanModal'
@@ -30,13 +33,26 @@ const PlanItem = ({ account, plan }: { account: string; plan: PlanData }) => {
         borderRadius: '4px',
         p: '24px',
         width: '100%',
+        bg: 'modalBG',
       }}
     >
       <Flex justifyContent="space-between" width="100%" alignItems="center" mb={1}>
         <Type.Large color={'neutral8'}>
           {plan.token?.name} ({plan.token?.symbol}) #{plan.index}
         </Type.Large>
-        {planStatus != PlanStatus.ENDED && <MoreIcon onCancel={() => setIsCancelModalOpen(true)} />}
+        <Flex>
+          <Link to={`${ROUTES.PLAN_DETAILS.path_prefix}/${plan.index}`}>
+            <Box
+              sx={{
+                color: 'neutral5',
+                cursor: 'pointer',
+              }}
+            >
+              <Login />
+            </Box>
+          </Link>
+          {planStatus != PlanStatus.ENDED && <MoreIcon onCancel={() => setIsCancelModalOpen(true)} />}
+        </Flex>
       </Flex>
       <Box mb={2}>
         <Type.Small color="neutral4">

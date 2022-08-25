@@ -9,9 +9,6 @@ const Tabs = ({ active }: { active: number }) => {
         <Box mr={32} sx={{ cursor: 'pointer' }}>
           <Type.H5 color={active == 0 ? 'neutral8' : 'neutral5'}>Plan Management</Type.H5>
         </Box>
-        <Box sx={{ cursor: 'pointer' }}>
-          <Type.H5 color={active == 1 ? 'neutral8' : 'neutral5'}>History</Type.H5>
-        </Box>
       </Flex>
     </Box>
   )
