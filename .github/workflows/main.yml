@@ -44,6 +44,7 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           port: 24
           source: "landing.zip,~/aip/landing/landing.zip"
+          target: "~/"
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:
