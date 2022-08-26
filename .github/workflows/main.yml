@@ -18,11 +18,6 @@ permissions:
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
 jobs:
   # Deployment job
   deploy:
@@ -30,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Prepare
-        run: Yes | apt install zip && Yes | apt install sshpass
+        run: sudo apt-get install -y zip && sudo apt-get install -y sshpass
       - name: Install yarn
         run: yarn install && yarn build:prod
       - name: Zip file build
