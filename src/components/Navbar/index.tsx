@@ -73,7 +73,7 @@ const Navbar = () => {
                 textAlign: 'center',
               }}
             >
-              <Type.BodyBold color="neutral1">In Development</Type.BodyBold>
+              <Type.BodyBold color="neutral1">In Testnet</Type.BodyBold>
             </Box>
           </Box>
 

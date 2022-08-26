@@ -41,11 +41,11 @@ const HowItem = ({ index, title, image }: { index: number; title: string; image:
 const HowCard = () => {
   return (
     <CardWrapper mt={24} title={'How to join?'}>
-      <Flex>
-        <Box mr={40} flex={1}>
+      <Flex flexDirection={['column', 'column', 'row']}>
+        <Box mr={[0, 0, 40]} flex={1}>
           <HowItem index={1} title={'Connect Wallet'} image={'images/home_icon_1.png'} />
         </Box>
-        <Box mr={40} flex={1}>
+        <Box mr={[0, 0, 40]} flex={1}>
           <HowItem index={2} title={'Create your Auto-Invest Plan'} image={'images/home_icon_2.png'} />
         </Box>
         <Box flex={1}>
