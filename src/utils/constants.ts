@@ -30,10 +30,10 @@ export const LINKS = {
   twitter: 'https://twitter.com/0xAutoInvest',
   medium: 'https://medium.com/@autoinvest',
   github: 'https://github.com/AIP-Finance',
-  whitepaper: '',
+  whitepaper: 'https://docs.aip.finance',
   pinksale: '',
   pancakeswap: '',
-  privacy: '',
+  privacy: 'https://docs.aip.finance',
 }
 
 export type StableCoin = 'USDT' | 'USDC' | 'DAI'
