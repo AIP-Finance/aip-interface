@@ -37,6 +37,12 @@ jobs:
       - name: Zip file build
         run: zip -r landing.zip build
       - name: Upload file
-        run: sshpass -p ${{ secrets.SSH_PASSWORD }} scp -o StrictHostKeyChecking=no -P 24 landing.zip ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }}:~/aip/landing
+        uses: ./
+        with:
+          host: ${{ secrets.SSH_IP }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 24
+          source: "landing.zip,~/aip/landing/landing.zip"
       - name: Deploy
         run: sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} -p 24 'cd ~/aip/landing && source deploy.sh'
