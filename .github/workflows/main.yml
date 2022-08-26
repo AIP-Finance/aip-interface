@@ -23,7 +23,11 @@ jobs:
   deploy:
     name: deploy
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./
     steps:
+      - uses: actions/checkout@main
       - name: Prepare
         run: sudo apt-get install -y zip && sudo apt-get install -y sshpass
       - name: Install yarn
