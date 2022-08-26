@@ -36,9 +36,7 @@ jobs:
         run: yarn install && yarn build:prod
       - name: Zip file build
         run: zip -r landing.zip build
-      - name: Allow ip
-        run: ssh-keyscan -H ${{secrets.SSH_IP}} > ~/.ssh/known_hosts
       - name: Upload file
-        run: sshpass -p ${{ secrets.SSH_PASSWORD }} scp -P 24 landing.zip ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }}:~/aip/landing
+        run: sshpass -p ${{ secrets.SSH_PASSWORD }} scp -o StrictHostKeyChecking=no -P 24 landing.zip ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }}:~/aip/landing
       - name: Deploy
-        run: sshpass -p ${{ secrets.SSH_PASSWORD }} ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} -p 24 'cd ~/aip/landing && source deploy.sh'
+        run: sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} -p 24 'cd ~/aip/landing && source deploy.sh'
