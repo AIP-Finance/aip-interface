@@ -9,7 +9,7 @@ const RenderPlanStatus = ({ plan }: { plan: PlanData }) => {
   const planStatus = getPlanStatus(plan)
 
   if (planStatus == PlanStatus.NOT_RUNNING) {
-    return <Type.SmallBold color="primary1">Not Running</Type.SmallBold>
+    return <Type.SmallBold color="primary2">Not Running</Type.SmallBold>
   }
 
   if (planStatus == PlanStatus.ON_GOING) {

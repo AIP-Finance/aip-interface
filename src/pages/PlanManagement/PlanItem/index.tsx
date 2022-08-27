@@ -1,5 +1,5 @@
 import { Login } from 'iconsax-react'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import Divider from 'components/Divider'
@@ -24,6 +24,10 @@ const PlanItem = ({ account, plan }: { account: string; plan: PlanData }) => {
   const [isExtendModalOpen, setIsExtendModalOpen] = useState(false)
   const [isWithdrawModalOpen, setIsWithdrawModalOpen] = useState(false)
   const planStatus = getPlanStatus(plan)
+  const hasAction = useMemo(
+    () => !(planStatus == PlanStatus.ENDED && plan.tokenAmount - plan.claimedTokenAmount == 0),
+    [plan, planStatus]
+  )
 
   return (
     <Box
@@ -51,7 +55,7 @@ const PlanItem = ({ account, plan }: { account: string; plan: PlanData }) => {
               <Login />
             </Box>
           </Link>
-          {planStatus != PlanStatus.ENDED && <MoreIcon onCancel={() => setIsCancelModalOpen(true)} />}
+          {hasAction && <MoreIcon onCancel={() => setIsCancelModalOpen(true)} />}
         </Flex>
       </Flex>
       <Box mb={2}>
@@ -88,6 +92,15 @@ const PlanItem = ({ account, plan }: { account: string; plan: PlanData }) => {
       </Flex>
 
       <Flex mt={3} justifyContent="space-between" alignItems="center">
+        <Type.Body>Next Auto-Invest Date:</Type.Body>
+        <Type.BodyBold>
+          {plan.startedTime
+            ? formatDate(plan.startedTime)
+            : durationCalculated({ timestamp: plan.createdTime, period: 0 })}
+        </Type.BodyBold>
+      </Flex>
+
+      <Flex mt={3} justifyContent="space-between" alignItems="center">
         <Type.Body>Start from:</Type.Body>
         <Type.BodyBold>
           {plan.startedTime
@@ -107,7 +120,7 @@ const PlanItem = ({ account, plan }: { account: string; plan: PlanData }) => {
 
       <Divider my={3} />
 
-      {planStatus != PlanStatus.ENDED ? (
+      {hasAction ? (
         <Flex justifyContent="space-between" width={'100%'} alignItems="center">
           <Button
             type="submit"
