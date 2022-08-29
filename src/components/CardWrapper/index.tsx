@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 
-import arrowDown from 'assets/images/icon/arrow_down.svg'
+import ArrowDown from 'assets/images/icon/arrow_down.svg'
 import { Box, Image, Type } from 'theme/base'
 
 import { CornerIcon } from '../Icon'
@@ -55,7 +55,7 @@ const CardWrapper = ({
           textAlign="center"
           pt={'4px'}
         >
-          <Image src={arrowDown} height="100%" />
+          <Image src={ArrowDown} height="100%" />
         </Box>
       )}
       <Box

@@ -1,11 +1,11 @@
-import { Login } from 'iconsax-react'
 import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import DocIcon from 'assets/images/icon/doc.svg'
 import Divider from 'components/Divider'
 import { PlanData } from 'entities/plan'
 import { Button } from 'theme/Buttons'
-import { Box, Flex, Type } from 'theme/base'
+import { Box, Flex, Image, Type } from 'theme/base'
 import { PlanStatus } from 'utils/constants'
 import { formatDate, formatNumber } from 'utils/formats'
 import { getPlanStatus } from 'utils/func'
@@ -15,7 +15,7 @@ import ROUTES from 'utils/routes'
 import CancelPlanModal from './CancelPlanModal'
 import ExtendPlanModal from './ExtendPlanModal'
 import MoreIcon from './MoreIcon'
-import Progress from './Progress'
+import PlanProgress from './PlanProgress'
 import RenderPlanStatus from './RenderPlanStatus'
 import WithdrawPlanModal from './WithdrawPlanModal'
 
@@ -48,11 +48,11 @@ const PlanItem = ({ account, plan }: { account: string; plan: PlanData }) => {
           <Link to={`${ROUTES.PLAN_DETAILS.path_prefix}/${plan.index}`}>
             <Box
               sx={{
-                color: 'neutral5',
                 cursor: 'pointer',
               }}
+              mr={16}
             >
-              <Login />
+              <Image src={DocIcon} height="100%" />
             </Box>
           </Link>
           {hasAction && <MoreIcon onCancel={() => setIsCancelModalOpen(true)} />}
@@ -68,7 +68,7 @@ const PlanItem = ({ account, plan }: { account: string; plan: PlanData }) => {
         <RenderPlanStatus plan={plan} />
       </Flex>
 
-      <Progress max={plan.ticks} value={plan.ticks - plan.remainingTicks} />
+      <PlanProgress plan={plan} />
 
       <Flex mt={3} justifyContent="space-between" alignItems="center">
         <Type.Body>Total Invested:</Type.Body>
@@ -92,27 +92,9 @@ const PlanItem = ({ account, plan }: { account: string; plan: PlanData }) => {
       </Flex>
 
       <Flex mt={3} justifyContent="space-between" alignItems="center">
-        <Type.Body>Next Auto-Invest Date:</Type.Body>
+        <Type.Body>Next Investment Date:</Type.Body>
         <Type.BodyBold>
           {plan.startedTime ? formatDate(plan.startedTime) : durationCalculated({ period: 0 })}
-        </Type.BodyBold>
-      </Flex>
-
-      <Flex mt={3} justifyContent="space-between" alignItems="center">
-        <Type.Body>Start from:</Type.Body>
-        <Type.BodyBold>
-          {plan.startedTime
-            ? formatDate(plan.startedTime)
-            : durationCalculated({ timestamp: plan.createdTime, period: 0 })}
-        </Type.BodyBold>
-      </Flex>
-
-      <Flex mt={3} justifyContent="space-between" alignItems="center">
-        <Type.Body>To:</Type.Body>
-        <Type.BodyBold>
-          {plan.startedTime
-            ? formatDate(plan.endedTime)
-            : durationCalculated({ timestamp: plan.createdTime, period: plan.frequency * plan.ticks })}
         </Type.BodyBold>
       </Flex>
 
