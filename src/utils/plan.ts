@@ -20,7 +20,7 @@ export const getPlanData = (planIndex: number, raw: any): PlanData => {
     endedTime: raw.statistics?.endedTime?.toNumber(),
     lastTriggerTime: raw.statistics?.lastTriggerTime?.toNumber(),
     tickAmount: Number(formatUnits(raw.plan?.tickAmount, stableCoin?.decimals)),
-    frequency: raw.plan?.frequencyD,
+    frequency: raw.plan?.frequency,
     ticks: raw.statistics?.ticks?.toNumber(),
     remainingTicks: raw.statistics?.remainingTicks?.toNumber(),
     tokenAmount: Number(formatUnits(raw.statistics?.swapAmount1, token?.decimals)),

@@ -94,9 +94,7 @@ const PlanItem = ({ account, plan }: { account: string; plan: PlanData }) => {
       <Flex mt={3} justifyContent="space-between" alignItems="center">
         <Type.Body>Next Auto-Invest Date:</Type.Body>
         <Type.BodyBold>
-          {plan.startedTime
-            ? formatDate(plan.startedTime)
-            : durationCalculated({ timestamp: plan.createdTime, period: 0 })}
+          {plan.startedTime ? formatDate(plan.startedTime) : durationCalculated({ period: 0 })}
         </Type.BodyBold>
       </Flex>
 
