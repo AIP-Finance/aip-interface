@@ -1,8 +1,8 @@
 import { Trans } from '@lingui/macro'
 
 import { Box, Flex, Type } from 'theme/base'
+import { LINKS } from 'utils/constants'
 
-import { LINKS } from '../../utils/constants'
 import CommunityCard from '../CommunityCard'
 
 const Footer = () => {

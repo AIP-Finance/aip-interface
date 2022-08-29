@@ -19,13 +19,21 @@ export function floorNumber(num: number, decimals: number) {
   return Math.floor(num * multipler) / multipler
 }
 
-export function durationCalculated({ timestamp, period }: { timestamp?: number; period: number }): string {
+export function durationCalculated({
+  timestamp,
+  period,
+  format = DATE_FORMAT,
+}: {
+  timestamp?: number
+  period: number
+  format?: string
+}): string {
   const now = timestamp
     ? dayjs.unix(timestamp).set('hour', 8).set('minute', 0)
     : dayjs().set('hour', 8).set('minute', 0)
 
   const endPeriod = now.add(1 + period, 'day')
-  return endPeriod.format(DATE_FORMAT)
+  return endPeriod.format(format)
 }
 
 export const pageToOffset = (page: number, limit: number) => (page - 1) * limit
