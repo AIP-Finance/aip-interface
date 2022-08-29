@@ -15,7 +15,7 @@ import ROUTES from 'utils/routes'
 import CancelPlanModal from './CancelPlanModal'
 import ExtendPlanModal from './ExtendPlanModal'
 import MoreIcon from './MoreIcon'
-import Progress from './Progress'
+import PlanProgress from './PlanProgress'
 import RenderPlanStatus from './RenderPlanStatus'
 import WithdrawPlanModal from './WithdrawPlanModal'
 
@@ -68,7 +68,7 @@ const PlanItem = ({ account, plan }: { account: string; plan: PlanData }) => {
         <RenderPlanStatus plan={plan} />
       </Flex>
 
-      <Progress plan={plan} max={plan.ticks} value={plan.ticks - plan.remainingTicks} />
+      <PlanProgress plan={plan} />
 
       <Flex mt={3} justifyContent="space-between" alignItems="center">
         <Type.Body>Total Invested:</Type.Body>

@@ -8,7 +8,9 @@ import { durationCalculated } from 'utils/parsers'
 const bg = 'neutral8'
 const format = 'YYYY-MM-DD'
 
-const Progress = ({ plan, max, value }: { plan: PlanData; max: number; value: number }) => {
+const PlanProgress = ({ plan }: { plan: PlanData }) => {
+  const max = plan.ticks
+  const value = plan.ticks - plan.remainingTicks
   return (
     <Box mt={24}>
       <Flex justifyContent="space-between" alignItems="center">
@@ -75,4 +77,4 @@ const Progress = ({ plan, max, value }: { plan: PlanData; max: number; value: nu
   )
 }
 
-export default Progress
+export default PlanProgress
