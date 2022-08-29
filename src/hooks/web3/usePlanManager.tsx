@@ -49,7 +49,7 @@ const usePlanManager = (token0: string, token1: string) => {
           planManagerContract.subscribe({
             token0,
             token1,
-            frequencyD: frequency,
+            frequency,
             tickAmount: parseEther(amount.toString()),
             periods: period,
           }),
