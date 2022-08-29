@@ -75,9 +75,38 @@
     "name": "claim",
     "outputs": [
       {
-        "internalType": "contract IAipPool",
-        "name": "pool",
+        "internalType": "uint256",
+        "name": "received1",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "claimReward",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "token",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "unclaimedAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "claimedAmount",
+        "type": "uint256"
       }
     ],
     "stateMutability": "nonpayable",
@@ -99,7 +128,7 @@
           },
           {
             "internalType": "uint24",
-            "name": "frequencyD",
+            "name": "frequency",
             "type": "uint24"
           }
         ],
@@ -133,13 +162,7 @@
       }
     ],
     "name": "extend",
-    "outputs": [
-      {
-        "internalType": "contract IAipPool",
-        "name": "pool",
-        "type": "address"
-      }
-    ],
+    "outputs": [],
     "stateMutability": "payable",
     "type": "function"
   },
@@ -185,7 +208,7 @@
           },
           {
             "internalType": "uint24",
-            "name": "frequencyD",
+            "name": "frequency",
             "type": "uint24"
           },
           {
@@ -337,7 +360,7 @@
           },
           {
             "internalType": "uint24",
-            "name": "frequencyD",
+            "name": "frequency",
             "type": "uint24"
           },
           {
@@ -383,9 +406,14 @@
     "name": "unsubscribe",
     "outputs": [
       {
-        "internalType": "contract IAipPool",
-        "name": "pool",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "received0",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "received1",
+        "type": "uint256"
       }
     ],
     "stateMutability": "nonpayable",
