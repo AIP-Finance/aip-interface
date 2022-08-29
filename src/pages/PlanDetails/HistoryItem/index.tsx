@@ -24,7 +24,7 @@ const HistoryItem = ({ history, plan }: { history: HistoryData; plan: PlanData }
         </Box>
         <Box width="25%" textAlign="left">
           <Type.Body color="neutral8">
-            {formatNumber(history.tokenAmount, 4, 4)} {plan.stableCoin?.symbol}
+            {formatNumber(history.fee, 4, 4)} {plan.stableCoin?.symbol}
           </Type.Body>
         </Box>
       </Flex>
