@@ -13,6 +13,7 @@ import { getPoolAddress } from 'utils/pool'
 interface TickInfo {
   amount0: BigNumber
   amount1: BigNumber
+  fee0: BigNumber
   time: BigNumber
 }
 
@@ -41,11 +42,16 @@ const usePlanHistory = (plan: PlanData) => {
                 .mul(parseUnits(plan.tickAmount.toString(), plan.stableCoin?.decimals))
                 .div(result.amount0)
               const tokenAmount = Number(formatUnits(tokenAmountBN, plan.token?.decimals))
+              const feeBN = result.fee0
+                .mul(parseUnits(plan.tickAmount.toString(), plan.stableCoin?.decimals))
+                .div(result.amount0)
+              const fee = Number(formatUnits(feeBN, plan.stableCoin?.decimals))
               const time = formatDate(result.time.toNumber())
               return {
                 time,
                 tokenAmount,
-                price: plan.tickAmount / tokenAmount,
+                price: (plan.tickAmount - fee) / tokenAmount,
+                fee,
               }
             })
           })
