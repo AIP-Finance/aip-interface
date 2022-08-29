@@ -80,7 +80,7 @@ const Footer = () => {
           <Box color="neutral5">
             <a href={LINKS.privacy} target="_blank" style={{ color: 'inherit' }} rel="noreferrer">
               <Type.Small>
-                <Trans>Privacy</Trans>
+                <Trans>Privacy Policy</Trans>
               </Type.Small>
             </a>
           </Box>

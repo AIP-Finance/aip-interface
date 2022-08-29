@@ -24,6 +24,7 @@ const CancelPlanModal = ({ isOpen, setIsOpen, plan }: { isOpen: boolean; setIsOp
     // TODO Handle success
 
     console.log('success', success)
+    window.location.reload()
     setSubmitting(false)
   }, [plan, unsubscribe, submitting])
 

@@ -33,7 +33,7 @@ export const LINKS = {
   whitepaper: 'https://docs.aip.finance',
   pinksale: '',
   pancakeswap: '',
-  privacy: 'https://docs.aip.finance',
+  privacy: 'https://docs.aip.finance/other-resource/privacy-policy',
 }
 
 export type StableCoin = 'USDT' | 'USDC' | 'DAI'

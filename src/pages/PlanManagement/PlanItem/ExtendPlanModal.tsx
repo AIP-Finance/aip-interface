@@ -72,6 +72,7 @@ const ExtendPlanModal = ({
       const success = await extend(plan.index, values.period)
       // TODO Handle success
       console.log('success', success)
+      window.location.reload()
       setSubmitStep(SubmitStep.INPUTTING)
       setSubmitting(false)
     },
