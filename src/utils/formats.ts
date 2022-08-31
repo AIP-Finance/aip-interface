@@ -18,4 +18,4 @@ export const addressShorten = (address: string, num?: number) => {
   return `${prefix}...${suffix}`
 }
 
-export const formatDate = (timestamp: number) => dayjs.unix(timestamp).format(DATE_FORMAT)
+export const formatDate = (timestamp: number, format: string = DATE_FORMAT) => dayjs.unix(timestamp).format(format)

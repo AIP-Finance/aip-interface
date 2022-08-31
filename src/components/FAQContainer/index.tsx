@@ -8,17 +8,17 @@ export const FAQ = [
     title: '1. What is Auto-Invest?',
     content: (
       <span>
-        Auto-Invest allows you to automate crypto investment and earn passive income. It is a dollar-cost averaging
-        (DCA) investment strategy. You can choose the cryptocurrencies you want to purchase on a regular basis.
+        Auto-Invest allows you to automate crypto investment and earn an income with token rewards. It is a dollar-cost
+        averaging (DCA) investment strategy. You can choose the cryptocurrencies you want to purchase on a regular
+        basis.
         <br />
-        You can choose to create a [Portfolio Auto-Invest Plan] to buy multiple cryptocurrencies in one portfolio, or
-        create an [Auto-Invest Plan] for a single cryptocurrency.
+        You can choose to create multiple Auto-Invest Plans for a single cryptocurrency.
       </span>
     ),
   },
   {
     title: '2. Where are my assets purchased with Auto-Invest?',
-    content: 'Your fiat money and investment assets are kept in smart contracts. No one can touch them but you.',
+    content: 'Your stable token and investment assets are kept in smart contracts. No one can touch them except you.',
   },
   {
     title: '3. How can AIP protect investors against price manipulation or flash-loan of AMM DEX?',
@@ -40,20 +40,32 @@ export const FAQ = [
     ),
   },
   {
-    title: '4. Can I cancel the auto-invest plan before the last day?',
+    title: '4. Can I cancel the auto-invest plan before the end day?',
     content: (
       <span>
-        Yes, you can cancel your auto-invest plan at any time you want and receive USDT back. You can also extend your
-        subscription or withdraw investment assets at any time too.
+        Yes, you can cancel your auto-invest plan at any time you want and receive your stable coin back. You can also
+        extend your subscription or withdraw investment assets at any time too.
       </span>
     ),
   },
   {
-    title: '5. How many Auto-Invest plans can I subscribe to?',
+    title: '5. What is token rewards?',
+    content: (
+      <span>
+        This is a mechanism for users who use IAP. Every time your investment is successful, you will receive tokens of
+        AIP. Read more{' '}
+        <a href={'https://docs.aip.finance/earn-with-aip/investing-rewards'} target={'_blank'} rel="noreferrer">
+          https://docs.aip.finance/earn-with-aip/investing-rewards
+        </a>
+      </span>
+    ),
+  },
+  {
+    title: '6. How many Auto-Invest plans can I subscribe to?',
     content: <span>There is no maximum limit to the number of Auto-Invest plans you can subscribe to.</span>,
   },
   {
-    title: '6.  What is the fee on AIP and how to calculator?',
+    title: '7.  What is the fee on AIP and how to calculator?',
     content: (
       <span>
         When you use AIP, You should consider the fees below:
