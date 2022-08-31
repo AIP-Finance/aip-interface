@@ -6,9 +6,12 @@ import Container from 'components/Container'
 import Logo from 'components/Logo'
 import { useAuthContext } from 'hooks/web3/useAuth'
 import { Button } from 'theme/Buttons'
+import ButtonWithIcon from 'theme/Buttons/ButtonWithIcon'
 import Dropdown, { DropdownItem } from 'theme/Dropdown'
+import TelegramIcon from 'theme/Icons/TelegramIcon'
 import { Flex, Type } from 'theme/base'
 import { Box } from 'theme/base'
+import { CHAIN_ID, LINKS } from 'utils/constants'
 import { addressShorten } from 'utils/formats'
 import ROUTES from 'utils/routes'
 
@@ -58,26 +61,33 @@ const Navbar = () => {
     >
       <Container>
         <Flex alignItems="center">
-          <Box sx={{ position: 'relative' }}>
-            <Link to="/">
+          <Flex sx={{ position: 'relative' }}>
+            <Box as={Link} display="block" to="/" mr={2}>
               <Logo />
-            </Link>
+            </Box>
             <Box
               sx={{
-                position: 'absolute',
+                position: 'relative',
                 top: '-5px',
-                left: '100px',
+                height: 'fit-content',
                 backgroundColor: 'primary1',
                 borderRadius: '4px',
-                width: '130px',
+                width: '72px',
                 textAlign: 'center',
               }}
             >
-              <Type.BodyBold color="neutral1">In Testnet</Type.BodyBold>
+              <Type.Small color="neutral1">In Testnet</Type.Small>
             </Box>
-          </Box>
-
+          </Flex>
+          {CHAIN_ID !== 1 && (
+            <a href="https://t.me/tungle_eth" target="_blank" rel="noreferrer">
+              <ButtonWithIcon icon={<TelegramIcon />} ml={3} size="sm" variant="outline">
+                Get TestUSDT
+              </ButtonWithIcon>
+            </a>
+          )}
           <Box flex="1"></Box>
+
           {account ? (
             <>
               <Link to={ROUTES.PLAN_MANAGEMENT.path}>

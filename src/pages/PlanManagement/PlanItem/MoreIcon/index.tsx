@@ -31,12 +31,13 @@ const MoreIcon = ({ onCancel }: { onCancel: any }) => {
         '& > div': {
           m: 0,
           textAlign: 'center',
-          mt: 'auto',
+          // mt: 'auto',
+          lineHeight: 1,
         },
         textAlign: 'center',
         verticalAlign: 'middle',
         position: 'relative',
-        '&:hover,&:focus,&:active': {
+        '&:hover:not([disabled]),&:focus:not([disabled]),&:active:not([disabled])': {
           bg: 'neutral3',
         },
       }}
