@@ -44,13 +44,12 @@ const PlanItem = ({ account, plan }: { account: string; plan: PlanData }) => {
         <Type.Large color={'neutral8'}>
           {plan.token?.name} ({plan.token?.symbol}) #{plan.index}
         </Type.Large>
-        <Flex>
+        <Flex sx={{ gap: 16 }}>
           <Link to={`${ROUTES.PLAN_DETAILS.path_prefix}/${plan.index}`}>
             <Box
               sx={{
                 cursor: 'pointer',
               }}
-              mr={16}
             >
               <Image src={DocIcon} height="100%" />
             </Box>
@@ -109,11 +108,20 @@ const PlanItem = ({ account, plan }: { account: string; plan: PlanData }) => {
             px={4}
             block
             mr={3}
+            disabled={planStatus === PlanStatus.ENDED}
             onClick={() => setIsExtendModalOpen(true)}
           >
             {'Extend'}
           </Button>
-          <Button type="submit" variant="outline" size="lg" px={4} block onClick={() => setIsWithdrawModalOpen(true)}>
+          <Button
+            type="submit"
+            variant="outline"
+            size="lg"
+            px={4}
+            block
+            onClick={() => setIsWithdrawModalOpen(true)}
+            disabled={plan.tokenAmount === plan.claimedTokenAmount}
+          >
             {'Withdraw'}
           </Button>
         </Flex>
