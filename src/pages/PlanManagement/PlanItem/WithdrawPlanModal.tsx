@@ -20,7 +20,9 @@ const WithdrawPlanModal = ({ isOpen, setIsOpen, plan }: { plan: PlanData } & any
     const success = await withdraw(plan.index)
     // TODO Handle success
     console.log('success', success)
-    window.location.reload()
+    if (success) {
+      window.location.reload()
+    }
     setSubmitting(false)
   }, [plan, withdraw, submitting])
 

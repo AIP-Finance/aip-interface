@@ -73,6 +73,10 @@ const CreatePlanForm = ({
   const [submitting, setSubmitting] = useState(false)
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
   const stableCoinAddress = useMemo(() => getStableCoinAddress(stableCoin) ?? '', [stableCoin])
+  const validBalance = useMemo(
+    () => balances[stableCoin] > 0 && balances[stableCoin] >= amountValue * periodValue,
+    [balances, stableCoin, amountValue, periodValue]
+  )
   const { approveToken, isTokenAllowanceEnough } = useERC20Approval(
     account,
     stableCoinAddress,
@@ -90,19 +94,21 @@ const CreatePlanForm = ({
         setSubmitStep(SubmitStep.SUBSCRIBING)
       } else {
         setSubmitStep(SubmitStep.APPROVING)
-        const success = await approveToken(totalAmount)
-        if (!success) {
+        const approveSuccess = await approveToken(totalAmount)
+        if (!approveSuccess) {
           setSubmitStep(SubmitStep.INPUTTING)
           setSubmitting(false)
           return
         }
         setSubmitStep(SubmitStep.SUBSCRIBING)
       }
-      const success = await subscribe(values)
+      const subscribeSuccess = await subscribe(values)
+      if (subscribeSuccess) {
+        setIsSuccessModalOpen(true)
+      }
       // TODO Handle success
-      console.log('success', success)
+      console.log('subscribeSuccess', subscribeSuccess)
       setSubmitStep(SubmitStep.INPUTTING)
-      setIsSuccessModalOpen(true)
       setSubmitting(false)
     },
     [approveToken, isTokenAllowanceEnough, subscribe, submitting]
@@ -245,7 +251,7 @@ const CreatePlanForm = ({
             </Flex>
             <Flex mt={3} justifyContent="space-between" width={'100%'} alignItems="center">
               <Type.Body>Your balance:</Type.Body>
-              <Type.BodyBold color="primary1">
+              <Type.BodyBold color={validBalance ? 'primary1' : 'warning2'}>
                 {formatNumber(balances[stableCoin], 2, 2)} {stableCoin}
               </Type.BodyBold>
             </Flex>
@@ -259,7 +265,7 @@ const CreatePlanForm = ({
               px={4}
               isLoading={submitting}
               block
-              disabled={submitting}
+              disabled={submitting || !validBalance}
             >
               {submitStep === SubmitStep.INPUTTING && 'Submit'}
               {submitStep === SubmitStep.APPROVING && `Approving ${stableCoin}...`}
