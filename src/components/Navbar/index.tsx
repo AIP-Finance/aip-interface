@@ -11,7 +11,7 @@ import Dropdown, { DropdownItem } from 'theme/Dropdown'
 import TelegramIcon from 'theme/Icons/TelegramIcon'
 import { Flex, Type } from 'theme/base'
 import { Box } from 'theme/base'
-import { CHAIN_ID, LINKS } from 'utils/constants'
+import { CHAIN_ID } from 'utils/constants'
 import { addressShorten } from 'utils/formats'
 import ROUTES from 'utils/routes'
 
