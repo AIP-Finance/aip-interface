@@ -1,6 +1,7 @@
 import { Trans } from '@lingui/macro'
 
-import { Box, Type } from 'theme/base'
+import { Box, Flex, Type } from 'theme/base'
+import { LINKS } from 'utils/constants'
 
 import CommunityCard from '../CommunityCard'
 
@@ -65,8 +66,26 @@ const Footer = () => {
         <Box my={24}>
           <CommunityCard />
         </Box>
-
-        <Type.Small color={'neutral5'}>
+        <Flex justifyContent="center" alignItems="center">
+          <Box color="neutral5">
+            <a href={LINKS.whitepaper} target="_blank" style={{ color: 'inherit' }} rel="noreferrer">
+              <Type.Small>
+                <Trans>WhitePaper</Trans>
+              </Type.Small>
+            </a>
+          </Box>
+          <Box mx={24} color="neutral4">
+            |
+          </Box>
+          <Box color="neutral5">
+            <a href={LINKS.privacy} target="_blank" style={{ color: 'inherit' }} rel="noreferrer">
+              <Type.Small>
+                <Trans>Privacy Policy</Trans>
+              </Type.Small>
+            </a>
+          </Box>
+        </Flex>
+        <Type.Small color={'neutral4'} mt={24}>
           <Trans>AIP - Auto Invest Protocol © 2022</Trans>
         </Type.Small>
       </Box>

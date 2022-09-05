@@ -11,10 +11,11 @@ export const LINKS = {
   twitter: 'https://twitter.com/0xAutoInvest',
   medium: 'https://medium.com/@autoinvest',
   github: 'https://github.com/AIP-Finance',
-  whitepaper: '',
+  whitepaper: 'https://docs.aip.finance',
   pinksale: '',
   pancakeswap: '',
-  privacy: '',
+  privacy: 'https://docs.aip.finance/other-resource/privacy-policy',
+  testnet: 'https://testnet.aip.finance',
 }
 
 export const PLAN_STATUS = {
