@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
 import Divider from 'components/Divider'
@@ -48,6 +48,10 @@ const ExtendPlanModal = ({
     plan.stableCoin?.addresses[CHAIN_ID],
     process.env.REACT_APP_PLAN_MANAGER
   )
+  const validBalance = useMemo(
+    () => balances[stableCoin] > 0 && balances[stableCoin] >= periodValue * plan.tickAmount,
+    [balances, stableCoin, plan.tickAmount, periodValue]
+  )
 
   const onSubmit = useCallback(
     async (values) => {
@@ -72,7 +76,9 @@ const ExtendPlanModal = ({
       const success = await extend(plan.index, values.period)
       // TODO Handle success
       console.log('success', success)
-      window.location.reload()
+      if (success) {
+        window.location.reload()
+      }
       setSubmitStep(SubmitStep.INPUTTING)
       setSubmitting(false)
     },
@@ -127,7 +133,7 @@ const ExtendPlanModal = ({
 
           <Flex mt={3} justifyContent="space-between" width={'100%'} alignItems="center">
             <Type.Body>Your balance:</Type.Body>
-            <Type.BodyBold color="primary1">
+            <Type.BodyBold color={validBalance ? 'primary1' : 'warning2'}>
               {formatNumber(balances[stableCoin], 2, 2)} {stableCoin}
             </Type.BodyBold>
           </Flex>
@@ -141,7 +147,7 @@ const ExtendPlanModal = ({
             block
             mr={3}
             isLoading={submitting}
-            disabled={submitting}
+            disabled={submitting || !validBalance}
           >
             {submitStep === SubmitStep.INPUTTING && 'Submit'}
             {submitStep === SubmitStep.APPROVING && `Approving ${stableCoin}...`}

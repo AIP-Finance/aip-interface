@@ -19,12 +19,12 @@ const CancelPlanModal = ({ isOpen, setIsOpen, plan }: { isOpen: boolean; setIsOp
   const onUnsubscribe = useCallback(async () => {
     if (submitting) return
     setSubmitting(true)
-    console.log('plan.index', plan.index)
     const success = await unsubscribe(plan.index)
     // TODO Handle success
-
+    if (success) {
+      window.location.reload()
+    }
     console.log('success', success)
-    window.location.reload()
     setSubmitting(false)
   }, [plan, unsubscribe, submitting])
 
