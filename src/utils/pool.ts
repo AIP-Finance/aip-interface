@@ -4,7 +4,7 @@ import { keccak256 } from '@ethersproject/keccak256'
 
 export const getPoolAddress = (token0: string, token1: string, frequency: number) => {
   const constructorArgumentsEncoded = defaultAbiCoder.encode(
-    ['address', 'address', 'uint24'],
+    ['address', 'address', 'uint8'],
     [token0, token1, frequency]
   )
   const create2Inputs = [
