@@ -16,25 +16,6 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "received1",
-        "type": "uint256"
-      }
-    ],
-    "name": "Claim",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "planIndex",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
         "name": "unclaimedAmount",
         "type": "uint256"
       },
@@ -191,27 +172,27 @@
     "inputs": [
       {
         "indexed": false,
-        "internalType": "uint24",
+        "internalType": "uint16",
         "name": "oldSwapFee",
-        "type": "uint24"
+        "type": "uint16"
       },
       {
         "indexed": false,
-        "internalType": "uint24",
+        "internalType": "uint16",
         "name": "oldSwapWETH9Fee",
-        "type": "uint24"
+        "type": "uint16"
       },
       {
         "indexed": false,
-        "internalType": "uint24",
+        "internalType": "uint16",
         "name": "newSwapFee",
-        "type": "uint24"
+        "type": "uint16"
       },
       {
         "indexed": false,
-        "internalType": "uint24",
+        "internalType": "uint16",
         "name": "newSwapWETH9Fee",
-        "type": "uint24"
+        "type": "uint16"
       }
     ],
     "name": "SwapFeeChanged",
@@ -280,6 +261,25 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "planIndex",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "received1",
+        "type": "uint256"
+      }
+    ],
+    "name": "Withdraw",
+    "type": "event"
+  },
+  {
     "inputs": [],
     "name": "WETH9",
     "outputs": [
@@ -307,35 +307,6 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "requester",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "planIndex",
-        "type": "uint256"
-      }
-    ],
-    "name": "claim",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "received1",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "requester",
-        "type": "address"
-      },
       {
         "internalType": "uint256",
         "name": "planIndex",
@@ -403,11 +374,6 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "requester",
-        "type": "address"
-      },
-      {
         "internalType": "uint256",
         "name": "planIndex",
         "type": "uint256"
@@ -446,9 +412,9 @@
     "name": "frequency",
     "outputs": [
       {
-        "internalType": "uint24",
+        "internalType": "uint8",
         "name": "",
-        "type": "uint24"
+        "type": "uint8"
       }
     ],
     "stateMutability": "view",
@@ -471,7 +437,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "claimedAmount1",
+        "name": "withdrawnAmount1",
         "type": "uint256"
       },
       {
@@ -523,46 +489,6 @@
   },
   {
     "inputs": [],
-    "name": "lastRewardCycle",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "index",
-        "type": "uint256"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "tickIndexStart",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "tickIndexEnd",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "rewardAmount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "paymentAmount0",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct IAipPool.RewardCycleInfo",
-        "name": "rewardCycle",
-        "type": "tuple"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "lastTrigger",
     "outputs": [
       {
@@ -598,6 +524,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "planManager",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -624,7 +563,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "claimedAmount1",
+        "name": "withdrawnAmount1",
         "type": "uint256"
       },
       {
@@ -678,40 +617,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "rewardCycles",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "tickIndexStart",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "tickIndexEnd",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "rewardAmount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "paymentAmount0",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "rewardOperator",
     "outputs": [
@@ -740,14 +645,14 @@
   {
     "inputs": [
       {
-        "internalType": "uint24",
+        "internalType": "uint16",
         "name": "_swapFee",
-        "type": "uint24"
+        "type": "uint16"
       },
       {
-        "internalType": "uint24",
+        "internalType": "uint16",
         "name": "_swapWETH9Fee",
-        "type": "uint24"
+        "type": "uint16"
       }
     ],
     "name": "setSwapFee",
@@ -805,9 +710,9 @@
     "name": "swapFee",
     "outputs": [
       {
-        "internalType": "uint24",
+        "internalType": "uint16",
         "name": "",
-        "type": "uint24"
+        "type": "uint16"
       }
     ],
     "stateMutability": "view",
@@ -831,9 +736,9 @@
     "name": "swapWETH9Fee",
     "outputs": [
       {
-        "internalType": "uint24",
+        "internalType": "uint16",
         "name": "",
-        "type": "uint24"
+        "type": "uint16"
       }
     ],
     "stateMutability": "view",
@@ -867,6 +772,11 @@
       {
         "internalType": "uint256",
         "name": "time",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "reward",
         "type": "uint256"
       }
     ],
@@ -933,14 +843,14 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "requester",
-        "type": "address"
-      },
-      {
         "internalType": "uint256",
         "name": "planIndex",
         "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
       }
     ],
     "name": "unsubscribe",
@@ -950,6 +860,25 @@
         "name": "received0",
         "type": "uint256"
       },
+      {
+        "internalType": "uint256",
+        "name": "received1",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "planIndex",
+        "type": "uint256"
+      }
+    ],
+    "name": "withdraw",
+    "outputs": [
       {
         "internalType": "uint256",
         "name": "received1",

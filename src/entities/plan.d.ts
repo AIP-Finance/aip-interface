@@ -13,6 +13,6 @@ export interface PlanData {
   frequency: number
   ticks: number
   tokenAmount: number
-  claimedTokenAmount: number
+  withdrawnTokenAmount: number
   remainingTicks: number
 }

@@ -42,11 +42,22 @@ const usePlanManager = (token0: string, token1: string) => {
   )
 
   const subscribe = useCallback(
-    ({ amount, frequency, period }: { amount: number; frequency: number; period: number }) => {
+    ({
+      investor,
+      amount,
+      frequency,
+      period,
+    }: {
+      investor: string
+      amount: number
+      frequency: number
+      period: number
+    }) => {
       if (!planManagerContract) return
       return handleResult(
         () =>
-          planManagerContract.subscribe({
+          planManagerContract.mint({
+            investor,
             token0,
             token1,
             frequency,
@@ -61,7 +72,7 @@ const usePlanManager = (token0: string, token1: string) => {
   const unsubscribe = useCallback(
     (planIndex: number) => {
       if (!planManagerContract) return
-      return handleResult(() => planManagerContract.unsubscribe(planIndex), 'Cancel plan successful')
+      return handleResult(() => planManagerContract.burn(planIndex), 'Cancel plan successful')
     },
     [handleResult, planManagerContract]
   )
@@ -75,7 +86,7 @@ const usePlanManager = (token0: string, token1: string) => {
   const withdraw = useCallback(
     (planIndex: number) => {
       if (!planManagerContract) return
-      return handleResult(() => planManagerContract.claim(planIndex), 'Withdraw token successful')
+      return handleResult(() => planManagerContract.withdraw(planIndex), 'Withdraw token successful')
     },
     [handleResult, planManagerContract]
   )

@@ -45,7 +45,7 @@ const WithdrawPlanModal = ({ isOpen, setIsOpen, plan }: { plan: PlanData } & any
         <Flex justifyContent="space-between" alignItems="center" mb={2}>
           <Type.Body color={'neutral8'}>Remaining Withdrawal:</Type.Body>
           <Type.BodyBold color={'primary1'}>
-            {formatNumber(plan.tokenAmount - plan.claimedTokenAmount, 4, 4)} {plan.token?.symbol}
+            {formatNumber(plan.tokenAmount - plan.withdrawnTokenAmount, 4, 4)} {plan.token?.symbol}
           </Type.BodyBold>
         </Flex>
 
