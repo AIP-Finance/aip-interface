@@ -563,6 +563,11 @@
       },
       {
         "internalType": "uint256",
+        "name": "withdrawnIndex",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
         "name": "withdrawnAmount1",
         "type": "uint256"
       },

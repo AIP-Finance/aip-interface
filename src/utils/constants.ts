@@ -5,7 +5,7 @@ export const DEFAULT_LOCALE = 'en'
 export const CONNECTOR_STORAGE_KEY = 'connector'
 
 export enum ChainId {
-  TESTNET = 3,
+  TESTNET = 4,
   MAINNET = 1,
 }
 
