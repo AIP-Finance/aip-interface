@@ -25,7 +25,7 @@ const PlanItem = ({ account, plan }: { account: string; plan: PlanData }) => {
   const [isWithdrawModalOpen, setIsWithdrawModalOpen] = useState(false)
   const planStatus = getPlanStatus(plan)
   const hasAction = useMemo(
-    () => !(planStatus == PlanStatus.ENDED && plan.tokenAmount - plan.claimedTokenAmount == 0),
+    () => !(planStatus == PlanStatus.ENDED && plan.tokenAmount - plan.withdrawnTokenAmount == 0),
     [plan, planStatus]
   )
 
@@ -86,7 +86,7 @@ const PlanItem = ({ account, plan }: { account: string; plan: PlanData }) => {
       <Flex mt={3} justifyContent="space-between" alignItems="center">
         <Type.Body>Remaining Withdrawal:</Type.Body>
         <Type.BodyBold>
-          {formatNumber(plan.tokenAmount - plan.claimedTokenAmount, 4, 4)} {plan.token?.symbol}
+          {formatNumber(plan.tokenAmount - plan.withdrawnTokenAmount, 4, 4)} {plan.token?.symbol}
         </Type.BodyBold>
       </Flex>
 
@@ -120,7 +120,7 @@ const PlanItem = ({ account, plan }: { account: string; plan: PlanData }) => {
             px={4}
             block
             onClick={() => setIsWithdrawModalOpen(true)}
-            disabled={plan.tokenAmount === plan.claimedTokenAmount}
+            disabled={plan.tokenAmount === plan.withdrawnTokenAmount}
           >
             {'Withdraw'}
           </Button>

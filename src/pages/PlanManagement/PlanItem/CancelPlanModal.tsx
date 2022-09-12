@@ -42,7 +42,7 @@ const CancelPlanModal = ({ isOpen, setIsOpen, plan }: { isOpen: boolean; setIsOp
         <Flex mt={3} justifyContent="space-between" alignItems="center">
           <Type.Body>Total {plan.token?.symbol}:</Type.Body>
           <Type.BodyBold>
-            {formatNumber(plan.tokenAmount - plan.claimedTokenAmount, 4, 4)} {plan.token?.symbol}
+            {formatNumber(plan.tokenAmount - plan.withdrawnTokenAmount, 4, 4)} {plan.token?.symbol}
           </Type.BodyBold>
         </Flex>
         <Flex mt={3} justifyContent="space-between" alignItems="center">

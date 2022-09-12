@@ -24,6 +24,6 @@ export const getPlanData = (planIndex: number, raw: any): PlanData => {
     ticks: raw.statistics?.ticks?.toNumber(),
     remainingTicks: raw.statistics?.remainingTicks?.toNumber(),
     tokenAmount: Number(formatUnits(raw.statistics?.swapAmount1, token?.decimals)),
-    claimedTokenAmount: Number(formatUnits(raw.statistics?.claimedAmount1, token?.decimals)),
+    withdrawnTokenAmount: Number(formatUnits(raw.statistics?.withdrawnAmount1, token?.decimals)),
   }
 }

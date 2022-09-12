@@ -102,7 +102,7 @@ const CreatePlanForm = ({
         }
         setSubmitStep(SubmitStep.SUBSCRIBING)
       }
-      const subscribeSuccess = await subscribe(values)
+      const subscribeSuccess = await subscribe({ ...values, investor: account })
       if (subscribeSuccess) {
         setIsSuccessModalOpen(true)
       }
@@ -111,7 +111,7 @@ const CreatePlanForm = ({
       setSubmitStep(SubmitStep.INPUTTING)
       setSubmitting(false)
     },
-    [approveToken, isTokenAllowanceEnough, subscribe, submitting]
+    [submitting, isTokenAllowanceEnough, subscribe, account, approveToken]
   )
 
   const handleRadioChange = (value: string | number | undefined): void => {
