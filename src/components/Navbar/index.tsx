@@ -6,14 +6,14 @@ import Container from 'components/Container'
 import Logo from 'components/Logo'
 import { useAuthContext } from 'hooks/web3/useAuth'
 import { Button } from 'theme/Buttons'
-import ButtonWithIcon from 'theme/Buttons/ButtonWithIcon'
 import Dropdown, { DropdownItem } from 'theme/Dropdown'
-import TelegramIcon from 'theme/Icons/TelegramIcon'
 import { Flex, Type } from 'theme/base'
 import { Box } from 'theme/base'
 import { CHAIN_ID } from 'utils/constants'
 import { addressShorten } from 'utils/formats'
 import ROUTES from 'utils/routes'
+
+import MintUSDT from './MintUSDT'
 
 const UserFrame = ({ address }: { address: string }) => (
   <Flex alignItems="center">
@@ -79,17 +79,12 @@ const Navbar = () => {
               <Type.Small color="neutral1">In Testnet</Type.Small>
             </Box>
           </Flex>
-          {CHAIN_ID !== 1 && (
-            <a href="https://t.me/tungle_eth" target="_blank" rel="noreferrer">
-              <ButtonWithIcon icon={<TelegramIcon />} ml={3} size="sm" variant="outline">
-                Get TestUSDT
-              </ButtonWithIcon>
-            </a>
-          )}
+
           <Box flex="1"></Box>
 
           {account ? (
             <>
+              {CHAIN_ID !== 1 && <MintUSDT account={account} />}
               <Link to={ROUTES.PLAN_MANAGEMENT.path}>
                 <Button variant="ghost">
                   <Type.Body>My Plans</Type.Body>
