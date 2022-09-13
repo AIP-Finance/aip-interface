@@ -43,8 +43,8 @@ export const FAQ = [
     title: '4. Can I cancel the auto-invest plan before the end day?',
     content: (
       <span>
-        Yes, you can cancel your auto-invest plan at any time you want and receive your stable coin back. You can also
-        extend your subscription or withdraw investment assets at any time too.
+        Yes, you can cancel your auto-invest plan at any time you want and receive your assets back. You can also extend
+        your subscription or withdraw investment assets at any time too.
       </span>
     ),
   },
@@ -53,7 +53,7 @@ export const FAQ = [
     content: (
       <span>
         This is a mechanism for users who use IAP. Every time your investment is successful, you will receive tokens of
-        AIP. Read more{' '}
+        AIP. Only available from AIP official version. Read more{' '}
         <a href={'https://docs.aip.finance/earn-with-aip/investing-rewards'} target={'_blank'} rel="noreferrer">
           https://docs.aip.finance/earn-with-aip/investing-rewards
         </a>
