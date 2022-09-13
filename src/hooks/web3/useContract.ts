@@ -6,6 +6,7 @@ import ERC20_ABI from 'abis/ERC20.json'
 import PlanManager_ABI from 'abis/PlanManager.json'
 import Pool_ABI from 'abis/Pool.json'
 import SwapManager_ABI from 'abis/SwapManager.json'
+import USDT_ABI from 'abis/USDT.json'
 import useActiveWeb3React from 'hooks/web3/useActiveWeb3React'
 import { getContract, getProviderOrSigner } from 'utils/contracts'
 
@@ -31,6 +32,10 @@ function useContract<T extends Contract = Contract>(
 
 export function useERC20Contract(erc20Address?: string, withSignerIfPossible?: boolean) {
   return useContract(erc20Address, ERC20_ABI, withSignerIfPossible)
+}
+
+export function useUSDTContract(address?: string, withSignerIfPossible?: boolean) {
+  return useContract(address, USDT_ABI, withSignerIfPossible)
 }
 
 export function usePlanManagerContract(withSignerIfPossible?: boolean) {
