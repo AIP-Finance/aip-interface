@@ -18,14 +18,18 @@ const usePrices = () => {
         params: [getStableCoinAddress(stableCoin), token.addresses[CHAIN_ID] ?? '', 3000],
         // TODO get fee from pool
       }))
-      const data: number[] = await multicallv2(SwapManager_ABI, calls).then((results) => {
-        return results.map((result: any, index: number) => {
-          return 1 / Number(formatUnits(result.price, TOKENS[index].decimals))
+      try {
+        const data: number[] = await multicallv2(SwapManager_ABI, calls).then((results) => {
+          return results.map((result: any, index: number) => {
+            return 1 / Number(formatUnits(result.price, TOKENS[index].decimals))
+          })
         })
-      })
-      const priceData: { [key: string]: number } = {}
-      data.forEach((price, index) => (priceData[TOKENS[index].symbol] = price))
-      setPrices(priceData)
+        const priceData: { [key: string]: number } = {}
+        data.forEach((price, index) => (priceData[TOKENS[index].symbol] = price))
+        setPrices(priceData)
+      } catch (err) {
+        console.log(err)
+      }
     }
     load()
   }, [stableCoin])
