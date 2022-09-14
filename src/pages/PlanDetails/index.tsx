@@ -10,6 +10,7 @@ import { getPlanData } from 'utils/plan'
 import ROUTES from 'utils/routes'
 
 import History from './History'
+import NFTDetails from './NFTDetails'
 
 const PlanDetails = () => {
   const { id } = useParams<{ id: string }>()
@@ -34,8 +35,10 @@ const PlanDetails = () => {
           { title: `#${id}` },
         ]}
       />
-
-      <Type.H5 mb={32}>History</Type.H5>
+      <NFTDetails id={id} />
+      <Type.H5 mb={32} textAlign="center">
+        Purchase History
+      </Type.H5>
 
       <Box>{!!plan && <History plan={plan} />}</Box>
     </DefaultLayout>
