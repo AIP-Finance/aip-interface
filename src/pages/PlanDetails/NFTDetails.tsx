@@ -27,7 +27,6 @@ const NFTDetails = ({ id }: { id: string }) => {
         setMetadata(data)
       } catch (err) {
         setMetadata(false)
-        console.log(err)
       }
     }
     load()

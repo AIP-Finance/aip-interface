@@ -61,7 +61,7 @@ const usePlanManager = (token0: string, token1: string) => {
             token1,
             frequency,
             investor,
-            owner: investor,
+            // owner: investor,
             tickAmount: parseEther(amount.toString()),
             periods: period,
           }),
