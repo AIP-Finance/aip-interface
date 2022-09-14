@@ -57,10 +57,11 @@ const usePlanManager = (token0: string, token1: string) => {
       return handleResult(
         () =>
           planManagerContract.mint({
-            investor,
             token0,
             token1,
             frequency,
+            investor,
+            owner: investor,
             tickAmount: parseEther(amount.toString()),
             periods: period,
           }),
