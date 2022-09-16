@@ -85,10 +85,19 @@ const Pagination = ({
         mr={1}
         borderRadius="md"
         size={28}
-        sx={{ px: 1, py: '4px', borderRadius: '4px' }}
+        sx={{
+          px: 1,
+          py: '4px',
+          borderRadius: '4px',
+          border: 'small',
+          borderColor: 'neutral4',
+          bg: 'neutral1',
+          color: 'neutral4',
+        }}
         disabled={currentPage === 1}
         onClick={onPrevious}
       />
+
       {paginationRange.map((pageNumber, i) => {
         if (pageNumber === DOTS) {
           return <DottedButton key={`${DOTS}${i + 1}`} icon={<FiMoreHorizontal size={14} />} />
@@ -98,25 +107,35 @@ const Pagination = ({
             key={pageNumber}
             onClick={() => handleOnClick(Number(pageNumber))}
             size="xs"
-            mr={1}
+            mr={2}
             px={1}
             sx={{
-              border: 'none',
-              bg: 'neutral6',
+              border: 'small',
+              borderColor: pageNumber === currentPage ? 'primary1' : 'neutral4',
+              bg: 'neutral1',
               borderRadius: '4px',
               minWidth: 28,
-              color: pageNumber === currentPage ? 'primary2' : 'neutral1',
+              color: pageNumber === currentPage ? 'primary1' : 'neutral5',
             }}
           >
             {pageNumber}
           </Button>
         )
       })}
+
       <IconButton
         icon={<FiChevronRight />}
         borderRadius="md"
         size={28}
-        sx={{ px: 1, py: '4px', borderRadius: '4px' }}
+        sx={{
+          px: 1,
+          py: '4px',
+          borderRadius: '4px',
+          border: 'small',
+          borderColor: 'neutral4',
+          bg: 'neutral1',
+          color: 'neutral4',
+        }}
         disabled={!lastPage || currentPage === lastPage}
         onClick={onNext}
       />

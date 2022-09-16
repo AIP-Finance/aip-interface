@@ -8,9 +8,10 @@ import { usePlanManagerContract } from 'hooks/web3/useContract'
 import { multicallv2 } from 'utils/multicall'
 import { getPlanData } from 'utils/plan'
 
-const LIMIT = 6
+const LIMIT = 2
 
 const usePlans = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [planIndexes, setPlanIndexes] = useState<number[]>()
   const [currentPage, setCurrentPage] = useState<number>(1)
   const loadedPageRef = useRef<number[]>([])
@@ -26,6 +27,7 @@ const usePlans = () => {
   const loadPlansInfo = useCallback(
     async (indexes) => {
       if (!planManagerContract) return
+      setIsLoading(true)
       const calls = indexes.map((planIndex: BigNumber) => ({
         address: planManagerContract.address,
         name: 'getPlan',
@@ -41,6 +43,7 @@ const usePlans = () => {
           return prev
         }, {} as { [key: number]: PlanData }),
       }))
+      setIsLoading(false)
     },
     [planManagerContract]
   )
@@ -80,7 +83,7 @@ const usePlans = () => {
     }
     init()
   }, [account, loadPlansInfo, planManagerContract])
-  return { data, currentPage, total, loadPage }
+  return { data, currentPage, total, loadPage, isLoading }
 }
 
 export default usePlans

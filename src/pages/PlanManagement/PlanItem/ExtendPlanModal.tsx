@@ -11,11 +11,8 @@ import { Button } from 'theme/Buttons'
 import NumberInputField from 'theme/InputField/NumberInputField'
 import Modal from 'theme/Modal'
 import { Box, Flex, Type } from 'theme/base'
-import { CHAIN_ID, SubmitStep } from 'utils/constants'
+import { CHAIN_ID, INPUT_CONFIG, SubmitStep } from 'utils/constants'
 import { formatNumber } from 'utils/formats'
-
-const MIN_ENTER = 1
-const MAX_PERIODS = 10000
 
 const ExtendPlanModal = ({
   account,
@@ -98,16 +95,21 @@ const ExtendPlanModal = ({
         <Box>
           <Box>
             <NumberInputField
-              rules={{ required: true, min: MIN_ENTER, max: MAX_PERIODS }}
+              rules={{
+                required: { value: true, message: 'Enter your period of addition' },
+                min: { value: INPUT_CONFIG.MIN_PERIODS, message: `Minimum periods is ${INPUT_CONFIG.MIN_PERIODS}` },
+                max: { value: INPUT_CONFIG.MAX_PERIODS, message: `Maximum periods is ${INPUT_CONFIG.MAX_PERIODS}` },
+              }}
+              isAllowed={(values) => values.value.length <= INPUT_CONFIG.MAX_INPUT_LENGTH}
               label={'Add Period'}
               required
+              isInteger
               control={control}
               name="period"
               hasError={Boolean(errors?.period)}
               block
             />
-            {Boolean(errors?.period) && <Type.Small color="warning2">Enter your total period</Type.Small>}
-            {errors?.periods?.type?.toString() === 'max' && <Type.Small color="warning2">max {MAX_PERIODS}</Type.Small>}
+            {!!errors?.period && <Type.Small color="warning2">{errors?.period.message}</Type.Small>}
           </Box>
 
           <Flex mt={3} justifyContent="space-between" width={'100%'} alignItems="center">

@@ -21,6 +21,14 @@ export enum PlanStatus {
   ENDED,
 }
 
+export enum INPUT_CONFIG {
+  MIN_AMOUNT = 10,
+  MAX_AMOUNT = 10000,
+  MIN_PERIODS = 2,
+  MAX_PERIODS = 100,
+  MAX_INPUT_LENGTH = 7,
+}
+
 export const DEFAULT_CHAIN_ID = ChainId.MAINNET
 export const CHAIN_ID = +(process.env.REACT_APP_CHAIN_ID ?? DEFAULT_CHAIN_ID)
 
