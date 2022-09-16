@@ -8,7 +8,7 @@ import { usePlanManagerContract } from 'hooks/web3/useContract'
 import { multicallv2 } from 'utils/multicall'
 import { getPlanData } from 'utils/plan'
 
-const LIMIT = 2
+const LIMIT = 6
 
 const usePlans = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
