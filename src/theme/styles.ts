@@ -236,6 +236,10 @@ const ThemedGlobalStyle = createGlobalStyle`
   border-bottom-color: #000!important;
 }
 
+.walletconnect-modal__mobile__toggle a {
+  color: #000000;
+}
+
 `
 
 export default ThemedGlobalStyle
