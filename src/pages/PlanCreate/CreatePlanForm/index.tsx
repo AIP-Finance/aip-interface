@@ -11,17 +11,12 @@ import { Button } from 'theme/Buttons'
 import NumberInputField from 'theme/InputField/NumberInputField'
 import RadioGroup, { RadioOptionType } from 'theme/RadioGroup'
 import { Box, Flex, Type } from 'theme/base'
-import { SubmitStep } from 'utils/constants'
+import { INPUT_CONFIG, SubmitStep } from 'utils/constants'
 import { formatNumber } from 'utils/formats'
 import { durationCalculated } from 'utils/parsers'
 import { getStableCoinAddress } from 'utils/tokens'
 
 import CreateSuccessModal from './CreateSuccessModal'
-
-const MIN_AMOUNT = 10
-const MAX_AMOUNT = 1000
-const MIN_PERIODS = 2
-const MAX_PERIODS = 100
 
 const options: RadioOptionType[] = [
   {
@@ -164,22 +159,16 @@ const CreatePlanForm = ({
               <NumberInputField
                 rules={{
                   required: { value: true, message: 'Amount is required' },
-                  min: { value: MIN_AMOUNT, message: `Minimum amount is ${MIN_AMOUNT}` },
-                  max: { value: MAX_AMOUNT, message: `Maximum amount is ${MAX_AMOUNT}` },
+                  min: { value: INPUT_CONFIG.MIN_AMOUNT, message: `Minimum amount is ${INPUT_CONFIG.MIN_AMOUNT}` },
+                  max: { value: INPUT_CONFIG.MAX_AMOUNT, message: `Maximum amount is ${INPUT_CONFIG.MAX_AMOUNT}` },
                 }}
-                label={
-                  // <Flex justifyContent="space-between" width={'100%'} alignItems="center" mb="8px">
-                  //   <Type.Body color={'neutral8'}>Amount Per Period</Type.Body>
-                  //   <Type.Small color={'primary1'}>Max</Type.Small>
-                  // </Flex>
-                  <Type.Body color={'neutral8'} mb={2}>
-                    Amount Per Period
-                  </Type.Body>
-                }
+                isAllowed={(values) => values.value.length <= INPUT_CONFIG.MAX_INPUT_LENGTH}
+                label={'Amount Per Period'}
                 required
+                isInteger
                 control={control}
                 name="amount"
-                hasError={!!errors?.amount}
+                hasError={Boolean(errors?.amount)}
                 block
                 autoFocus
                 suffix={<Type.Small color="neutral8">{stableCoin}</Type.Small>}
@@ -187,7 +176,7 @@ const CreatePlanForm = ({
               {!!errors?.amount && <Type.Small color="warning2">{errors?.amount.message}</Type.Small>}
             </Box>
             <Box mt="24px">
-              <Type.Body color={'neutral8'} mb="8px">
+              <Type.Body color={'neutral8'} mb={2}>
                 Frequency Invest
               </Type.Body>
               <RadioGroup
@@ -203,12 +192,14 @@ const CreatePlanForm = ({
             <Box mt="24px">
               <NumberInputField
                 rules={{
-                  required: true,
-                  min: { value: MIN_PERIODS, message: `Minimum periods is ${MIN_PERIODS}` },
-                  max: { value: MAX_PERIODS, message: `Maximum periods is ${MAX_PERIODS}` },
+                  required: { value: true, message: 'Period is required' },
+                  min: { value: INPUT_CONFIG.MIN_PERIODS, message: `Minimum periods is ${INPUT_CONFIG.MIN_PERIODS}` },
+                  max: { value: INPUT_CONFIG.MAX_PERIODS, message: `Maximum periods is ${INPUT_CONFIG.MAX_PERIODS}` },
                 }}
+                isAllowed={(values) => values.value.length <= INPUT_CONFIG.MAX_INPUT_LENGTH}
                 label={'Total Periods'}
                 required
+                isInteger
                 control={control}
                 name="period"
                 hasError={Boolean(errors?.period)}

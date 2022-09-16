@@ -3,8 +3,8 @@ import React from 'react'
 import Loading from 'theme/Loading'
 import { Box, Type } from 'theme/base'
 
-const DataLoading = ({ data }: { data: any[] | undefined }) => {
-  if (!data)
+const DataLoading = ({ data, isLoading = false }: { data: any[] | undefined; isLoading?: boolean }) => {
+  if (!data || isLoading)
     return (
       <Box textAlign="center">
         <Loading />
