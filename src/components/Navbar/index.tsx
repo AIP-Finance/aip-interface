@@ -88,20 +88,22 @@ const Navbar = () => {
             <Box as={Link} display="block" to="/" mr={2}>
               <Logo />
             </Box>
-            <Box
-              sx={{
-                position: 'relative',
-                right: 0,
-                top: ['5px', '-5px'],
-                height: 'fit-content',
-                backgroundColor: 'primary1',
-                borderRadius: '4px',
-                width: '64px',
-                textAlign: 'center',
-              }}
-            >
-              <Type.Small color="neutral1">Testnet</Type.Small>
-            </Box>
+            {CHAIN_ID !== 1 && (
+              <Box
+                sx={{
+                  position: 'relative',
+                  right: 0,
+                  top: ['5px', '-5px'],
+                  height: 'fit-content',
+                  backgroundColor: 'primary1',
+                  borderRadius: '4px',
+                  width: '64px',
+                  textAlign: 'center',
+                }}
+              >
+                <Type.Small color="neutral1">Testnet</Type.Small>
+              </Box>
+            )}
           </Box>
 
           <Box flex="1"></Box>
