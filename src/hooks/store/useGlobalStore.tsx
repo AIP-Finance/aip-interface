@@ -14,6 +14,8 @@ import React, {
 } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
+import { StableCoin } from 'utils/constants'
+
 import {
   GlobalContextValue,
   GlobalState,
@@ -37,7 +39,7 @@ export const GLOBAL_INITIAL_STATE: GlobalState = {
     DAI: undefined,
     USDC: undefined,
   },
-  stableCoin: 'USDT',
+  stableCoin: process.env.REACT_APP_STABLE_COIN as StableCoin,
 }
 
 export const GlobalStoreContext = React.createContext({} as any)
