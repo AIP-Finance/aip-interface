@@ -31,23 +31,23 @@ export const STABLE_COINS: TokenData[] = [
 ]
 export const TOKENS: TokenData[] = [
   {
-    name: 'TestInvest1',
-    symbol: 'TI1',
+    name: 'Wrapped ETH',
+    symbol: 'WETH',
     decimals: 18,
     addresses: {
       [ChainId.TESTNET]: '0x5bfC833BC041DCb65D8294C2DD9C817D71aEa9b8',
-      [ChainId.MAINNET]: '',
+      [ChainId.MAINNET]: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
     },
   },
-  {
-    name: 'TestInvest2',
-    symbol: 'TI2',
-    decimals: 5,
-    addresses: {
-      [ChainId.TESTNET]: '0xef68cEE62bc85650Ee96dbBaC7653B1BA103ADc6',
-      [ChainId.MAINNET]: '',
-    },
-  },
+  // {
+  //   name: 'TestInvest2',
+  //   symbol: 'TI2',
+  //   decimals: 5,
+  //   addresses: {
+  //     [ChainId.TESTNET]: '0xef68cEE62bc85650Ee96dbBaC7653B1BA103ADc6',
+  //     [ChainId.MAINNET]: '',
+  //   },
+  // },
 ]
 
 export const getTokenInfo = (address: string, chainId = CHAIN_ID) =>
