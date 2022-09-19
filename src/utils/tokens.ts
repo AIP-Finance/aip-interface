@@ -7,7 +7,7 @@ export const STABLE_COINS: TokenData[] = [
     decimals: 18,
     addresses: {
       [ChainId.TESTNET]: '0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735',
-      [ChainId.MAINNET]: '',
+      [ChainId.MAINNET]: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
     },
   },
   {
@@ -16,7 +16,7 @@ export const STABLE_COINS: TokenData[] = [
     decimals: 18,
     addresses: {
       [ChainId.TESTNET]: '0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b',
-      [ChainId.MAINNET]: '',
+      [ChainId.MAINNET]: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
     },
   },
   {
@@ -25,7 +25,7 @@ export const STABLE_COINS: TokenData[] = [
     decimals: 18,
     addresses: {
       [ChainId.TESTNET]: '0x944c7626b5074F423F4C00aa54b520c4d985578d',
-      [ChainId.MAINNET]: '',
+      [ChainId.MAINNET]: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
     },
   },
 ]
