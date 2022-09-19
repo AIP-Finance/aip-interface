@@ -35,6 +35,8 @@ export const usePollingBalance = (stableCoin: StableCoin) => {
   const { account } = useActiveWeb3React()
   const tokenContract = useERC20Contract(getStableCoinAddress(stableCoin), true)
 
+  console.log('USDT', tokenContract?.address)
+
   useEffect(() => {
     // console.log('go again')
     let cancel = false
